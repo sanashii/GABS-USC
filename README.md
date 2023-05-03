@@ -14,7 +14,7 @@ github repo for the final project in OOP
 
 2] (Inclusion of icons on your page) always use the format "src/resources/iconName.format" and place them in the resources folder under src
 
-3] username format (superuser): yourlastname ; password: yourlastname
+3] username format (superuser): `yourlastname` ; password: `yourlastname`
 
 ### Modules
 - Application Superuser Functionalities
