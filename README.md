@@ -14,6 +14,8 @@ github repo for the final project in OOP
 
 2] (Inclusion of icons on your page) always use the format "src/resources/iconName.format" and place them in the resources folder under src
 
+3] username format (superuser): yourlastname ; password: yourlastname
+
 ### Modules
 - Application Superuser Functionalities
 - USC Map Segment
@@ -21,7 +23,7 @@ github repo for the final project in OOP
 
 ## DATABASE GUIDE
 1. download MySQL on your device (https://dev.mysql.com/downloads/ && VIDEO GUIDE: https://youtu.be/GoQq5D_ntiY)
-2. create a database in your local mysql cmd. note that the defualt port will be used, 3306.
+2. create a database in your local mysql cmd. note that the defualt port will be used, `3306`.
 ```sql
 mysql -u root -p
 CREATE DATABASE gabs_usc;
