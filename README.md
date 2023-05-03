@@ -12,7 +12,7 @@ github repo for the final project in OOP
 ## GENERAL RULES
 1] git pull from main to your branch and only merge once your assigned features are complete
 
-2] (Setting icons in your page) always use the format "src/resources/iconName.format" and place them in the resources folder under src
+2] (Inclusion of icons on your page) always use the format "src/resources/iconName.format" and place them in the resources folder under src
 
 ### Modules
 - Application Superuser Functionalities
@@ -40,4 +40,13 @@ String jdbcUrl = "jdbc:mysql://mysql-localhost:3306/gabs_usc";
 String username = "superuser";
 String password = "password";
 Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+```
+5. to import the mysql data unto your local database provided by the dump file found in the resources folder, run these commands in you mysql cmd:
+```mysql
+mysqldump -u root -p gabs_usc < gabs_usc.sql
+```
+
+in the event wherein you happen to add additional data into your local database, create a new dump file and update it accordingly on github in order for the team to keep posted with the changes
+```mysql
+mysqldump -u root -p gabs_usc > gabs_usc.sql
 ```
