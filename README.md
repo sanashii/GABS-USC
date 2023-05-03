@@ -1,7 +1,7 @@
 # OOP-FP
 github repo for the final project in OOP
 
-# DEFAULT JFRAME SETTINGS:
+## DEFAULT JFRAME SETTINGS:
 ```java
 //Setting the JFrame to Android Screen
 		jFrame.setTitle("GABS USC");
