@@ -35,7 +35,7 @@ FLUSH PRIVILEGES;
 ```sql
 bind-address = 0.0.0.0
 ```
-this will set your device listen for connections on all network interfaces. just remember to change it back to the default loopback address which is most likely `127.0.0.1` to avoid future project clashes
+this will set your device to listen for connections on all network interfaces. just remember to change it back to the default loopback address which is most likely `127.0.0.1` to avoid future project clashes
 
 4. test the db connection in your java file
 ```java
