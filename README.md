@@ -78,7 +78,7 @@ in the event wherein you happen to add additional data into your local database,
 mysqldump -u root -p gabs_usc > gabs_usc.sql
 ```
 ## DATABASE ERROR HANDLING
-Tf ever you encounter an error saying
+If ever you encounter an error saying
 ```java
 java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost:3306/gabs_usc
 ```
