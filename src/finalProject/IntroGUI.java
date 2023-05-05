@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 
+
 public class IntroGUI{
 	
 	IntroGUI(){
@@ -20,7 +21,7 @@ public class IntroGUI{
 
 		ImageIcon jImage = new ImageIcon("src/resources/name.png");
 		
-		ImageIcon jLock = new ImageIcon("src/resources/lock.png");
+		ImageIcon jLock = new ImageIcon("src/resources/padlock.png");
 		
 		JLabel jLabel = new JLabel(); //create the labels
 		JButton jButton = new JButton();//create the buttons

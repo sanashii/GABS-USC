@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,13 +19,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class AdminLoginGUI{
+
+public class AdminLoginGUI extends PasswordHasher{
 	
 	AdminLoginGUI(){
+		
 		JFrame jFrame = new JFrame();
 		
 		ImageIcon jIcon = new ImageIcon("src/resources/icon.png");
-		ImageIcon jLock = new ImageIcon("src/resources/lock.png");
+		ImageIcon jLock = new ImageIcon("src/resources/padlock.png");
 		
 		JPanel jPanel = new JPanel();
 		
@@ -33,6 +40,7 @@ public class AdminLoginGUI{
 		
 		JButton loginBtn = new JButton();
 		JButton loginPage = new JButton();
+	
 		
 		jFrame.setTitle("GABS USC");
 		jFrame.setSize(540,810); //Android Screen Ratio
@@ -66,6 +74,42 @@ public class AdminLoginGUI{
 		loginBtn.setFocusable(false);
 		loginBtn.setBackground(new Color(24, 216, 95));
 		loginBtn.setBorder(roundedBorder);
+		loginBtn.addActionListener(new ActionListener() {
+		    @SuppressWarnings("unused")
+			@Override
+		    public void actionPerformed(ActionEvent e) {
+		        String username = enterUser.getText();
+		        String password = enterPass.getText();
+		        //String hashedPass = hashPassword(password); // hash the password they input & compare it with a hashed password from the database
+		        
+		        try {
+		            // Establish a connection to the database
+		            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+		            
+		            // Query the database for a matching username and password hash
+		            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+		            statement.setString(1, username);
+		            //statement.setString(2, hashedPass);
+		            statement.setString(2, password); // for debugging since a hashed pass in db doesnt exist yet
+		            ResultSet resultSet = statement.executeQuery();
+		            
+		            if (resultSet.next()) {
+		                // Login successful, allow access to admin panel
+		                System.out.println("Login successful");
+		                SuperuserGUI superUserMenu = new SuperuserGUI();
+		            } else {
+		                System.out.println("Invalid username or password");
+		            }
+		            
+		            // Close the database connection and statement
+		            resultSet.close();
+		            statement.close();
+		            connection.close();
+		        } catch (SQLException ex) {
+		            ex.printStackTrace();
+		        }
+		    }
+		});
 		
 		loginPage.setBounds(420,670,62,62);
 		loginPage.setIcon(jLock);
@@ -94,6 +138,5 @@ public class AdminLoginGUI{
 		jFrame.setVisible(true);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
 }
 
