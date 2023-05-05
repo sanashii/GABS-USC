@@ -48,3 +48,16 @@ in the event wherein you happen to add additional data into your local database,
 ```mysql
 mysqldump -u root -p gabs_usc > gabs_usc.sql
 ```
+## DATABASE ERROR HANDLING
+Tf ever you encounter an error saying
+```java
+java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost:3306/gabs_usc
+```
+It means that the MySQL JDBC Driverhas not been included in your project's classpath. To resolve this issue, please do the following:
+1. Make sure that when you installed MySQL, you included the installation for `Connector/J 8.0.33`, to check, open your MySQL Installer and see if your have Connector/J installed, if not kindly install it but most likely installs along with all the dependencies needed.
+2. In Eclipse, right-click on your project and select Properties.
+3. In the Properties dialog box, select Java Build Path from the left-hand side menu.
+4. In the Java Build Path dialog box, select the Libraries tab.
+5. Click on the Add External JARs button and navigate to the location where you downloaded the MySQL JDBC driver JAR file. (possible path for the JAR File: `C:\Program Files (x86)\MySQL\Connector J 8.0`)
+6. Select the JAR file and click on Open to add it to your project's `classpath`.
+7. Click on OK / Apply to close the Properties dialog box.
