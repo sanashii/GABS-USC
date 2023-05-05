@@ -41,15 +41,23 @@ public class SuperuserGUI extends PasswordHasher{
         // add buttons with labels and set their positions
         JButton mapBtn = new JButton("USC Map Segment");
         mapBtn.setBounds(25, 50, 300, 50);
+        mapBtn.setForeground(Color.white);
+        mapBtn.setBackground(new Color(136, 191, 140, 255));
 
         JButton transportBtn = new JButton("USC Transportation Segment");
         transportBtn.setBounds(25, 125, 300, 50);
+        transportBtn.setForeground(Color.white);
+        transportBtn.setBackground(new Color(136, 191, 140, 255));
 
         JButton addUserBtn = new JButton("Add a New Superuser");
         addUserBtn.setBounds(25, 200, 300, 50);
+        addUserBtn.setForeground(Color.white);
+        addUserBtn.setBackground(new Color(136, 191, 140, 255));
 
         JButton changePassBtn = new JButton("Change Personal Password");
         changePassBtn.setBounds(25, 275, 300, 50);
+        changePassBtn.setForeground(Color.white);
+        changePassBtn.setBackground(new Color(136, 191, 140, 255));
         
         JPanel logoutBtnPanel = new JPanel();
         logoutBtnPanel.setBackground(Color.white);
