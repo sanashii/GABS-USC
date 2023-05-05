@@ -67,6 +67,7 @@ public class IntroGUI{
 		jFrame.add(jLabel);
 		jFrame.add(jButton);
 		jFrame.add(loginPage);
+		jFrame.setLocationRelativeTo(null); // setting the JFrame to appear in the middle
 				
 		jFrame.setVisible(true);
 		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

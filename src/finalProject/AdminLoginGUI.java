@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -46,6 +47,7 @@ public class AdminLoginGUI extends PasswordHasher{
 		jFrame.setSize(540,810); //Android Screen Ratio
 		jFrame.setLayout(null);
 		jFrame.setResizable(false); //To Avoid changing the size of the screen
+		jFrame.setLocationRelativeTo(null); // setting the JFrame to appear in the middle
 				
 		jFrame.setIconImage(jIcon.getImage());//change image icon of frame
 		jFrame.getContentPane().setBackground(new Color(0, 177, 63));
@@ -97,8 +99,9 @@ public class AdminLoginGUI extends PasswordHasher{
 		                // Login successful, allow access to admin panel
 		                System.out.println("Login successful");
 		                SuperuserGUI superUserMenu = new SuperuserGUI();
+		                jFrame.dispose();
 		            } else {
-		                System.out.println("Invalid username or password");
+		            	JOptionPane.showMessageDialog(jFrame, "Invalid username or password. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
 		            }
 		            
 		            // Close the database connection and statement
