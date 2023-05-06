@@ -51,7 +51,7 @@ public class IntroGUI{
 		jButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	TranspoPage transpo = new TranspoPage();
+		    	MapPage map = new MapPage();
 		  
 		    	jFrame.dispose();
 		    }

@@ -54,8 +54,9 @@ public class TranspoPage {
             }
         });
 
+        
         sidebar.setBackground(new Color(118, 212, 152));
-        sidebar.setBounds(-200, 80, 190, 730);
+        sidebar.setBounds(-250, 80, 190, 730);
         
         sidebar.setLayout(null);
         
@@ -64,6 +65,7 @@ public class TranspoPage {
         button1.setBorder(null);
         button1.setBackground(new Color(118, 212, 152));
         button1.setFocusable(false);
+        button1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
         
         button1.addActionListener(new ActionListener() {
 			
@@ -80,6 +82,17 @@ public class TranspoPage {
         button2.setBorder(null);
         button2.setBackground(new Color(118, 212, 152));
         button2.setFocusable(false);
+        button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+        
+        button2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				TranspoPage thisPage = new TranspoPage();
+				jFrame.dispose();
+			}
+		});
         
         JButton button3 = new JButton();
         button3.setIcon(exitIcon);
@@ -97,21 +110,113 @@ public class TranspoPage {
 		});
 //        button3.setFocusable(false);
         
+        Container container = sidebar.getParent();
+        if (container != null) {
+            container.setComponentZOrder(sidebar, 0);
+        }
         sidebar.add(button1);
         sidebar.add(button2);
         sidebar.add(button3);
         
-        JLabel namePage = new JLabel();
-        namePage.setText("Transpo Page");
-        namePage.setLayout(null);
-        namePage.setBounds(200,200,100,100);
-        jFrame.add(namePage);
+//        JLabel namePage = new JLabel();
+//        namePage.setText("Transpo Page");
+//        namePage.setLayout(null);
+//        namePage.setBounds(200,200,100,100);
+//        jFrame.add(namePage);
 //        To identify that this is the Transpo Page
+        
+        //First Drop-down Panel with the First Button 
+        JButton dropOpt1 = new JButton();
+        dropOpt1.setText("USC TC to SM Cebu");
+        dropOpt1.setBorder(null);
+        dropOpt1.setFocusable(false);
+        dropOpt1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt1.setBounds(0,80,540,50);
+        
+        JPanel dropdownPanel1 = new JPanel();
+        dropdownPanel1.setBounds(0, 130, 540, 200);
+        dropdownPanel1.setBackground(Color.WHITE);
+        dropdownPanel1.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel1.setLayout(null);
+        dropdownPanel1.setVisible(false);
 
+        JLabel label1 = new JLabel("Option 1");
+        label1.setBounds(20, 20, 100, 30);
+        dropdownPanel1.add(label1);
+        
+        dropOpt1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel1.setVisible(!dropdownPanel1.isVisible());
+            }
+        });
+
+        //Second drop-down Panel with Second button
+        JButton dropOpt2 = new JButton();
+        dropOpt2.setText("USC TC to Ayala Cebu");
+        dropOpt2.setBorder(null);
+        dropOpt2.setFocusable(false);
+        dropOpt2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt2.setBounds(0,130,540,50);
+        
+        JPanel dropdownPanel2 = new JPanel();
+        dropdownPanel2.setBounds(0, 180, 540, 200);
+        dropdownPanel2.setBackground(Color.WHITE);
+        dropdownPanel2.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel2.setLayout(null);
+        dropdownPanel2.setVisible(false);
+        
+        JLabel label2 = new JLabel("Option 2");
+        label2.setBounds(100, 100, 100, 30);
+        dropdownPanel2.add(label2);
+                
+        dropOpt2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel2.setVisible(!dropdownPanel2.isVisible());
+            }
+        });
+        
+        
+        JButton dropOpt3 = new JButton();
+        dropOpt3.setText("USC TC to Metro Ayala");
+        dropOpt3.setBorder(null);
+        dropOpt3.setFocusable(false);
+        dropOpt3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt3.setBounds(0,180,540,50);
+        
+        JPanel dropdownPanel3 = new JPanel();
+        dropdownPanel3.setBounds(0, 230, 540, 200);
+        dropdownPanel3.setBackground(Color.WHITE);
+        dropdownPanel3.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel3.setLayout(null);
+        dropdownPanel3.setVisible(false);
+        
+        JLabel label3 = new JLabel("Option 3");
+        label3.setBounds(100, 100, 100, 30);
+        dropdownPanel3.add(label3);
+                
+        dropOpt3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel3.setVisible(!dropdownPanel3.isVisible());
+            }
+        });
+        
+        jFrame.add(sidebar);
+        
+        jFrame.add(dropOpt1);
+        jFrame.add(dropdownPanel1);
+        
+        jFrame.add(dropOpt2);
+        jFrame.add(dropdownPanel2);
+        
+        jFrame.add(dropOpt3);
+        jFrame.add(dropdownPanel3);
+        
         jFrame.add(jLabel);
         jFrame.add(jButton);
-        jFrame.add(jPanel);
-        jFrame.add(sidebar);
+        jFrame.add(jPanel);        
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,7 +40,7 @@ public class MapPage {
         jFrame.setTitle("GABS USC");
         jFrame.setSize(540,810);
         jFrame.setLayout(null);
-        jFrame.setLocationRelativeTo(null); //This will position the JFrame in the same place of the introGUI
+        jFrame.setLocationRelativeTo(null);//This will position the JFrame in the same place of the introGUI
         jFrame.setResizable(false);
 
         jFrame.setIconImage(jIcon.getImage());
@@ -72,19 +73,31 @@ public class MapPage {
         button1.setBorder(null);
         button1.setBackground(new Color(118, 212, 152));
         button1.setFocusable(false);
+        button1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+        
+        button1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				MapPage toMap = new MapPage();
+				jFrame.dispose();
+			}
+		});
         
         JButton button2 = new JButton("Transportation Guide");
         button2.setBounds(0,50,190,50);
         button2.setBorder(null);
         button2.setBackground(new Color(118, 212, 152));
         button2.setFocusable(false);
+        button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
         
         button2.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				TranspoPage toTranspo = new TranspoPage();
+				TranspoPage thisPage = new TranspoPage();
 				jFrame.dispose();
 			}
 		});
