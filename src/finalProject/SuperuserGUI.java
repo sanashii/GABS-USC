@@ -1,6 +1,7 @@
 package finalProject;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,12 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
 @SuppressWarnings("unused")
 public class SuperuserGUI extends PasswordHasher{
-    SuperuserGUI() {
+    SuperuserGUI(String username) {
         JFrame jFrame = new JFrame();
         
         // setting of default header w/ logo
@@ -36,7 +38,7 @@ public class SuperuserGUI extends PasswordHasher{
         JPanel jPanel = new JPanel();
         jPanel.setBackground(Color.white);
         jPanel.setBounds(85, 80, 350, 500);
-        jPanel.setLayout(null);
+        jPanel.setLayout(null); 
 
         // add buttons with labels and set their positions
         JButton mapBtn = new JButton("USC Map Segment");
@@ -45,23 +47,38 @@ public class SuperuserGUI extends PasswordHasher{
         mapBtn.setBackground(new Color(136, 191, 140, 255));
 
         JButton transportBtn = new JButton("USC Transportation Segment");
-        transportBtn.setBounds(25, 125, 300, 50);
+        transportBtn.setBounds(25, 150, 300, 50);
         transportBtn.setForeground(Color.white);
         transportBtn.setBackground(new Color(136, 191, 140, 255));
 
         JButton addUserBtn = new JButton("Add a New Superuser");
-        addUserBtn.setBounds(25, 200, 300, 50);
+        addUserBtn.setBounds(25, 250, 300, 50);
         addUserBtn.setForeground(Color.white);
         addUserBtn.setBackground(new Color(136, 191, 140, 255));
+        addUserBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SuperuserRegister addSuperuser = new SuperuserRegister(username);
+				jFrame.dispose();
+			}
+        });
 
         JButton changePassBtn = new JButton("Change Personal Password");
-        changePassBtn.setBounds(25, 275, 300, 50);
+        changePassBtn.setBounds(25, 350, 300, 50);
         changePassBtn.setForeground(Color.white);
         changePassBtn.setBackground(new Color(136, 191, 140, 255));
+        changePassBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChangePassword passChange = new ChangePassword(username);
+				jFrame.dispose();
+			}
+        	
+        });
         
         JPanel logoutBtnPanel = new JPanel();
         logoutBtnPanel.setBackground(Color.white);
-        logoutBtnPanel.setBounds(435, 580, 100, 100);
+        logoutBtnPanel.setBounds(425, 680, 100, 100);
         logoutBtnPanel.setLayout(null);
 
         ImageIcon logoutIcon = new ImageIcon("src/resources/logout.png");

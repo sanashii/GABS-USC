@@ -37,7 +37,7 @@ public class IntroGUI{
 		jFrame.getContentPane().setBackground(new Color(0, 177, 63));//to set the background color same as the logo
 				
 		jLabel.setIcon(jImage);
-		jLabel.setBounds(70,130,354,258);//trying to match the size of the image
+		jLabel.setBounds(70,130,354,258);
 				
 		Border roundedBorder = BorderFactory.createCompoundBorder();
 				
@@ -51,6 +51,7 @@ public class IntroGUI{
 		loginPage.setBounds(420,670,62,62);
 		loginPage.setIcon(jLock);
 		loginPage.setBackground(jFrame.getBackground());
+		loginPage.setContentAreaFilled(false);
 		loginPage.setBorderPainted(false);
 		loginPage.addActionListener(new ActionListener() {
 			
