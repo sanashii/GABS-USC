@@ -75,7 +75,7 @@ public class ChangePassword { //TODO: experiment and fix
 
         jLabel.setText("Password Change");
         jLabel.setFont(new Font(null, Font.BOLD, 24));
-        jLabel.setBounds(85, 50, 300, 100);
+        jLabel.setBounds(72, 50, 300, 100);
 
         passLabel.setText("Enter New Password:");
         passLabel.setFont(new Font(null, Font.PLAIN, 15));
@@ -111,6 +111,7 @@ public class ChangePassword { //TODO: experiment and fix
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+                connection.setAutoCommit(true);
                 PreparedStatement statement = connection.prepareStatement("UPDATE users SET password = ? WHERE username = ?");
                 statement.setString(1, hashedPassword);
                 statement.setString(2, username);

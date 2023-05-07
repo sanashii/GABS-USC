@@ -71,30 +71,30 @@ public class SuperuserRegister {
 
         jLabel.setText("Superuser Registration");
         jLabel.setFont(new Font(null, Font.BOLD, 24));
-        jLabel.setBounds(85, 20, 300, 50);
+        jLabel.setBounds(48, 20, 300, 50);
 
         JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setBounds(20, 80, 100, 30);
+        emailLabel.setBounds(20, 100, 100, 30);
         JTextField emailTextField = new JTextField();
-        emailTextField.setBounds(120, 80, 200, 30);
+        emailTextField.setBounds(120, 100, 200, 30);
 
         JLabel usernameLabel = new JLabel("Username:");
-        usernameLabel.setBounds(20, 130, 100, 30);
+        usernameLabel.setBounds(20, 150, 100, 30);
         JTextField usernameTextField = new JTextField();
-        usernameTextField.setBounds(120, 130, 200, 30);
+        usernameTextField.setBounds(120, 150, 200, 30);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 180, 100, 30);
+        passwordLabel.setBounds(20, 200, 100, 30);
         JTextField passwordTextField = new JTextField();
-        passwordTextField.setBounds(120, 180, 200, 30);
+        passwordTextField.setBounds(120, 200, 200, 30);
 
         JLabel retypedPasswordLabel = new JLabel("Re-enter password:");
-        retypedPasswordLabel.setBounds(20, 230, 100, 30);
+        retypedPasswordLabel.setBounds(20, 250, 100, 30);
         JTextField retypedPasswordTextField = new JTextField();
-        retypedPasswordTextField.setBounds(120, 230, 200, 30);
+        retypedPasswordTextField.setBounds(120, 250, 200, 30);
 
         JButton registerButton = new JButton("Register");
-        registerButton.setBounds(120, 300, 100, 30);
+        registerButton.setBounds(120, 350, 100, 30);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String email = emailTextField.getText();
