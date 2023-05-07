@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class TranspoPage {
+public class TranspoPageTo {
     private JPanel sidebar;
     private boolean sidebarOpen = false;
 
-    TranspoPage(){
+    TranspoPageTo(){
         JFrame jFrame = new JFrame();
         
         ImageIcon jIcon = new ImageIcon("src/resources/name.png");
@@ -112,7 +112,7 @@ public class TranspoPage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				  MapPage test = new MapPage();
+				 TranspoPageTo to = new TranspoPageTo();
 				  jFrame.dispose();
 			}
 		});
@@ -121,7 +121,7 @@ public class TranspoPage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				  MapPage test = new MapPage();
+				 TranspoPageFrom from = new TranspoPageFrom();
 				  jFrame.dispose();
 			}
 		});
@@ -143,7 +143,7 @@ public class TranspoPage {
         
         
         JButton button4 = new JButton();
-        button4.setBounds(0,100,190,50);
+        button4.setBounds(0,100,190,500);
         button4.setBorder(null);
         button4.setBackground(new Color(118, 212, 152));
         button4.setFocusable(false);
@@ -166,7 +166,7 @@ public class TranspoPage {
         
         //First Drop-down Panel with the First Button 
         JButton dropOpt1 = new JButton();
-        dropOpt1.setText("USC TC to SM Cebu");
+        dropOpt1.setText("USC Main to USC TC (13C)");
         dropOpt1.setBorder(null);
         dropOpt1.setFocusable(false);
         dropOpt1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
@@ -192,7 +192,7 @@ public class TranspoPage {
 
         //Second drop-down Panel with Second button
         JButton dropOpt2 = new JButton();
-        dropOpt2.setText("USC TC to Ayala Cebu");
+        dropOpt2.setText("Ayala Terminal to USC TC (62B)");
         dropOpt2.setBorder(null);
         dropOpt2.setFocusable(false);
         dropOpt2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
@@ -218,7 +218,7 @@ public class TranspoPage {
         
         
         JButton dropOpt3 = new JButton();
-        dropOpt3.setText("USC TC to Metro Ayala");
+        dropOpt3.setText("Ayala Terminal to USC TC (62C)");
         dropOpt3.setBorder(null);
         dropOpt3.setFocusable(false);
         dropOpt3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
@@ -242,6 +242,184 @@ public class TranspoPage {
             }
         });
         
+        
+        JButton dropOpt4 = new JButton();
+        dropOpt4.setText("Ayala Terminal to USC TC (Ayala - Guba)");
+        dropOpt4.setBorder(null);
+        dropOpt4.setFocusable(false);
+        dropOpt4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt4.setBounds(0,230,540,50);
+        
+        JPanel dropdownPanel4 = new JPanel();
+        dropdownPanel4.setBounds(0, 280, 540, 200);
+        dropdownPanel4.setBackground(Color.WHITE);
+        dropdownPanel4.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel4.setLayout(null);
+        dropdownPanel4.setVisible(false);
+        
+        JLabel label4 = new JLabel("Option 4");
+        label4.setBounds(100, 100, 100, 30);
+        dropdownPanel4.add(label4);
+                
+        dropOpt4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel4.setVisible(!dropdownPanel4.isVisible());
+            }
+        });
+        
+        JButton dropOpt5 = new JButton();
+        dropOpt5.setText("Parkmall to USC TC (13H)");
+        dropOpt5.setBorder(null);
+        dropOpt5.setFocusable(false);
+        dropOpt5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt5.setBounds(0,280,540,50);
+        
+        JPanel dropdownPanel5 = new JPanel();
+        dropdownPanel5.setBounds(0, 330, 540, 200);
+        dropdownPanel5.setBackground(Color.WHITE);
+        dropdownPanel5.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel5.setLayout(null);
+        dropdownPanel5.setVisible(false);
+        
+        JLabel label5 = new JLabel("Option 5");
+        label5.setBounds(100, 100, 100, 30);
+        dropdownPanel5.add(label5);
+                
+        dropOpt5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel5.setVisible(!dropdownPanel5.isVisible());
+            }
+        });
+        
+        JButton dropOpt6 = new JButton();
+        dropOpt6.setText("SM Consolacion to USC TC (24G)");
+        dropOpt6.setBorder(null);
+        dropOpt6.setFocusable(false);
+        dropOpt6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt6.setBounds(0,330,540,50);
+        
+        JPanel dropdownPanel6 = new JPanel();
+        dropdownPanel6.setBounds(0, 380, 540, 200);
+        dropdownPanel6.setBackground(Color.WHITE);
+        dropdownPanel6.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel6.setLayout(null);
+        dropdownPanel6.setVisible(false);
+        
+        JLabel label6 = new JLabel("Option 6");
+        label6.setBounds(100, 100, 100, 30);
+        dropdownPanel6.add(label6);
+                
+        dropOpt6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel6.setVisible(!dropdownPanel6.isVisible());
+            }
+        });
+        
+        
+        JButton dropOpt7 = new JButton();
+        dropOpt7.setText("J Mall to USC TC (13I)");
+        dropOpt7.setBorder(null);
+        dropOpt7.setFocusable(false);
+        dropOpt7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt7.setBounds(0,380,540,50);
+        
+        JPanel dropdownPanel7 = new JPanel();
+        dropdownPanel7.setBounds(0, 430, 540, 200);
+        dropdownPanel7.setBackground(Color.WHITE);
+        dropdownPanel7.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel7.setLayout(null);
+        dropdownPanel7.setVisible(false);
+        
+        JLabel label7 = new JLabel("Option 7");
+        label7.setBounds(100, 100, 100, 30);
+        dropdownPanel7.add(label7);
+                
+        dropOpt7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel7.setVisible(!dropdownPanel7.isVisible());
+            }
+        });
+        
+        JButton dropOpt8 = new JButton();
+        dropOpt8.setText("MC Public Market to USC TC (22I)");
+        dropOpt8.setBorder(null);
+        dropOpt8.setFocusable(false);
+        dropOpt8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt8.setBounds(0,430,540,50);
+        
+        JPanel dropdownPanel8 = new JPanel();
+        dropdownPanel8.setBounds(0, 480, 540, 200);
+        dropdownPanel8.setBackground(Color.WHITE);
+        dropdownPanel8.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel8.setLayout(null);
+        dropdownPanel8.setVisible(false);
+        
+        JLabel label8 = new JLabel("Option 8");
+        label8.setBounds(100, 100, 100, 30);
+        dropdownPanel8.add(label8);
+                
+        dropOpt8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel8.setVisible(!dropdownPanel8.isVisible());
+            }
+        });
+        
+        JButton dropOpt9 = new JButton();
+        dropOpt9.setText("Pacific Mall to USC TC (24G)");
+        dropOpt9.setBorder(null);
+        dropOpt9.setFocusable(false);
+        dropOpt9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt9.setBounds(0,480,540,50);
+        
+        JPanel dropdownPanel9 = new JPanel();
+        dropdownPanel9.setBounds(0, 530, 540, 200);
+        dropdownPanel9.setBackground(Color.WHITE);
+        dropdownPanel9.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel9.setLayout(null);
+        dropdownPanel9.setVisible(false);
+        
+        JLabel label9 = new JLabel("Option 9");
+        label9.setBounds(100, 100, 100, 30);
+        dropdownPanel9.add(label9);
+                
+        dropOpt9.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel9.setVisible(!dropdownPanel9.isVisible());
+            }
+        });
+        
+        JButton dropOpt10 = new JButton();
+        dropOpt10.setText("Tintay to USC TC (13C)");
+        dropOpt10.setBorder(null);
+        dropOpt10.setFocusable(false);
+        dropOpt10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        dropOpt10.setBounds(0,530,540,50);
+        
+        JPanel dropdownPanel10 = new JPanel();
+        dropdownPanel10.setBounds(0, 580, 540, 200);
+        dropdownPanel10.setBackground(Color.WHITE);
+        dropdownPanel10.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
+        dropdownPanel10.setLayout(null);
+        dropdownPanel10.setVisible(false);
+        
+        JLabel label10 = new JLabel("Option 10");
+        label10.setBounds(100, 100, 100, 30);
+        dropdownPanel10.add(label10);
+                
+        dropOpt10.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dropdownPanel10.setVisible(!dropdownPanel10.isVisible());
+            }
+        });
+        
+        
         jFrame.add(sidebar);
         
         jFrame.add(dropOpt1);
@@ -252,6 +430,27 @@ public class TranspoPage {
         
         jFrame.add(dropOpt3);
         jFrame.add(dropdownPanel3);
+        
+        jFrame.add(dropOpt4);
+        jFrame.add(dropdownPanel4);
+        
+        jFrame.add(dropOpt5);
+        jFrame.add(dropdownPanel5);
+      
+        jFrame.add(dropOpt6);
+        jFrame.add(dropdownPanel6);
+        
+        jFrame.add(dropOpt7);
+        jFrame.add(dropdownPanel7);
+        
+        jFrame.add(dropOpt8);
+        jFrame.add(dropdownPanel8);
+      
+        jFrame.add(dropOpt9);
+        jFrame.add(dropdownPanel9);
+        
+        jFrame.add(dropOpt10);
+        jFrame.add(dropdownPanel10);
         
         jFrame.add(jLabel);
         jFrame.add(jButton);

@@ -1,6 +1,7 @@
 package finalProject;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 public class MapPage {
 	private JPanel sidebar;
@@ -91,14 +94,46 @@ public class MapPage {
         button2.setBackground(new Color(118, 212, 152));
         button2.setFocusable(false);
         button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
-        
+        JFrame frame = new JFrame("Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        panel.add(button2);
+        JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem menuItem1 = new JMenuItem("To USC TC");
+        JMenuItem menuItem2 = new JMenuItem("From USC TC");
+        popupMenu.add(menuItem1);
+        popupMenu.add(menuItem2);
+        popupMenu.setPopupSize(190, 150);
+        menuItem1.setBackground(new Color(118, 212, 152));
+        menuItem2.setBackground(new Color(118, 212, 152));
+        popupMenu.setBackground(new Color(118, 212, 152));
         button2.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				TranspoPage thisPage = new TranspoPage();
-				jFrame.dispose();
+				  popupMenu.show(button2, 0, button2.getHeight());
+			}
+		});
+        menuItem1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 TranspoPageTo to = new TranspoPageTo();
+				  jFrame.dispose();
+			}
+		});
+        menuItem2	.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				 TranspoPageFrom from = new TranspoPageFrom();
+				  jFrame.dispose();
 			}
 		});
         
@@ -118,9 +153,21 @@ public class MapPage {
 		});
 //        button3.setFocusable(false);
         
+        JButton button4 = new JButton();
+        button4.setBounds(0,100,190,500);
+        button4.setBorder(null);
+        button4.setBackground(new Color(118, 212, 152));
+        button4.setFocusable(false);
+        
+        
+        Container container = sidebar.getParent();
+        if (container != null) {
+            container.setComponentZOrder(sidebar, 0);
+        }
         sidebar.add(button1);
         sidebar.add(button2);
         sidebar.add(button3);
+        sidebar.add(button4);
         
         JLabel namePage = new JLabel();
         namePage.setText("Map Page");
