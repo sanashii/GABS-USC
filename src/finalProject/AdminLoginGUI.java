@@ -74,7 +74,8 @@ public class AdminLoginGUI extends PasswordHasher{
 		loginBtn.setBounds(100,330,150,50);
 		loginBtn.setText("Login Admin");
 		loginBtn.setFocusable(false);
-		loginBtn.setBackground(new Color(24, 216, 95));
+		loginBtn.setForeground(Color.white);
+		loginBtn.setBackground(new Color(136, 191, 140, 255));
 		loginBtn.setBorder(roundedBorder);
 		loginPage.setContentAreaFilled(false);
 		loginPage.setBorderPainted(false);
@@ -92,11 +93,9 @@ public class AdminLoginGUI extends PasswordHasher{
 		            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
 		            statement.setString(1, username);
 		            statement.setString(2, hashedPass);
-		            //statement.setString(2, password); // for debugging since a hashed pass in db still needs work
 		            ResultSet resultSet = statement.executeQuery();
 		            
 		            if (resultSet.next()) {
-		                System.out.println("Login successful");
 		                SuperuserGUI superUserMenu = new SuperuserGUI(username);
 		                jFrame.dispose();
 		            } else {

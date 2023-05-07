@@ -1,6 +1,7 @@
 package finalProject;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,20 +40,35 @@ public class SuperuserGUI extends PasswordHasher{
         jPanel.setBackground(Color.white);
         jPanel.setBounds(85, 80, 350, 500);
         jPanel.setLayout(null); 
+        
+        JLabel titleLabel = new JLabel("Superuser Menu");
+        titleLabel.setBounds(75, 20, 400, 30);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        jPanel.add(titleLabel);
 
         // add buttons with labels and set their positions
         JButton mapBtn = new JButton("USC Map Segment");
-        mapBtn.setBounds(25, 50, 300, 50);
+        mapBtn.setBounds(25, 100, 300, 50);
         mapBtn.setForeground(Color.white);
         mapBtn.setBackground(new Color(136, 191, 140, 255));
 
         JButton transportBtn = new JButton("USC Transportation Segment");
-        transportBtn.setBounds(25, 150, 300, 50);
+        transportBtn.setBounds(25, 200, 300, 50);
         transportBtn.setForeground(Color.white);
         transportBtn.setBackground(new Color(136, 191, 140, 255));
+        transportBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TranspoSegmentGUI transpo = new TranspoSegmentGUI(username);
+				jFrame.dispose();
+			}
+        	
+        });
 
         JButton addUserBtn = new JButton("Add a New Superuser");
-        addUserBtn.setBounds(25, 250, 300, 50);
+        addUserBtn.setBounds(25, 300, 300, 50);
         addUserBtn.setForeground(Color.white);
         addUserBtn.setBackground(new Color(136, 191, 140, 255));
         addUserBtn.addActionListener(new ActionListener() {
@@ -64,7 +80,7 @@ public class SuperuserGUI extends PasswordHasher{
         });
 
         JButton changePassBtn = new JButton("Change Personal Password");
-        changePassBtn.setBounds(25, 350, 300, 50);
+        changePassBtn.setBounds(25, 400, 300, 50);
         changePassBtn.setForeground(Color.white);
         changePassBtn.setBackground(new Color(136, 191, 140, 255));
         changePassBtn.addActionListener(new ActionListener() {
