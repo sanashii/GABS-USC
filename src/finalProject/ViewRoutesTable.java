@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.ImageIcon;
@@ -20,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class ViewRoutesTable {
 	@SuppressWarnings("unused")
-	ViewRoutesTable(String username){
+	ViewRoutesTable(String username, String returnPage){
 		JFrame jFrame = new JFrame();
         
         // setting of default header w/ logo
@@ -56,7 +58,30 @@ public class ViewRoutesTable {
         backButton.setBorderPainted(false);
         backButton.addActionListener(e -> {
             jFrame.dispose();
-            TranspoSegmentGUI superUserMenu = new TranspoSegmentGUI(username);
+            //TranspoSegmentGUI superUserMenu = new TranspoSegmentGUI(username);
+            switch(returnPage) {
+            	case "delete":
+					try {
+						DeleteRouteGUI deletePage = new DeleteRouteGUI(username);
+					} catch (FileNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					}
+					break;
+            	case "add":
+            		try {
+						AddRouteGUI deletePage = new AddRouteGUI(username);
+					} catch (FileNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					}
+            		break;
+            	case "edit":
+            		try {
+						EditRouteGUI deletePage = new EditRouteGUI(username);
+					} catch (FileNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					} 
+					break;
+            }
         });
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
