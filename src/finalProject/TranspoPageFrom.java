@@ -470,8 +470,10 @@ public class TranspoPageFrom {
             }
         });
         
-        jFrame.add(sidebar);
+      
         
+        jFrame.add(sidebar);
+   
         jFrame.add(dropOpt1);
         jFrame.add(dropdownPanel1);
         
