@@ -77,8 +77,11 @@ public class TranspoSegmentGUI {
         editRouteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				EditRouteGUI newRoute =  new EditRouteGUI(username);
+				try {
+					EditRouteGUI newRoute =  new EditRouteGUI(username);
+				} catch (FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
 				jFrame.dispose();
 			}
         });
@@ -93,8 +96,11 @@ public class TranspoSegmentGUI {
         deleteRouteButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				DeleteRouteGUI newRoute =  new DeleteRouteGUI(username);
+				try {
+					DeleteRouteGUI newRoute =  new DeleteRouteGUI(username);
+				} catch (FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
 				jFrame.dispose();
 			}
         });

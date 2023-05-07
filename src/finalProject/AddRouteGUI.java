@@ -156,7 +156,7 @@ public class AddRouteGUI {
         viewRoutesTable.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewRoutesTable viewRoutesTable = new ViewRoutesTable(username);
+				ViewRoutesTable viewRoutesTable = new ViewRoutesTable(username, "add");
 				jFrame.dispose();
 			}
         	
