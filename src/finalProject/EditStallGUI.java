@@ -2,28 +2,46 @@ package finalProject;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class DeleteOfficeGUI {
-	@SuppressWarnings("unused")
-	DeleteOfficeGUI(String username){
-		JFrame jFrame = new JFrame();
+public class EditStallGUI {
+	String selectedOption;
+	String selectedBuilding;
+	String selectedOption2;
+	Date openingHours;
+	Date closingHours;
+	EditStallGUI(String username){
+JFrame jFrame = new JFrame();
         // setting of default header w/ logo
         JPanel headerPanel = new JPanel();
         headerPanel.setBackground(new Color(0, 177, 64, 255));
@@ -43,7 +61,7 @@ public class DeleteOfficeGUI {
         jPanel.setBounds(85, 83, 350, 540);
         jPanel.setLayout(null); 
         
-        JLabel titleLabel = new JLabel("Deleting an Office");
+        JLabel titleLabel = new JLabel("Editing a Stall");
         titleLabel.setBounds(72, 20, 400, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -68,54 +86,60 @@ public class DeleteOfficeGUI {
         jFrame.add(headerPanel);
         jFrame.add(jPanel);
 
-        JLabel officeIDLabel = new JLabel("Enter office ID:");
-        officeIDLabel.setBounds(20, 80, 300, 30);
-        jPanel.add(officeIDLabel);
-        JTextField officeIDField = new JTextField();
-        officeIDField.setBounds(20, 120, 150, 30);
-        jPanel.add(officeIDField);
+        JLabel stallIDLabel = new JLabel("Enter stall ID:");
+        stallIDLabel.setBounds(20, 80, 300, 30);
+        jPanel.add(stallIDLabel);
+        JTextField stallIDField = new JTextField();
+        stallIDField.setBounds(20, 120, 150, 30);
+        jPanel.add(stallIDField);
 
-        JButton deleteOffice = new JButton("Delete Office");
+        JLabel costLabel = new JLabel("New average cost:");
+        costLabel.setBounds(20, 170, 300, 30);
+        jPanel.add(costLabel);
+        JTextField costField = new JTextField();
+        costField.setBounds(20, 210, 150, 30);
+        jPanel.add(costField);
+
+        JButton editOffice = new JButton("Apply Changes");
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
-        deleteOffice.setBounds(110, 480, 120, 30);
-        deleteOffice.setForeground(new Color(29, 142, 0));
-        deleteOffice.setBackground(Color.white);
-        deleteOffice.setBorder(buttonBorder);
-        deleteOffice.addActionListener(new ActionListener() {
-			@Override
+        editOffice.setBounds(110, 480, 120, 30);
+        editOffice.setForeground(new Color(29, 142, 0));
+        editOffice.setBackground(Color.white);
+        editOffice.setBorder(buttonBorder);
+        editOffice.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
                     Statement statement = connection.createStatement();
 
-                    int id = Integer.parseInt(officeIDField.getText());
+                    int id = Integer.parseInt(stallIDField.getText());
 
                     // Check if the ID exists in the table
-                    ResultSet idCheck = statement.executeQuery("SELECT * FROM offices WHERE office_ID = " + id);
+                    ResultSet idCheck = statement.executeQuery("SELECT * FROM stalls WHERE stall_ID = " + id);
                     if (!idCheck.next()) {
-                        JOptionPane.showMessageDialog(jPanel, "Office ID does not exist.");
+                        JOptionPane.showMessageDialog(jPanel, "Stall ID does not exist.");
                         return;
                     }
-                    
-                    String officeId = officeIDField.getText(); // Get the inputted route ID
-                    String sql = "DELETE FROM offices WHERE office_ID = " + officeId; // SQL query to delete the row with the given route ID
 
-                    int result = statement.executeUpdate(sql); 
+                    // Retrieve the stall name associated with the ID
+                    String stallName = idCheck.getString("stall_name");
 
-                    if (result == 1) { 
-                        JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + officeId + "!");
-                        jFrame.dispose();
-                    } else { 
-                        JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + officeId + ". Please check if the ID is valid.");
-                    }
+                    // Use a prepared statement to update all rows in the table with the same stall name
+                    String sql = "UPDATE stalls SET average_cost = ? WHERE stall_name = ?";
+                    java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setDouble(1, Double.parseDouble(costField.getText()));
+                    preparedStatement.setString(2, stallName);
+                    preparedStatement.executeUpdate();
+                    preparedStatement.close();
 
                     statement.close();
                     connection.close();
-                    
-                    DeleteOfficeGUI delete = new DeleteOfficeGUI(username);
-                    jFrame.dispose();
 
+                    JOptionPane.showMessageDialog(jFrame, "Successfully updated stall!");
+                    jFrame.dispose();
+                    EditStallGUI edit = new EditStallGUI(username); // calls itself so if every they want to add another one, they wont be exited from the menu
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
@@ -125,22 +149,24 @@ public class DeleteOfficeGUI {
             }
 
         });
-        jPanel.add(deleteOffice);
+
+        jPanel.add(editOffice);
         
-        JButton viewOfficesTable = new JButton("View Offices Table");
-        viewOfficesTable.setBounds(110, 440, 120, 30);
-        viewOfficesTable.setForeground(new Color(29, 142, 0));
-        viewOfficesTable.setBackground(Color.white);
-        viewOfficesTable.setBorder(buttonBorder);
-        viewOfficesTable.addActionListener(new ActionListener() {
+        JButton viewStallsTable = new JButton("View Stalls Table");
+        viewStallsTable.setBounds(110, 440, 120, 30);
+        viewStallsTable.setForeground(new Color(29, 142, 0));
+        viewStallsTable.setBackground(Color.white);
+        viewStallsTable.setBorder(buttonBorder);
+        viewStallsTable.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewOfficesTable viewOfficesTable = new ViewOfficesTable(username, "delete");
+				@SuppressWarnings("unused")
+				ViewStallsTableGUI viewStallsTable = new ViewStallsTableGUI(username, "edit");
 				jFrame.dispose();
 			}
         	
         });
-        jPanel.add(viewOfficesTable);
+        jPanel.add(viewStallsTable);
         
         
         jFrame.setTitle("GABS USC");

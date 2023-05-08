@@ -69,6 +69,7 @@ public class TranspoPage {
         
         button1.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -103,15 +104,14 @@ public class TranspoPage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				  popupMenu.show(button2, 0, button2.getHeight());
 			}
 		});
         menuItem1.addActionListener(new ActionListener() {
 			
+			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				  MapPage test = new MapPage();
 				  jFrame.dispose();
 			}
@@ -120,8 +120,8 @@ public class TranspoPage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				  MapPage test = new MapPage();
+				  @SuppressWarnings("unused")
+				MapPage test = new MapPage();
 				  jFrame.dispose();
 			}
 		});
@@ -134,7 +134,7 @@ public class TranspoPage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				@SuppressWarnings("unused")
 				IntroGUI toIntro = new IntroGUI();
 				jFrame.dispose();
 			}

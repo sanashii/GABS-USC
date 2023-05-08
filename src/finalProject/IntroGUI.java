@@ -49,7 +49,8 @@ public class IntroGUI{
 //		jButton.addActionListener(this);
 		
 		jButton.addActionListener(new ActionListener() {
-		    @Override
+		    @SuppressWarnings("unused")
+			@Override
 		    public void actionPerformed(ActionEvent e) {
 		    	MapPage map = new MapPage();
 		  

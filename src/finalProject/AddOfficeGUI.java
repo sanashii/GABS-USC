@@ -244,7 +244,7 @@ public class AddOfficeGUI {
 			        
 			        JOptionPane.showMessageDialog(jFrame, "Successfully added office!");
 			        jFrame.dispose();
-			        AddOfficeGUI transpo = new AddOfficeGUI(username); // calls itself so if every they want to add another one, they wont be exited from the menu
+			        AddOfficeGUI newOffice = new AddOfficeGUI(username); // calls itself so if every they want to add another one, they wont be exited from the menu
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
@@ -270,7 +270,6 @@ public class AddOfficeGUI {
         	
         });
         jPanel.add(viewOfficesTable);
-        
         
         jFrame.setTitle("GABS USC");
         jFrame.setSize(540, 810); // Android Screen Ratio

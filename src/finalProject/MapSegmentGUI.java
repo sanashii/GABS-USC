@@ -104,7 +104,7 @@ JFrame jFrame = new JFrame();
         addCanteenBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangePassword passChange = new ChangePassword(username);
+				AddCanteenGUI addCanteen = new AddCanteenGUI(username);
 				jFrame.dispose();
 			}
         	
@@ -117,7 +117,7 @@ JFrame jFrame = new JFrame();
         addStallBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangePassword passChange = new ChangePassword(username);
+				AddStallGUI newStall = new AddStallGUI(username);
 				jFrame.dispose();
 			}
         });
@@ -129,7 +129,7 @@ JFrame jFrame = new JFrame();
         editStallBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangePassword passChange = new ChangePassword(username);
+				EditStallGUI editStall = new EditStallGUI(username);
 				jFrame.dispose();
 			}
         });
@@ -138,10 +138,10 @@ JFrame jFrame = new JFrame();
         deleteStallBtn.setBounds(25, 580, 300, 50);
         deleteStallBtn.setForeground(Color.white);
         deleteStallBtn.setBackground(new Color(136, 191, 140, 255));
-        editStallBtn.addActionListener(new ActionListener() {
+        deleteStallBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChangePassword passChange = new ChangePassword(username);
+				DeleteStallGUI deleteStall = new DeleteStallGUI(username);
 				jFrame.dispose();
 			}
         });
