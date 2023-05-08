@@ -164,7 +164,7 @@ public class TranspoPageFrom {
         
       //Code to insert a scrollbar into the frame
         JPanel transPoPanel = new JPanel();
-        transPoPanel.setPreferredSize(new Dimension(630, 1200)); // Set the height to be larger than 810
+        transPoPanel.setPreferredSize(new Dimension(0, 1200)); // Set the height to be larger than 810
         transPoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         transPoPanel.setLayout(null);
         
