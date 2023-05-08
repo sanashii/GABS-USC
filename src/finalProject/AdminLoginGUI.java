@@ -74,37 +74,34 @@ public class AdminLoginGUI extends PasswordHasher{
 		loginBtn.setBounds(100,330,150,50);
 		loginBtn.setText("Login Admin");
 		loginBtn.setFocusable(false);
-		loginBtn.setBackground(new Color(24, 216, 95));
+		loginBtn.setForeground(Color.white);
+		loginBtn.setBackground(new Color(136, 191, 140, 255));
 		loginBtn.setBorder(roundedBorder);
+		loginPage.setContentAreaFilled(false);
+		loginPage.setBorderPainted(false);
 		loginBtn.addActionListener(new ActionListener() {
 		    @SuppressWarnings("unused")
 			@Override
 		    public void actionPerformed(ActionEvent e) {
 		        String username = enterUser.getText();
 		        String password = enterPass.getText();
-		        //String hashedPass = hashPassword(password); // hash the password they input & compare it with a hashed password from the database
+		        String hashedPass = hashPassword(password); // hash the password they input & compare it with a hashed password from the database
 		        
 		        try {
-		            // Establish a connection to the database
 		            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
 		            
-		            // Query the database for a matching username and password hash
 		            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
 		            statement.setString(1, username);
-		            //statement.setString(2, hashedPass);
-		            statement.setString(2, password); // for debugging since a hashed pass in db doesnt exist yet
+		            statement.setString(2, hashedPass);
 		            ResultSet resultSet = statement.executeQuery();
 		            
 		            if (resultSet.next()) {
-		                // Login successful, allow access to admin panel
-		                System.out.println("Login successful");
-		                SuperuserGUI superUserMenu = new SuperuserGUI();
+		                SuperuserGUI superUserMenu = new SuperuserGUI(username);
 		                jFrame.dispose();
 		            } else {
 		            	JOptionPane.showMessageDialog(jFrame, "Invalid username or password. Please try again.", "Login Error", JOptionPane.ERROR_MESSAGE);
 		            }
 		            
-		            // Close the database connection and statement
 		            resultSet.close();
 		            statement.close();
 		            connection.close();
