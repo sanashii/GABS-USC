@@ -48,6 +48,16 @@ public class IntroGUI{
 		jButton.setBorder(roundedBorder);
 //		jButton.addActionListener(this);
 		
+		jButton.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	MapPage map = new MapPage();
+		  
+		    	jFrame.dispose();
+		    }
+		});
+		
+		
 		loginPage.setBounds(420,670,62,62);
 		loginPage.setIcon(jLock);
 		loginPage.setBackground(jFrame.getBackground());
