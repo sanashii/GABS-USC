@@ -70,7 +70,7 @@ Connection connection = DriverManager.getConnection(jdbcUrl, username, password)
 ```
 4. to import the mysql data unto your local database provided by the dump file found in the resources folder, run these commands in you mysql cmd (make sure you're in the right path that consists og the gabs_usc.sql file i.e `.../src/resources/`):
 ```mysql
-mysqldump -u root -p gabs_usc < gabs_usc.sql
+mysqldump -u root -p gabs_usc < eclipse-workspace/OOP_FP/src/resources/gabs_usc.sql
 ```
 
 in the event wherein you happen to add additional data into your local database, create a new dump file and update it accordingly on github in order for the team to keep posted with the changes
