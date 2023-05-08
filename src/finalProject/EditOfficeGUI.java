@@ -163,7 +163,6 @@ public class EditOfficeGUI {
 
         jPanel.add(buildingCodeBox);
 
-
         JLabel locationLabel = new JLabel("Location:");
         locationLabel.setBounds(20, 260, 300, 30);
         jPanel.add(locationLabel);
