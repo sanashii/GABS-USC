@@ -97,7 +97,8 @@ public class AddOfficeGUI {
         JLabel buildingCodeLabel = new JLabel("Select building:");
         buildingCodeLabel.setBounds(20, 170, 300, 30);
         jPanel.add(buildingCodeLabel);
-        String[] options = {"Lawrence Bunzel Building (LB)", 
+        String[] options = {"Select Building",
+        					"Lawrence Bunzel Building (LB)", 
         					"University Dormitory (DR)", 
         					"Enrique Shoenig (ES)", 
         					"Franz Oster (FO)", 
@@ -115,6 +116,8 @@ public class AddOfficeGUI {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     switch((String) buildingCodeBox.getSelectedItem()) {
+	                    case "Select Building":
+	                		selectedOption = null;
                         case "Lawrence Bunzel Building (LB)":
                             selectedOption = "LB";
                             break;

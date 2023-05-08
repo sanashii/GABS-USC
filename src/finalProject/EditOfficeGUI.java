@@ -41,6 +41,7 @@ public class EditOfficeGUI {
 	String selectedOption2;
 	Date openingHours;
 	Date closingHours;
+	//! CONSTRAINT: have to edit all field due to conlfict in database updates
 	
 	@SuppressWarnings("unused")
 	EditOfficeGUI(String username){
@@ -100,7 +101,8 @@ public class EditOfficeGUI {
         JLabel buildingCodeLabel = new JLabel("Select building:");
         buildingCodeLabel.setBounds(20, 170, 300, 30);
         jPanel.add(buildingCodeLabel);
-        String[] options = {"Lawrence Bunzel Building (LB)", 
+        String[] options = {"Select Building",
+        					"Lawrence Bunzel Building (LB)", 
         					"University Dormitory (DR)", 
         					"Enrique Shoenig (ES)", 
         					"Franz Oster (FO)", 
@@ -118,6 +120,8 @@ public class EditOfficeGUI {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     switch((String) buildingCodeBox.getSelectedItem()) {
+                    	case "Select Building":
+                    		selectedOption = null;
                         case "Lawrence Bunzel Building (LB)":
                             selectedOption = "LB";
                             break;
@@ -156,7 +160,9 @@ public class EditOfficeGUI {
             }
         });
 
+
         jPanel.add(buildingCodeBox);
+
 
         JLabel locationLabel = new JLabel("Location:");
         locationLabel.setBounds(20, 260, 300, 30);
@@ -165,22 +171,49 @@ public class EditOfficeGUI {
         locationField.setBounds(20, 300, 150, 30);
         jPanel.add(locationField);
         
-        JButton editTimeOffice = new JButton("Edit Time");
-        Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
-        editTimeOffice.setBounds(110, 400, 120, 30);
-        editTimeOffice.setForeground(new Color(29, 142, 0));
-        editTimeOffice.setBackground(Color.white);
-        editTimeOffice.setBorder(buttonBorder);
-        editTimeOffice.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EditOfficeTimeGUI time = new EditOfficeTimeGUI(username);
-				jFrame.dispose();
-			}
+        JLabel hoursLabel = new JLabel("Hours:");
+        hoursLabel.setBounds(20, 350, 300, 30);
+        jPanel.add(hoursLabel);
+        openingHours = new Date(); // set the default value to the current time
+        SpinnerDateModel openingHoursModel = new SpinnerDateModel(openingHours, null, null, Calendar.HOUR_OF_DAY);
+        JSpinner openingHoursSpinner = new JSpinner(openingHoursModel);
+        openingHours = (Date) openingHoursSpinner.getValue();
+
+        closingHours = new Date(); 
+        SpinnerDateModel closingHoursModel = new SpinnerDateModel(closingHours, null, null, Calendar.HOUR_OF_DAY);
+        JSpinner closingHoursSpinner = new JSpinner(closingHoursModel);
+        closingHours = (Date) closingHoursSpinner.getValue();
+
+        JSpinner.DateEditor editor = new JSpinner.DateEditor(openingHoursSpinner, "hh:mm a");
+        openingHoursSpinner.setEditor(editor);
+
+        editor = new JSpinner.DateEditor(closingHoursSpinner, "hh:mm a");
+        closingHoursSpinner.setEditor(editor);
+        
+        openingHoursSpinner.setPreferredSize(new Dimension(150, 30));
+        openingHoursSpinner.addChangeListener(new ChangeListener() { //updates the time based on the one that was set
+            public void stateChanged(ChangeEvent e) {
+                openingHours = (Date) openingHoursSpinner.getValue();
+            }
         });
+        closingHoursSpinner.setPreferredSize(new Dimension(150, 30));
+        closingHoursSpinner.addChangeListener(new ChangeListener() { //updates the time based on the one that was set
+            public void stateChanged(ChangeEvent e) {
+                closingHours = (Date) closingHoursSpinner.getValue();
+            }
+        });
+
+        JPanel hoursPanel = new JPanel();
+        hoursPanel.setLayout(new GridLayout(1,2));
+        hoursPanel.add(openingHoursSpinner);
+        hoursPanel.add(new JLabel(" to "));
+        hoursPanel.add(closingHoursSpinner);
+
+        hoursPanel.setBounds(20, 390, 220, 30);
+        jPanel.add(hoursPanel);
         
         JButton editOffice = new JButton("Apply Changes");
-        buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
+        Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
         editOffice.setBounds(110, 480, 120, 30);
         editOffice.setForeground(new Color(29, 142, 0));
         editOffice.setBackground(Color.white);
@@ -202,30 +235,19 @@ public class EditOfficeGUI {
                         return;
                     }
                     
-                    String sql = "UPDATE offices SET building_code = ?, location = ? WHERE office_ID = " + id;
+                    String sql = "UPDATE offices SET building_code = ?, location = ?, hours = ? WHERE office_ID = " + id;
 
                     String buildingCode = selectedOption;
                     String location = locationField.getText();
-
-                    // Check if input fields have changed
-                    boolean hasChanged = false;
-                    ResultSet rs = statement.executeQuery("SELECT * FROM offices WHERE office_ID = " + id);
-                    if (rs.next()) {
-                    	String currentBuilding = rs.getString("building_code");
-                        String currentLocation = rs.getString("location");
-                        if (!currentBuilding.equals(buildingCode) || !currentLocation.equals(location)) {
-                            hasChanged = true;
-                        }
-                    }
-                    rs.close();
-
-                    if (hasChanged) {
-                        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                        preparedStatement.setString(1, buildingCode);
-                        preparedStatement.setString(2, location);
-                        preparedStatement.executeUpdate();
-                        preparedStatement.close();
-                    }
+                    DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+					String hours = dateFormat.format(openingHours) + " - " + dateFormat.format(closingHours);
+                    java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                    preparedStatement.setString(1, buildingCode);
+                    preparedStatement.setString(2, location);
+                    preparedStatement.setString(3, hours);
+                    preparedStatement.executeUpdate();
+                    preparedStatement.close();
+                    
 
                     statement.close();
                     connection.close();
