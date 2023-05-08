@@ -53,6 +53,13 @@ public class SuperuserGUI extends PasswordHasher{
         mapBtn.setBounds(25, 100, 300, 50);
         mapBtn.setForeground(Color.white);
         mapBtn.setBackground(new Color(136, 191, 140, 255));
+        mapBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MapSegmentGUI transpo = new MapSegmentGUI(username);
+				jFrame.dispose();
+			}
+        });
 
         JButton transportBtn = new JButton("USC Transportation Segment");
         transportBtn.setBounds(25, 200, 300, 50);
