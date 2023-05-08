@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `offices`
+--
+
+DROP TABLE IF EXISTS `offices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `offices` (
+  `office_ID` int NOT NULL AUTO_INCREMENT,
+  `office_name` varchar(255) DEFAULT NULL,
+  `building_code` char(2) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `hours` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`office_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `offices`
+--
+
+LOCK TABLES `offices` WRITE;
+/*!40000 ALTER TABLE `offices` DISABLE KEYS */;
+INSERT INTO `offices` VALUES (1,'Cashier','LB','GF, Lobby','03:58 am - 09:58 pm'),(2,'Registrar\'s Office','LB','Beside car entrance','09:00 am - 05:00 pm'),(3,'DCISM Office','LB','4F by the 460s hallway','08:11 pm - 08:11 pm'),(4,'IE Department','LB','4F between 460s and 440s hall','08:11 pm - 08:11 pm');
+/*!40000 ALTER TABLE `offices` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `routes`
 --
 
@@ -30,7 +57,7 @@ CREATE TABLE `routes` (
   `jeepsToTake` varchar(255) DEFAULT NULL,
   `route_map` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`route_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +66,7 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES (1,'USC TC to Ayala',11,15,'13C Ayala direct','src/resources/routes/tcToAyala.png'),(4,'USC TC to IT Park',11,15,'13C direct leave from IT Park bus stop','src/resources/routes/helpme.png'),(5,'Test',11,15,'123, 3','src/resources/routes/damn');
+INSERT INTO `routes` VALUES (1,'USC TC to Ayala',11,15,'13C Ayala direct','src/resources/routes/tcToAyala.png'),(8,'dumdum',11,15,'ur mom','src/resources/routes/ehe');
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-07 21:26:04
+-- Dump completed on 2023-05-08 22:04:52
