@@ -68,7 +68,7 @@ String username = "superuser";
 String password = "password";
 Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
 ```
-4. to import the mysql data unto your local database provided by the dump file found in the resources folder, run these commands in you mysql cmd:
+4. to import the mysql data unto your local database provided by the dump file found in the resources folder, run these commands in you mysql cmd (make sure you're in the right path that consists og the gabs_usc.sql file i.e `.../src/resources/`):
 ```mysql
 mysqldump -u root -p gabs_usc < gabs_usc.sql
 ```
