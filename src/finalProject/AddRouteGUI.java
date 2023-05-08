@@ -136,13 +136,16 @@ public class AddRouteGUI {
 			        
 			        JOptionPane.showMessageDialog(jFrame, "Successfully added route!");
 			        jFrame.dispose();
-			        TranspoSegmentGUI transpo = new TranspoSegmentGUI(username);
+			        try {
+						AddRouteGUI transpo = new AddRouteGUI(username);
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();
 				}
-				
 			}
         	
         });
@@ -159,7 +162,6 @@ public class AddRouteGUI {
 				ViewRoutesTable viewRoutesTable = new ViewRoutesTable(username, "add");
 				jFrame.dispose();
 			}
-        	
         });
         jPanel.add(viewRoutesTable);
         

@@ -4,11 +4,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.ImageIcon;
@@ -20,9 +18,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class ViewRoutesTable {
+public class ViewOfficesTable {
 	@SuppressWarnings("unused")
-	ViewRoutesTable(String username, String returnPage){
+	ViewOfficesTable(String username, String returnPage){
 		JFrame jFrame = new JFrame();
         
         // setting of default header w/ logo
@@ -45,7 +43,7 @@ public class ViewRoutesTable {
         jPanel.setBounds(85, 83, 350, 500);
         jPanel.setLayout(null); 
         
-        JLabel titleLabel = new JLabel("Routes Table");
+        JLabel titleLabel = new JLabel("Offices Table");
         titleLabel.setBounds(80, 20, 400, 30);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -60,25 +58,13 @@ public class ViewRoutesTable {
             jFrame.dispose();
             switch(returnPage) {
             	case "delete":
-					try {
-						DeleteRouteGUI deletePage = new DeleteRouteGUI(username);
-					} catch (FileNotFoundException | SQLException e1) {
-						e1.printStackTrace();
-					}
+					DeleteOfficeGUI deletePage = new DeleteOfficeGUI(username);
 					break;
             	case "add":
-            		try {
-						AddRouteGUI addPage = new AddRouteGUI(username);
-					} catch (FileNotFoundException | SQLException e1) {
-						e1.printStackTrace();
-					}
+					AddOfficeGUI addPage = new AddOfficeGUI(username);
             		break;
             	case "edit":
-            		try {
-						EditRouteGUI editPage = new EditRouteGUI(username);
-					} catch (FileNotFoundException | SQLException e1) {
-						e1.printStackTrace();
-					} 
+					EditOfficeGUI editPage = new EditOfficeGUI(username);
 					break;
             }
         });
@@ -91,7 +77,7 @@ public class ViewRoutesTable {
 
         jFrame.add(headerPanel); // add header panel to frame
 
-        String[] columnNames = {"Route ID", "Route Name", "Traditional Jeep Fare", "Modern Jeep Fare", "Jeeps To Take", "Route Map"};
+        String[] columnNames = {"Office ID", "Office Name", "Building Code", "Location", "Hours"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(model);
         table.setEnabled(false);
@@ -108,16 +94,15 @@ public class ViewRoutesTable {
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password")) {
             Statement stmt = conn.createStatement();
-            String sql = "SELECT route_id, route_name, traditionalJeep_Fare, modernJeep_Fare, jeepsToTake, route_map FROM routes";
+            String sql = "SELECT office_ID, office_name, building_code, location, hours FROM offices";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                int id = rs.getInt("route_id");
-                String name = rs.getString("route_name");
-                double traditionalJeepneyFare = rs.getDouble("traditionalJeep_Fare");
-                double modernJeepneyFare = rs.getDouble("modernJeep_Fare");
-                String jeepsToTake = rs.getString("jeepsToTake");
-                String route_map = rs.getString("route_map");
-                Object[] rowData = {id, name, traditionalJeepneyFare, modernJeepneyFare, jeepsToTake, route_map};
+                int id = rs.getInt("office_ID");
+                String name = rs.getString("office_name");
+                String buildingCode = rs.getString("building_code");
+                String location = rs.getString("location");
+                String hours = rs.getString("hours");
+                Object[] rowData = {id, name, buildingCode, location, hours};
                 model.addRow(rowData);
             }
         } catch (Exception e) {

@@ -78,7 +78,6 @@ public class EditRouteGUI {
         routeIDField.setBounds(20, 120, 150, 30);
         jPanel.add(routeIDField);
 
-
         JLabel newJeepsToTakeLabel = new JLabel("New set of jeepneys to take:");
         newJeepsToTakeLabel.setBounds(20, 170, 300, 30);
         jPanel.add(newJeepsToTakeLabel);
@@ -133,7 +132,11 @@ public class EditRouteGUI {
 
                     JOptionPane.showMessageDialog(jFrame, "Successfully updated route!");
                     jFrame.dispose();
-                    TranspoSegmentGUI transpo = new TranspoSegmentGUI(username);
+                    try {
+						EditRouteGUI transpo = new EditRouteGUI(username);
+					} catch (FileNotFoundException e1) {
+						e1.printStackTrace();
+					}
                 } catch (SQLException | ClassNotFoundException | NumberFormatException e1) {
                     e1.printStackTrace();
                 }
