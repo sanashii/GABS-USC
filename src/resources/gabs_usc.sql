@@ -66,7 +66,7 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES (1,'USC TC to Ayala',11,15,'13C Ayala direct','src/resources/routes/tcToAyala.png'),(8,'dumdum',11,15,'ur mom','src/resources/routes/ehe');
+INSERT INTO `routes` VALUES (1,'USC TC to Ayala Terraces',17,13,'Directly to Ayala Terraces','src/resources/routes/tcToAyala.png'),(2,'USC TC to Metro Ayala',18,14,'Directly to Metro Ayala';
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
 UNLOCK TABLES;
 
