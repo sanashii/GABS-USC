@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class MapSegmentGUI {
 	@SuppressWarnings("unused")
 	MapSegmentGUI(String username){
-JFrame jFrame = new JFrame();
+		JFrame jFrame = new JFrame();
         
         // setting of default header w/ logo
         JPanel headerPanel = new JPanel();
