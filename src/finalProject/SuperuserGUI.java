@@ -5,6 +5,10 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -38,7 +42,7 @@ public class SuperuserGUI extends PasswordHasher{
 
         JPanel jPanel = new JPanel();
         jPanel.setBackground(Color.white);
-        jPanel.setBounds(85, 80, 350, 500);
+        jPanel.setBounds(85, 80, 350, 580);
         jPanel.setLayout(null); 
         
         JLabel titleLabel = new JLabel("Superuser Menu");
@@ -99,6 +103,32 @@ public class SuperuserGUI extends PasswordHasher{
         	
         });
         
+        JButton deleteAccountBtn = new JButton("Delete Account");
+        deleteAccountBtn.setBounds(25, 500, 300, 50);
+        deleteAccountBtn.setForeground(Color.white);
+        deleteAccountBtn.setBackground(new Color(136, 191, 140, 255));
+        deleteAccountBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirmed = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this account?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+                if (confirmed == JOptionPane.YES_OPTION) {
+                    try {
+                        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+                        Statement stmt = conn.createStatement();
+                        String query = "DELETE FROM users WHERE username='" + username + "'";
+                        stmt.executeUpdate(query);
+                        conn.close();
+                        JOptionPane.showMessageDialog(null, "Account deleted successfully.");
+                        jFrame.dispose();
+                        AdminLoginGUI adminLogin = new AdminLoginGUI();
+                    } catch (SQLException ex) {
+                        System.out.println("SQLException: " + ex.getMessage());
+                    }
+                }
+            }
+        });
+
+        
         JPanel logoutBtnPanel = new JPanel();
         logoutBtnPanel.setBackground(Color.white);
         logoutBtnPanel.setBounds(425, 680, 100, 100);
@@ -138,6 +168,7 @@ public class SuperuserGUI extends PasswordHasher{
         jPanel.add(transportBtn);
         jPanel.add(addUserBtn);
         jPanel.add(changePassBtn);
+        jPanel.add(deleteAccountBtn);
 
         jFrame.getContentPane().setBackground(Color.white); // set main background to white
 
