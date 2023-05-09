@@ -59,7 +59,7 @@ JFrame jFrame = new JFrame();
             jFrame.dispose();
             switch(returnPage) {
             	case "delete":
-					//DeleteStallGUI deletePage = new DeleteStallGUI(username);
+					DeleteStallGUI deletePage = new DeleteStallGUI(username);
 					break;
             	case "add":
 					AddStallGUI addPage = new AddStallGUI(username);
