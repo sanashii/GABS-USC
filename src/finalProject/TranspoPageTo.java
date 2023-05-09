@@ -1,15 +1,59 @@
 package finalProject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
 
 public class TranspoPageTo {
     private JPanel sidebar;
     private boolean sidebarOpen = false;
-
+       
     TranspoPageTo(){
+    	JButton dropOpt1 = new JButton();
+    	JPanel dropdownPanel1 = new JPanel();
+    	
+    	JButton dropOpt2 = new JButton();
+    	JPanel dropdownPanel2 = new JPanel();
+
+    	JButton dropOpt3 = new JButton();
+    	JPanel dropdownPanel3 = new JPanel();
+
+    	JButton dropOpt4 = new JButton();
+    	JPanel dropdownPanel4 = new JPanel();
+    	
+    	JButton dropOpt5 = new JButton();
+    	JPanel dropdownPanel5 = new JPanel();
+    	
+    	JButton dropOpt6 = new JButton();
+    	JPanel dropdownPanel6 = new JPanel();
+    	
+    	JButton dropOpt7 = new JButton();
+    	JPanel dropdownPanel7 = new JPanel();
+
+    	JButton dropOpt8 = new JButton();
+    	JPanel dropdownPanel8 = new JPanel();
+
+    	JButton dropOpt9 = new JButton();
+    	JPanel dropdownPanel9 = new JPanel();
+    	
+    	JButton dropOpt10 = new JButton();
+    	JPanel dropdownPanel10 = new JPanel();
+    	
+    	
+    	
+    	
+    	
         JFrame jFrame = new JFrame();
         
         ImageIcon jIcon = new ImageIcon("src/resources/name.png");
@@ -73,7 +117,7 @@ public class TranspoPageTo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				MapPage toMap = new MapPage();
+				new MapPage();
 				jFrame.dispose();
 			}
 		});
@@ -113,7 +157,7 @@ public class TranspoPageTo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				 TranspoPageTo to = new TranspoPageTo();
+				  new TranspoPageTo();
 				  jFrame.dispose();
 			}
 		});
@@ -122,7 +166,7 @@ public class TranspoPageTo {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				 TranspoPageFrom from = new TranspoPageFrom();
+				  new TranspoPageFrom();
 				  jFrame.dispose();
 			}
 		});
@@ -167,39 +211,40 @@ public class TranspoPageTo {
         transPoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         transPoPanel.setLayout(null);
         
-        JButton dropOpt1 = new JButton();
+        Map<String, Integer> routeNames = new HashMap<>();
+        routeNames.put("USC Main to USC TC (13C)", 13); //13 is the id tied to the route name in the db
+        // add the rest of the route ids here along with their names like "Ayala Terminal to USC TC" and etc"
+
+        
         dropOpt1.setText("USC Main to USC TC (13C)");
         dropOpt1.setBorder(null);
         dropOpt1.setFocusable(false);
         dropOpt1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt1.setBounds(0,0,540,50);
+
         
-        JPanel dropdownPanel1 = new JPanel();
         dropdownPanel1.setBounds(0, 50, 540, 200);
         dropdownPanel1.setBackground(Color.WHITE);
         dropdownPanel1.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
         dropdownPanel1.setLayout(null);
         dropdownPanel1.setVisible(false);
 
-        JLabel label1 = new JLabel("Option 1");
-        label1.setBounds(20, 20, 100, 30);
-        dropdownPanel1.add(label1);
-        
+        // In your actionPerformed method for the dropOpt1 button
         dropOpt1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dropdownPanel1.setVisible(!dropdownPanel1.isVisible());
+            	dropdownPanel1.setVisible(!dropdownPanel1.isVisible());
             }
         });
-        
-        JButton dropOpt2 = new JButton();
+
+
         dropOpt2.setText("Ayala Terminal to USC TC (62B)");
         dropOpt2.setBorder(null);
         dropOpt2.setFocusable(false);
         dropOpt2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt2.setBounds(0,80,540,50);
         
-        JPanel dropdownPanel2 = new JPanel();
+        
         dropdownPanel2.setBounds(0, 130, 540, 200);
         dropdownPanel2.setBackground(Color.WHITE);
         dropdownPanel2.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -217,14 +262,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt3 = new JButton();
+       
         dropOpt3.setText("Ayala Terminal to USC TC (62C)");
         dropOpt3.setBorder(null);
         dropOpt3.setFocusable(false);
         dropOpt3.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt3.setBounds(0,160,540,50);
         
-        JPanel dropdownPanel3 = new JPanel();
+        
         dropdownPanel3.setBounds(0, 180, 540, 200);
         dropdownPanel3.setBackground(Color.WHITE);
         dropdownPanel3.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -242,14 +287,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt4 = new JButton();
+        
         dropOpt4.setText("Ayala Terminal to USC TC (Ayala - Guba)");
         dropOpt4.setBorder(null);
         dropOpt4.setFocusable(false);
         dropOpt4.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt4.setBounds(0,240,540,50);
         
-        JPanel dropdownPanel4 = new JPanel();
+        
         dropdownPanel4.setBounds(0, 250, 540, 200);
         dropdownPanel4.setBackground(Color.WHITE);
         dropdownPanel4.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -267,14 +312,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt5 = new JButton();
+        
         dropOpt5.setText("Parkmall to USC TC (13H)");
         dropOpt5.setBorder(null);
         dropOpt5.setFocusable(false);
         dropOpt5.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt5.setBounds(0,320,540,50);
         
-        JPanel dropdownPanel5 = new JPanel();
+        
         dropdownPanel5.setBounds(0, 320, 540, 200);
         dropdownPanel5.setBackground(Color.WHITE);
         dropdownPanel5.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -292,14 +337,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt6 = new JButton();
+        
         dropOpt6.setText("SM Consolacion to USC TC (24G)");
         dropOpt6.setBorder(null);
         dropOpt6.setFocusable(false);
         dropOpt6.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt6.setBounds(0,400,540,50);
         
-        JPanel dropdownPanel6 = new JPanel();
+       
         dropdownPanel6.setBounds(0, 410, 540, 200);
         dropdownPanel6.setBackground(Color.WHITE);
         dropdownPanel6.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -317,14 +362,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt7 = new JButton();
+       
         dropOpt7.setText("J Mall to USC TC (13I)");
         dropOpt7.setBorder(null);
         dropOpt7.setFocusable(false);
         dropOpt7.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt7.setBounds(0,480,540,50);
         
-        JPanel dropdownPanel7 = new JPanel();
+       
         dropdownPanel7.setBounds(0, 490, 540, 200);
         dropdownPanel7.setBackground(Color.WHITE);
         dropdownPanel7.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -342,14 +387,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt8 = new JButton();
+        
         dropOpt8.setText("MC Public Market to USC TC (22I)");
         dropOpt8.setBorder(null);
         dropOpt8.setFocusable(false);
         dropOpt8.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt8.setBounds(0,560,540,50);
         
-        JPanel dropdownPanel8 = new JPanel();
+       
         dropdownPanel8.setBounds(0, 570, 540, 200);
         dropdownPanel8.setBackground(Color.WHITE);
         dropdownPanel8.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -367,14 +412,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt9 = new JButton();
+       
         dropOpt9.setText("Pacific Mall to USC TC (24G)");
         dropOpt9.setBorder(null);
         dropOpt9.setFocusable(false);
         dropOpt9.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt9.setBounds(0,640,540,50);
         
-        JPanel dropdownPanel9 = new JPanel();
+      
         dropdownPanel9.setBounds(0, 650, 540, 200);
         dropdownPanel9.setBackground(Color.WHITE);
         dropdownPanel9.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
@@ -392,14 +437,14 @@ public class TranspoPageTo {
             }
         });
         
-        JButton dropOpt10 = new JButton();
+      
         dropOpt10.setText("Tintay to USC TC (13C)");
         dropOpt10.setBorder(null);
         dropOpt10.setFocusable(false);
         dropOpt10.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         dropOpt10.setBounds(0,720,540,50);
         
-        JPanel dropdownPanel10 = new JPanel();
+       
         dropdownPanel10.setBounds(0, 730, 540, 200);
         dropdownPanel10.setBackground(Color.WHITE);
         dropdownPanel10.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));

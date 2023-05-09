@@ -72,7 +72,7 @@ public class TranspoPageFrom {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				MapPage toMap = new MapPage();
+				new MapPage();
 				jFrame.dispose();
 			}
 		});
@@ -112,7 +112,7 @@ public class TranspoPageFrom {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				 TranspoPageTo to = new TranspoPageTo();
+				  new TranspoPageTo();
 				  jFrame.dispose();
 			}
 		});
@@ -121,7 +121,7 @@ public class TranspoPageFrom {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				 TranspoPageFrom from = new TranspoPageFrom();
+				  new TranspoPageFrom();
 				  jFrame.dispose();
 			}
 		});

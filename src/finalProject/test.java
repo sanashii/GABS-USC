@@ -1,27 +1,57 @@
 package finalProject;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
-public class MapPage {
-	private JPanel sidebar;
+public class test {
+    private JPanel sidebar;
     private boolean sidebarOpen = false;
+    Map<String, Integer> routeNames;
 
-    MapPage(){
+    test(){
+    	
+    	JButton dropOpt1 = new JButton();
+    	JPanel dropdownPanel1 = new JPanel();
+    	
+    	JButton dropOpt2 = new JButton();
+    	JPanel dropdownPanel2 = new JPanel();
+
+    	JButton dropOpt3 = new JButton();
+    	JPanel dropdownPanel3 = new JPanel();
+
+    	JButton dropOpt4 = new JButton();
+    	JPanel dropdownPanel4 = new JPanel();
+    	
+    	JButton dropOpt5 = new JButton();
+    	JPanel dropdownPanel5 = new JPanel();
+    	
+    	JButton dropOpt6 = new JButton();
+    	JPanel dropdownPanel6 = new JPanel();
+    	
+    	JButton dropOpt7 = new JButton();
+    	JPanel dropdownPanel7 = new JPanel();
+
+    	JButton dropOpt8 = new JButton();
+    	JPanel dropdownPanel8 = new JPanel();
+
+    	
         JFrame jFrame = new JFrame();
+        
         ImageIcon jIcon = new ImageIcon("src/resources/name.png");
         ImageIcon exitIcon = new ImageIcon("src/resources/exit.png");
         ImageIcon sideBar = new ImageIcon("src/resources/menu2.png");
-
+        ImageIcon ayalaTtoTC = new ImageIcon("src/resources/routes/Ayala Terminal to TC.png");
+        
         Image originalImage = jIcon.getImage();
         Image scaledImage = originalImage.getScaledInstance(130,94, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
@@ -38,7 +68,7 @@ public class MapPage {
         jFrame.setTitle("GABS USC");
         jFrame.setSize(540,810);
         jFrame.setLayout(null);
-        jFrame.setLocationRelativeTo(null); //This will position the JFrame in the same place of the introGUI
+        jFrame.setLocationRelativeTo(null);//This will position the JFrame in the same place of the introGUI
         jFrame.setResizable(false);
 
         jFrame.setIconImage(jIcon.getImage());
@@ -61,8 +91,9 @@ public class MapPage {
             }
         });
 
+        
         sidebar.setBackground(new Color(118, 212, 152));
-        sidebar.setBounds(-200, 80, 190, 730);
+        sidebar.setBounds(-250, 80, 190, 730);
         
         sidebar.setLayout(null);
         
@@ -78,7 +109,7 @@ public class MapPage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new MapPage();
+				MapPage toMap = new MapPage();
 				jFrame.dispose();
 			}
 		});
@@ -118,21 +149,19 @@ public class MapPage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				  new TranspoPageTo();
+				 TranspoPageTo to = new TranspoPageTo();
 				  jFrame.dispose();
 			}
 		});
-        
         menuItem2	.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				  new TranspoPageFrom();
+				 TranspoPageFrom from = new TranspoPageFrom();
 				  jFrame.dispose();
 			}
 		});
-        
         JButton button3 = new JButton();
         button3.setIcon(exitIcon);
         button3.setBounds(20,630,40,40);
@@ -143,151 +172,64 @@ public class MapPage {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new IntroGUI();
+				IntroGUI toIntro = new IntroGUI();
 				jFrame.dispose();
 			}
 		});
 //        button3.setFocusable(false);
         
+        
+        JButton button4 = new JButton();
+        button4.setBounds(0,100,190,500);
+        button4.setBorder(null);
+        button4.setBackground(new Color(118, 212, 152));
+        button4.setFocusable(false);
+        
+        
+        Container container = sidebar.getParent();
+        if (container != null) {
+            container.setComponentZOrder(sidebar, 0);
+        }
         sidebar.add(button1);
         sidebar.add(button2);
         sidebar.add(button3);
-     
+        sidebar.add(button4);
+        
         jFrame.add(sidebar);
+        
+      //Code to insert a scrollbar into the frame
+        JPanel transPoPanel = new JPanel();
+        transPoPanel.setPreferredSize(new Dimension(0, 1050)); // Set the height of transPoPanel
+        transPoPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        transPoPanel.setLayout(null);
+        
+        // reference by andy
+        routeNames = new HashMap<>();
 
-        JPanel mapPanel = new JPanel();
-        mapPanel.setPreferredSize(new Dimension(1280, 824)); // Set the height of transPoPanel
-        mapPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        mapPanel.setLayout(null);
-        
-        ImageIcon map = new ImageIcon("src/resources/map.png");
-        JLabel mapLabel = new JLabel();
-        mapLabel.setIcon(map);
-        mapLabel.setBounds(0, 0, map.getIconWidth(), map.getIconHeight());
-
-        JButton lbBtn = new JButton();
-        lbBtn.setText("LB Building");
-        lbBtn.setBounds(218,275,100,100);
-        lbBtn.setFocusable(false);
-        lbBtn.setBorder(null);
-        lbBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "LB Building");
-			}
-		});
-        
-        JButton smedBtn = new JButton();
-        smedBtn.setText("SMED Building");
-        smedBtn.setBounds(595,317,100,100);
-        smedBtn.setFocusable(false);
-        smedBtn.setBorder(null);
-        smedBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "SMED Building");
-			}
-		});
-        
-        JButton peBtn = new JButton();
-        peBtn.setText("PE Building");
-        peBtn.setBounds(809,330,80,80);
-        peBtn.setFocusable(false);
-        peBtn.setBorder(null);
-        peBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "PE Building");
-			}
-		});
-        
-        JButton rhBtn = new JButton();
-        rhBtn.setText("RH Building");
-        rhBtn.setBounds(920,317,80,80);
-        rhBtn.setFocusable(false);
-        rhBtn.setBorder(null);
-        rhBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "RH Building");
-			}
-		});
-        
-        JButton lrcBtn = new JButton();
-        lrcBtn.setText("LRC Building");
-        lrcBtn.setBounds(910,117,100,100);
-        lrcBtn.setFocusable(false);
-        lrcBtn.setBorder(null);
-        lrcBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "LRC Building");
-			}
-		});
-        
-        JButton mrBtn = new JButton();
-        mrBtn.setText("MR Building");
-        mrBtn.setBounds(730,50,80,80);
-        mrBtn.setFocusable(false);
-        mrBtn.setBorder(null);
-        mrBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "MR Building");
-			}
-		});
-        
-        JButton afBtn = new JButton();
-        afBtn.setText("AF Building");
-        afBtn.setBounds(580,70,100,100);
-        afBtn.setFocusable(false);
-        afBtn.setBorder(null);
-        afBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "AF Building");
-			}
-		});
-        
-        JButton dormBtn = new JButton();
-        dormBtn.setText("Dormitory");
-        dormBtn.setBounds(595,480,80,80);
-        dormBtn.setFocusable(false);
-        dormBtn.setBorder(null);
-        dormBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "Dormitory");
-			}
-		});
-        
-        mapPanel.add(mapLabel);
-        mapPanel.add(lbBtn);
-        mapPanel.add(smedBtn);
-        mapPanel.add(peBtn);
-        mapPanel.add(rhBtn);
-        mapPanel.add(lrcBtn);
-        mapPanel.add(mrBtn);
-        mapPanel.add(afBtn);
-        mapPanel.add(dormBtn);
-        
-        JScrollPane scrollBar = new JScrollPane(mapPanel);
+		try {
+		    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+		
+		    // execute a SELECT query to fetch the route_id and route_name
+		    PreparedStatement stmt = conn.prepareStatement("SELECT route_id, route_name FROM routes");
+		    ResultSet rs = stmt.executeQuery();
+		
+		    // Step 3: Populate the map with the fetched values
+		    while (rs.next()) {
+		        int routeId = rs.getInt("route_id");
+		        String routeName = rs.getString("route_name");
+		        routeNames.put(routeName, routeId);
+		    }
+		
+		    // Step 4: Close the ResultSet, Statement, and Connection
+		    rs.close();
+		    stmt.close();
+		    conn.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+		
+		// System.out.println(routeNames); // debugging material
+        JScrollPane scrollBar = new JScrollPane(transPoPanel);
         scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         
         jFrame.add(scrollBar);
@@ -298,13 +240,10 @@ public class MapPage {
             }
         });
         
-        
-        
         jFrame.add(scrollBar);
-        
         jFrame.add(jLabel);
         jFrame.add(jButton);
-        jFrame.add(jPanel);       
+        jFrame.add(jPanel);        
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

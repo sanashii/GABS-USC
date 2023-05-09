@@ -29,11 +29,8 @@ CREATE TABLE `offices` (
   `location` varchar(255) DEFAULT NULL,
   `hours` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`office_ID`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
->>>>>>> bc4f5841a0e22f0ffc25bc0a0a3d457567ad6cc0
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,11 +58,8 @@ CREATE TABLE `routes` (
   `jeepsToTake` varchar(255) DEFAULT NULL,
   `route_map` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`route_id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
->>>>>>> bc4f5841a0e22f0ffc25bc0a0a3d457567ad6cc0
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,29 +68,23 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES (1,'USC TC to Ayala Terraces',17,13,'13C Directly to Ayala Terraces','src/resources/routes/tcToAyalaTerraces.png'),(2,'USC TC to Metro Ayala',18,13,'13C: Directly to Metro Ayala','src/resources/routes/tcToMetroAyala.png'),
-(3,'USC TC to Metro Ayala',15,14,'62B: Directly to Metro Ayala','src/resources/routes/tcToMetroAyala.png'),
-(4,'USC TC to Metro Ayala',15,14,'62C: Directly to Metro Ayala','src/resources/routes/tcToMetroAyala.png'),
-(5,'USC TC to Ayala',14,12,'Guba - Ayala: Directly to Ayala Bus Stop near the Terminal','src/resources/routes/tcToAyalaBusStop.png'),
-(6,'USC TC to Parkmall',18,14,'13H: Directly to Parkmall','src/resources/routes/tcToParkmall.png'),
-(7,'USC TC to SM Conscolacion',25,18,'24G: Directly to SM Conscolacion','src/resources/routes/tcToSMConscolacion.png'),
-(8,'USC TC to J Mall',18,15,'13I: Directly to J Mall','src/resources/routes/tcToJMall.png'),
-(9,'USC TC to MC Public Market',15,12,'22I: Directly to MC Public Market','src/resources/routes/tcToMCPublicMarket.png'),
-(10,'USC TC to Pacific Mall',20,15,'24G: Directly to Pacific Mall','src/resources/routes/tcToPacificMall.png'),
-(11,'USC TC to Tintay',20,18,'13C: Directly to Tintay','src/resources/routes/tcToTintay.png'),
-(12,'USC TC to Tintay',20,18,'Directly to Tintay','src/resources/routes/tcToTintay.png'),
-(13,'USC Main to USC TC',18,16,'13C: Directly to USC TC passes by Ayala Area','src/resources/routes/mainToTC.png'),
-(14,'Ayala Terminal to USC TC',15,13,'13C: Directly to USC TC','src/resources/routes/ayalaToTC.png'),
-(15,'Ayala Terminal to USC TC',15,13,'62B: Directly to USC TC','src/resources/routes/ayalaToTC.png'),
-(16,'Ayala Terminal to USC TC',15,13,'62C: Directly to USC TC','src/resources/routes/ayalaToTC.png'),
-(17,'Ayala Terminal to USC TC',0,12,'Guba - Ayala: Directly to USC TC','src/resources/routes/ayalaToTC.png'),
-(18,'Parkmall to USC TC',20,15,'13H: Directly to Parkmall','src/resources/routes/parkmallToTC.png'),
-(19,'SM Conscolacion to USC TC',30,20,'24G: Directly to USC TC','src/resources/routes/smConscolacionToTC.png'),
-(20,'J Mall to USC TC',20,15,'13I: Directly to USC TC','src/resources/routes/jMallToTC.png'),
-(21,'MC Public Market to USC TC',15,12,'22I: Directly to USC TC','src/resources/routes/jMalltToTC.png'),
-(22,'Pacific Mall to USC TC',20,15,'24G: Directly to USC TC','src/resources/routes/pacificMallToTC.png'),
-(23,'Tintay to USC TC',20,18,'13C: Directly to USC TC','src/resources/routes/tintayToTC.png'),
-(24,'USC TC to IT',17,14,'Directly to USC TC','src/resources/routes/tcToIT.png');
+INSERT INTO `routes` VALUES (1,'USC TC to Ayala Terraces',17,13,'13C: Directly to Ayala Terraces','src/resources/routes/tcToAyalaTerraces.png'),(2,'USC TC to Metro Ayala',18,13,'13C or 62B or 62C: Directly to Metro Ayala but prices may vary','src/resources/routes/tcToMetroAyala.png'),
+(3,'USC TC to Ayala',14,12,'Guba - Ayala: Directly to Ayala Bus Stop near the Terminal','src/resources/routes/tcToAyalaBusStop.png'),
+(4,'USC TC to Parkmall',18,14,'13H: Directly to Parkmall','src/resources/routes/tcToParkmall.png'),
+(5,'USC TC to SM Consolacion',25,18,'24G: Directly to SM Consolacion','src/resources/routes/tcToSMConsolacion.png'),
+(6,'USC TC to J Mall',18,15,'13I: Directly to J Mall','src/resources/routes/tcToJMall.png'),
+(7,'USC TC to MC Public Market',15,12,'22I: Directly to MC Public Market','src/resources/routes/tcToMCPublicMarket.png'),
+(8,'USC TC to Pacific Mall',20,15,'24G: Directly to Pacific Mall','src/resources/routes/tcToPacificMall.png'),
+(9,'USC TC to Tintay',20,18,'13C: Directly to Tintay','src/resources/routes/tcToTintay.png'),
+(10,'USC TC to IT',17,14,'Directly to USC TC','src/resources/routes/tcToIT.png'),
+(11,'USC Main to USC TC',18,16,'13C: Directly to USC TC passes by Ayala Area','src/resources/routes/mainToTC.png'),
+(12,'Ayala Terminal to USC TC',15,13,'13C or 62B or 62C or Guba - Ayala: Directly to USC TC prices may vary','src/resources/routes/ayalaToTC.png'),
+(13,'Parkmall to USC TC',20,15,'13H: Directly to USC TC','src/resources/routes/parkmallToTC.png'),
+(14,'SM Consolacion to USC TC',30,20,'24G: Directly to USC TC','src/resources/routes/smConsolacionToTC.png'),
+(15,'J Mall to USC TC',20,15,'13I: Directly to USC TC','src/resources/routes/jMallToTC.png'),
+(16,'MC Public Market to USC TC',15,12,'22I: Directly to USC TC','src/resources/routes/jMalltToTC.png'),
+(17,'Pacific Mall to USC TC',20,15,'24G: Directly to USC TC','src/resources/routes/pacificMallToTC.png'),
+(18,'Tintay to USC TC',20,18,'13C: Directly to USC TC','src/resources/routes/tintayToTC.png');
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,11 +101,8 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-<<<<<<< HEAD
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-=======
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
->>>>>>> bc4f5841a0e22f0ffc25bc0a0a3d457567ad6cc0
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
