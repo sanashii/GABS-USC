@@ -116,10 +116,17 @@ public class UpdateFaresGUI {
             String traditionalJeepneyFareText = traditionalJeepneyFareTextField.getText();
             String modernJeepneyFareText = modernJeepneyFareTextField.getText();
 
-            double traditionalJeepneyFareValue = traditionalJeepneyFareText.isEmpty() ? traditionalFareHolder : Double.parseDouble(traditionalJeepneyFareText);
-            double modernJeepneyFareValue = modernJeepneyFareText.isEmpty() ? modernFareHolder : Double.parseDouble(modernJeepneyFareText);
+            double traditionalJeepneyFareValue = traditionalJeepneyFareText.isEmpty() ? traditionalFareHolder : 0;
+            double modernJeepneyFareValue = modernJeepneyFareText.isEmpty() ? modernFareHolder : 0;
 
             try {
+                if (!traditionalJeepneyFareText.isEmpty()) {
+                    traditionalJeepneyFareValue = Double.parseDouble(traditionalJeepneyFareText);
+                }
+                if (!modernJeepneyFareText.isEmpty()) {
+                    modernJeepneyFareValue = Double.parseDouble(modernJeepneyFareText);
+                }
+                // if the inputs are valid numbers, update the fares
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
                 PreparedStatement preparedStatement = connection.prepareStatement("UPDATE routes SET traditionalJeep_fare = ?, modernJeep_fare = ?");
                 preparedStatement.setDouble(1, traditionalJeepneyFareValue);
@@ -131,10 +138,13 @@ public class UpdateFaresGUI {
                 jFrame.dispose();
 
                 connection.close();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(jFrame, "Invalid input. Please enter a valid number.");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         });
+
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
         updateButton.setForeground(new Color(29, 142, 0));
         updateButton.setBackground(Color.white);

@@ -9,6 +9,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.BorderFactory;
@@ -162,11 +163,27 @@ JFrame jFrame = new JFrame();
 
 			        String canteenName = canteenNameField.getText();
 			        String buildingCode = selectedOption;
-			        
-			        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+			        // Check if canteen already exists in same building
+			        String checkSql = "SELECT * FROM canteens WHERE canteen_name = ? AND building_code = ?";
+			        java.sql.PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+			        checkStatement.setString(1, canteenName);
+			        checkStatement.setString(2, buildingCode);
+			        ResultSet resultSet = checkStatement.executeQuery();
+			        if (resultSet.next()) {
+			            // Canteen already exists
+			            JOptionPane.showMessageDialog(jFrame, "Canteen already exists in this building.");
+			            return;
+			        }
+			        checkStatement.close();
+			        resultSet.close();
+
+			        // If canteen does not already exist, add to database
+			        String addSql = "INSERT INTO canteens (canteen_name, building_code) VALUES (?, ?)";
+			        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(addSql);
 			        preparedStatement.setString(1, canteenName);
 			        preparedStatement.setString(2, buildingCode);
-			        
+
 			        int option = JOptionPane.showConfirmDialog(jFrame, "Are you sure you want to add this canteen?", "Add Canteen", JOptionPane.YES_NO_OPTION);
 			        if (option == JOptionPane.YES_OPTION) {
 			            preparedStatement.executeUpdate();
@@ -176,8 +193,7 @@ JFrame jFrame = new JFrame();
 			            AddCanteenGUI newCanteen = new AddCanteenGUI(username);
 			        }
 			        preparedStatement.close();
-			        statement.close();
-			        connection.close();
+
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				} catch (ClassNotFoundException e1) {

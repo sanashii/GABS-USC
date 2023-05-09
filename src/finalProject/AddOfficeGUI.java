@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
@@ -230,7 +231,20 @@ public class AddOfficeGUI {
 			        DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
 					String hours = dateFormat.format(openingHours) + " - " + dateFormat.format(closingHours);
 			        
-
+					// Check if office already exists in same building
+			        String checkSql = "SELECT * FROM offices WHERE office_name = ? AND building_code = ?";
+			        java.sql.PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+			        checkStatement.setString(1, officeName);
+			        checkStatement.setString(2, buildingCode);
+			        ResultSet resultSet = checkStatement.executeQuery();
+			        if (resultSet.next()) {
+			            // Canteen already exists
+			            JOptionPane.showMessageDialog(jFrame, "Canteen already exists in this building.");
+			            return;
+			        }
+			        checkStatement.close();
+			        resultSet.close();
+			        
 			        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			        preparedStatement.setString(1, officeName);
 			        preparedStatement.setString(2, buildingCode);

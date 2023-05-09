@@ -186,14 +186,14 @@ public class TranspoPageTo {
 		    PreparedStatement stmt = conn.prepareStatement("SELECT route_id, route_name FROM routes");
 		    ResultSet rs = stmt.executeQuery();
 		
-		    // Step 3: Populate the map with the fetched values
+		    // populate the map with the fetched values
 		    while (rs.next()) {
 		        int routeId = rs.getInt("route_id");
 		        String routeName = rs.getString("route_name");
 		        routeNames.put(routeName, routeId);
 		    }
 		
-		    // Step 4: Close the ResultSet, Statement, and Connection
+		    // close the ResultSet, Statement, and Connection
 		    rs.close();
 		    stmt.close();
 		    conn.close();
@@ -273,7 +273,7 @@ public class TranspoPageTo {
         });
         
         JButton dropOpt2 = new JButton();
-        dropOpt2.setText("Ayala Terminal to USC TC (62B)");
+        dropOpt2.setText("Ayala Terminal to USC TC");
         dropOpt2.setBorder(null);
         dropOpt2.setFocusable(false);
         dropOpt2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
@@ -285,15 +285,57 @@ public class TranspoPageTo {
         dropdownPanel2.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
         dropdownPanel2.setLayout(null);
         dropdownPanel2.setVisible(false);
-        
-        JLabel label2 = new JLabel("Option 2");
-        label2.setBounds(100, 100, 100, 30);
-        dropdownPanel2.add(label2);
                 
         dropOpt2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dropdownPanel2.setVisible(!dropdownPanel2.isVisible());
+            	dropdownPanel2.setVisible(!dropdownPanel2.isVisible());
+                int routeId = routeNames.get(dropOpt2.getText()); // gets the ID from the hashmap based on the dropOpt1 text which matches with the one in the hashmap
+                try {
+                    // create a connection to the database and execute a query to retrieve the data
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                    stmt.setInt(1, routeId);
+                    ResultSet result = stmt.executeQuery();
+
+
+                    // retrieve the data and create JLabels to display them
+                    if (result.next()) {
+                        String routeNameResult = result.getString("route_name");
+                        double traditionalJeepFareResult = result.getDouble("traditionalJeep_Fare");
+                        double modernJeepFareResult = result.getDouble("modernJeep_Fare");
+                        String jeepsToTakeResult = result.getString("jeepsToTake");
+                        String routeMapResult = result.getString("route_map");
+
+                        JLabel labelName = new JLabel("Route Name: " + routeNameResult);
+                        labelName.setBounds(20, 20, 100, 30);
+                        dropdownPanel2.add(labelName);
+
+                        JLabel labelTraditionalFare = new JLabel("Traditional Jeep Fare: " + traditionalJeepFareResult);
+                        labelTraditionalFare.setBounds(20, 90, 400, 30);
+                        dropdownPanel2.add(labelTraditionalFare);
+
+                        JLabel labelModernFare = new JLabel("Modern Jeep Fare: " + modernJeepFareResult);
+                        labelModernFare.setBounds(20, 120, 400, 30);
+                        dropdownPanel2.add(labelModernFare);
+
+                        JLabel labelJeepsToTake = new JLabel("Jeeps To Take: " + jeepsToTakeResult);
+                        labelJeepsToTake.setBounds(20, 150, 400, 30);
+                        dropdownPanel2.add(labelJeepsToTake);
+
+                        // francis, adjust this lng para ma photo siya inig display
+                        JLabel labelRouteMap = new JLabel("Route Map: " + routeMapResult);
+                        labelRouteMap.setBounds(20, 180, 400, 30);
+                        dropdownPanel2.add(labelRouteMap);
+                    }
+
+                    // close the connection and the statement
+                    result.close();
+                    stmt.close();
+                    conn.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         
