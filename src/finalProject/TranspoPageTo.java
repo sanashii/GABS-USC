@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 public class TranspoPageTo {
     private JPanel sidebar;
     private boolean sidebarOpen = false;
+    Map<String, Integer> routeNames;
 
     TranspoPageTo(){
         JFrame jFrame = new JFrame();
@@ -176,13 +177,35 @@ public class TranspoPageTo {
         transPoPanel.setLayout(null);
         
         // reference by andy
-        // Create a map to store the the of a rout tied to their name
-        Map<String, Integer> routeNames = new HashMap<>();
-        routeNames.put("USC Main to USC TC (13C)", 13); //13 is the id tied to the route name in the db
-        // add the rest of the route ids here along with their names like "Ayala Terminal to USC TC" and etc"
+        routeNames = new HashMap<>();
+
+		try {
+		    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+		
+		    // execute a SELECT query to fetch the route_id and route_name
+		    PreparedStatement stmt = conn.prepareStatement("SELECT route_id, route_name FROM routes");
+		    ResultSet rs = stmt.executeQuery();
+		
+		    // Step 3: Populate the map with the fetched values
+		    while (rs.next()) {
+		        int routeId = rs.getInt("route_id");
+		        String routeName = rs.getString("route_name");
+		        routeNames.put(routeName, routeId);
+		    }
+		
+		    // Step 4: Close the ResultSet, Statement, and Connection
+		    rs.close();
+		    stmt.close();
+		    conn.close();
+		} catch (SQLException e) {
+		    e.printStackTrace();
+		}
+		
+		// System.out.println(routeNames); // debugging material
+
 
         JButton dropOpt1 = new JButton();
-        dropOpt1.setText("USC Main to USC TC (13C)");
+        dropOpt1.setText("USC Main to USC TC");
         dropOpt1.setBorder(null);
         dropOpt1.setFocusable(false);
         dropOpt1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
