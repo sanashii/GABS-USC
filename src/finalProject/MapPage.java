@@ -1,7 +1,9 @@
 package finalProject;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +11,13 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -74,10 +83,8 @@ public class MapPage {
         button1.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
         
         button1.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new MapPage();
 				jFrame.dispose();
 			}
@@ -91,10 +98,8 @@ public class MapPage {
         button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
         
         button2.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				new TranspoPageTo();
 				jFrame.dispose();
 			}
@@ -114,7 +119,6 @@ public class MapPage {
 				jFrame.dispose();
 			}
 		});
-//        button3.setFocusable(false);
         
         sidebar.add(button1);
         sidebar.add(button2);
@@ -134,17 +138,160 @@ public class MapPage {
 
         JButton lbBtn = new JButton();
         lbBtn.setText("LB Building");
-        lbBtn.setBounds(218,275,100,100);
+        lbBtn.setBounds(218, 275, 100, 100);
         lbBtn.setFocusable(false);
         lbBtn.setBorder(null);
         lbBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(jFrame, "LB Building");
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // retrieve the office names from the database
+                String[] officeNames = null;
+                String[] stallNames = null;
+                try {
+                    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+                    PreparedStatement stmt = conn.prepareStatement("SELECT office_name FROM offices WHERE building_code='LB'");
+                    ResultSet result = stmt.executeQuery();
+                    PreparedStatement stmt2 = conn.prepareStatement("SELECT stall_name FROM stalls WHERE building_code='LB'");
+                    ResultSet result2 = stmt2.executeQuery();
+
+                    // create an array to store the office names and stall names
+                    List<String> namesList = new ArrayList<>();
+                    while (result.next()) {
+                        namesList.add(result.getString("office_name"));
+                    }
+                    officeNames = namesList.toArray(new String[namesList.size()]);
+                    
+                    List<String> stallnamesList = new ArrayList<>();
+                    while (result2.next()) {
+                        stallnamesList.add(result2.getString("stall_name"));
+                    }
+                    stallNames = stallnamesList.toArray(new String[stallnamesList.size()]);
+
+                    // close the resources
+                    result.close();
+                    stmt.close();
+                    result2.close();
+                    stmt2.close();
+                    conn.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+                // create a JComboBox with the retrieved office names
+                JComboBox<String> buildingCodeBox = new JComboBox<String>();
+                buildingCodeBox.addItem("Select option...");
+                for (String name : officeNames) {
+                    buildingCodeBox.addItem(name);
+                }
+
+                // create a JLabel to display the office information
+                JLabel officeInfoLabel = new JLabel("");
+                officeInfoLabel.setVerticalAlignment(JLabel.TOP);
+
+                // create a JPanel to contain the components
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
+                panel.add(buildingCodeBox, BorderLayout.CENTER);
+                panel.add(officeInfoLabel, BorderLayout.SOUTH);
+
+                // add an ActionListener to the JComboBox
+                buildingCodeBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String selectedOffice = (String) buildingCodeBox.getSelectedItem();
+                        if (!selectedOffice.equals("Select option...")) {
+                            // retrieve the office information from the database
+                            try {
+                                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+                                PreparedStatement stmt = conn.prepareStatement("SELECT office_name, building_code, location, hours FROM offices WHERE office_name=? AND building_code='LB'"); // the AND clause is used to ensure that the item is found in this specific building code since item name duplication with a different building_code is possible
+                                stmt.setString(1, selectedOffice);
+                                ResultSet result = stmt.executeQuery();
+                                if (result.next()) {
+                                    // display the office information in the label
+                                    String officeInfo = "<html><b>Office Name:</b> " + result.getString("office_name") + "<br>"
+                                            + "<b>Building Code:</b> " + result.getString("building_code") + "<br>"
+                                            + "<b>Location:</b> " + result.getString("location") + "<br>"
+                                            + "<b>Hours:</b> " + result.getString("hours") + "<br>";
+                                    officeInfoLabel.setText(officeInfo);
+                                }
+                                // close the resources
+                                result.close();
+                                stmt.close();
+                                conn.close();
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        } else {
+                            // clear the office information label
+                            officeInfoLabel.setText("");
+                        }
+                    }
+                });
+                
+                // create a JComboBox with the retrieved stall names
+                JComboBox<String> stallBox = new JComboBox<String>();
+                stallBox.addItem("Select option...");
+                for (String name : stallNames) {
+                    stallBox.addItem(name);
+                }
+                
+                JLabel stallLabel = new JLabel("");
+                stallLabel.setVerticalAlignment(JLabel.TOP);
+
+                // create a JPanel to contain the components
+                JPanel panel2 = new JPanel(new BorderLayout());
+                panel2.add(new JLabel("View list of stalls:"), BorderLayout.NORTH);
+                panel2.add(stallBox, BorderLayout.CENTER);
+                panel2.add(stallLabel, BorderLayout.SOUTH);
+
+                // add an ActionListener to the JComboBox
+                stallBox.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String selectedStall = (String) stallBox.getSelectedItem();
+                        if (!selectedStall.equals("Select option...")) {
+                            // retrieve the office information from the database
+                            try {
+                                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+                                PreparedStatement stmt = conn.prepareStatement("SELECT stall_name, building_code, average_cost FROM stalls WHERE stall_name=? AND building_code='LB'");
+                                stmt.setString(1, selectedStall);
+                                ResultSet result = stmt.executeQuery();
+                                if (result.next()) {
+                                    // display the office information in the label
+                                    String stallInfo = "<html><b>Stall Name:</b> " + result.getString("stall_name") + "<br>"
+                                            + "<b>Building Code:</b> " + result.getString("building_code") + "<br>"
+                                            + "<b>Average:</b> " + result.getDouble("average_cost") + "<br>";
+                                    stallLabel.setText(stallInfo);
+                                }
+                                // close the resources
+                                result.close();
+                                stmt.close();
+                                conn.close();
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        } else {
+                            // clear the office information label
+                            stallLabel.setText("");
+                        }
+                    }
+                });
+                Object[] options = {"OK", "Cancel"};
+
+             // Create a new JPanel and add both panels to it
+             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
+             combinedPanel.add(panel);
+             combinedPanel.add(panel2);
+
+             // Create a new JScrollPane and set its viewport to the combined panel
+             JScrollPane scrollPane = new JScrollPane(combinedPanel);
+
+             // Show the scroll pane inside the option dialog
+             int choice = JOptionPane.showOptionDialog(null, scrollPane, "LB Building", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+
+            }
+        });
         
         JButton smedBtn = new JButton();
         smedBtn.setText("SMED Building");
@@ -152,7 +299,6 @@ public class MapPage {
         smedBtn.setFocusable(false);
         smedBtn.setBorder(null);
         smedBtn.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
