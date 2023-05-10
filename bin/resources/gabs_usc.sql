@@ -76,7 +76,7 @@ INSERT INTO `routes` VALUES (1,'USC TC to Ayala Terraces',17,13,'13C: Directly t
 (7,'USC TC to MC Public Market',15,12,'22I: Directly to MC Public Market','src/resources/routes/tcToMCPublicMarket.png'),
 (8,'USC TC to Pacific Mall',20,15,'24G: Directly to Pacific Mall','src/resources/routes/tcToPacificMall.png'),
 (9,'USC TC to Tintay',20,18,'13C: Directly to Tintay','src/resources/routes/tcToTintay.png'),
-(10,'USC TC to IT',17,14,'Directly to USC TC','src/resources/routes/tcToIT.png'),
+(10,'USC TC to IT Park',0,14,'For Modern: Directly to IT Park Terminal','src/resources/routes/tcToIT.png'),
 (11,'USC Main to USC TC',18,16,'13C: Directly to USC TC passes by Ayala Area','src/resources/routes/mainToTC.png'),
 (12,'Ayala Terminal to USC TC',15,13,'13C or 62B or 62C or Guba - Ayala: Directly to USC TC prices may vary','src/resources/routes/ayalaToTC.png'),
 (13,'Parkmall to USC TC',20,15,'13H: Directly to USC TC','src/resources/routes/parkmallToTC.png'),

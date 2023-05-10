@@ -260,12 +260,12 @@ public class TranspoPageFrom {
         JLabel imageLabel1 = new JLabel(scaledIcon1);
         imageLabel1.setBounds(0, 0, 540, 145);
         dropdownPanel1.add(imageLabel1);
-        dropdownPanel1.setFont(new Font("Arial", Font.PLAIN, 12));
+        
         
         dropOpt1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	dropdownPanel1.setFont(new Font("Arial", Font.PLAIN, 12));
+            	
                 dropdownPanel1.setVisible(!dropdownPanel1.isVisible());
                 dropOpt2.setVisible(false);
                 dropOpt3.setVisible(false);
