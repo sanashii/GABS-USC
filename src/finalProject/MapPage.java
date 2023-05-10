@@ -137,7 +137,7 @@ public class MapPage {
         mapLabel.setBounds(0, 0, map.getIconWidth(), map.getIconHeight());
 
         //Codes for LB Buidling
-        ImageIcon lbImage = new ImageIcon("src/building_codes/LB Building.png");
+        ImageIcon lbImage = new ImageIcon("src/resources/building_codes/LB Building.png");
         Image lbImg = lbImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon lbIcon = new ImageIcon(lbImg);
         JButton lbBtn = new JButton(lbIcon);
@@ -298,7 +298,7 @@ public class MapPage {
         });
         
         //Codes for SMED Building
-        ImageIcon smedImage = new ImageIcon("src/building_codes/SMED Building.png");
+        ImageIcon smedImage = new ImageIcon("src/resources/building_codes/SMED Building.png");
         Image smedImg = smedImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon smedIcon = new ImageIcon(smedImg);
         
@@ -460,7 +460,7 @@ public class MapPage {
 		});
         
         //Codes for PE Building
-        ImageIcon peImage = new ImageIcon("src/building_codes/PE Building.png");
+        ImageIcon peImage = new ImageIcon("src/resources/building_codes/PE Building.png");
         Image peImg = peImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon peIcon = new ImageIcon(peImg);
         
@@ -472,8 +472,6 @@ public class MapPage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-//				JOptionPane.showMessageDialog(jFrame, "PE Building");
 				String[] officeNames = null;
                 String[] stallNames = null;
                 try {
@@ -622,7 +620,7 @@ public class MapPage {
 		});
         
         //Codes for RH Building
-        ImageIcon rhImage = new ImageIcon("src/building_codes/RH Building.png");
+        ImageIcon rhImage = new ImageIcon("src/resources/building_codes/RH Building.png");
         Image rhImg = rhImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon rhIcon = new ImageIcon(rhImg);
         
@@ -784,7 +782,7 @@ public class MapPage {
 		});
         
         //Codes for LRC Building
-        ImageIcon lrcImage = new ImageIcon("src/building_codes/LRC Building.png");
+        ImageIcon lrcImage = new ImageIcon("src/resources/building_codes/LRC Building.png");
         Image lrcImg = lrcImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon lrcIcon = new ImageIcon(lrcImg);
         
@@ -946,7 +944,7 @@ public class MapPage {
 		});
         
         //Codes for MR Building
-        ImageIcon mrImage = new ImageIcon("src/building_codes/MR Building.png");
+        ImageIcon mrImage = new ImageIcon("src/resources/building_codes/MR Building.png");
         Image mrImg = mrImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon mrIcon = new ImageIcon(mrImg);
         
@@ -1108,7 +1106,7 @@ public class MapPage {
 		});
         
         //Codes for AF Building
-        ImageIcon afImage = new ImageIcon("src/building_codes/SAFAD Building.png");
+        ImageIcon afImage = new ImageIcon("src/resources/building_codes/SAFAD Building.png");
         Image afImg = afImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon afIcon = new ImageIcon(afImg);
         
@@ -1270,7 +1268,7 @@ public class MapPage {
 		});
         
         //Codes for Dormitory Codes
-        ImageIcon dormImage = new ImageIcon("src/building_codes/Dormitory.png");
+        ImageIcon dormImage = new ImageIcon("src/resources/building_codes/Dormitory.png");
         Image dormImg = dormImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon dormIcon = new ImageIcon(dormImg);
         
@@ -1282,8 +1280,6 @@ public class MapPage {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-//				JOptionPane.showMessageDialog(jFrame, "Dormitory");
 				String[] officeNames = null;
                 String[] stallNames = null;
                 try {
