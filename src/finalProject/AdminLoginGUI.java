@@ -1,9 +1,12 @@
 package finalProject;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -111,6 +114,36 @@ public class AdminLoginGUI extends PasswordHasher{
 		    }
 		});
 		
+		JLabel forgotPasswordLabel = new JLabel("<html><u>Forgot Password? Click me!</u></html>");
+		forgotPasswordLabel.setBounds(100, 420, 200, 50);
+		forgotPasswordLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		forgotPasswordLabel.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		    	String username = enterUser.getText();
+		    	try {
+		            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+		            
+		            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+		            statement.setString(1, username);
+		            ResultSet resultSet = statement.executeQuery();
+		            
+		            if (resultSet.next()) {
+		                ChangePassword passChangePage = new ChangePassword(username, "update");
+		                jFrame.dispose();
+		            } else {
+		            	JOptionPane.showMessageDialog(jFrame, "User does not exist!", "Login Error", JOptionPane.ERROR_MESSAGE);
+		            }
+		            
+		            resultSet.close();
+		            statement.close();
+		            connection.close();
+		        } catch (SQLException ex) {
+		            ex.printStackTrace();
+		        }
+		    	
+		    }
+		});
+		
 		loginPage.setBounds(420,670,62,62);
 		loginPage.setIcon(jLock);
 		loginPage.setBackground(jFrame.getBackground());
@@ -131,6 +164,7 @@ public class AdminLoginGUI extends PasswordHasher{
 		jPanel.add(userLabel); jPanel.add(enterUser);
 		jPanel.add(passLabel); jPanel.add(enterPass);
 		jPanel.add(loginBtn);
+		jPanel.add(forgotPasswordLabel);
 		
 		jFrame.add(jPanel);
 		jFrame.add(loginPage);

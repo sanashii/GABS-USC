@@ -55,7 +55,7 @@ CREATE TABLE `offices` (
   `location` varchar(255) DEFAULT NULL,
   `hours` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`office_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE `routes` (
   `jeepsToTake` varchar(255) DEFAULT NULL,
   `route_map` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`route_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'baulita','andybaulita@gmail.com','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'),(2,'suico','lorenz@gmail.com','dc066ce6a8774838c6be69243ec7c1adfee89c0b40b97cd93ce2a968106dbdf6'),(3,'aliser','francis@gmail.com','4544b3726ead44ac2ca3ca71b530a871f9d50626411fd99b86b14ad6a186bc59'),(4,'gobui','ralph@gmail.com','2147c6e281863632c45b5871bed8a9158cb430e41a0b9cfc14c62aac011f6095'),(5,'dummy','test@gmail.com','dc8ffdbf2736dbdf39508017ac594e0d069f3eee9b0f29ece256aa7d831f9ef6'),(6,'dummy2','test2@gmail.com','7b50943dab3f7f92f4120ca9a031d777b5a13bb71749e7e6a2cdd5f2e0ddaf5a'),(7,'dummy3','test3@gmail.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'),(8,'dummy4','test4@gmail.com','e6eb6b4699a92f63128c8ababde3879ef16279989aad2f125a7204e45272043a'),(9,'shysana','TWICEsana@jyp.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
+INSERT INTO `users` VALUES (1,'baulita','andybaulita@gmail.com','7b50943dab3f7f92f4120ca9a031d777b5a13bb71749e7e6a2cdd5f2e0ddaf5a'),(2,'suico','lorenz@gmail.com','dc066ce6a8774838c6be69243ec7c1adfee89c0b40b97cd93ce2a968106dbdf6'),(3,'aliser','francis@gmail.com','4544b3726ead44ac2ca3ca71b530a871f9d50626411fd99b86b14ad6a186bc59'),(4,'gobui','ralph@gmail.com','2147c6e281863632c45b5871bed8a9158cb430e41a0b9cfc14c62aac011f6095'),(5,'dummy','test@gmail.com','dc8ffdbf2736dbdf39508017ac594e0d069f3eee9b0f29ece256aa7d831f9ef6'),(6,'dummy2','test2@gmail.com','7b50943dab3f7f92f4120ca9a031d777b5a13bb71749e7e6a2cdd5f2e0ddaf5a'),(7,'dummy3','test3@gmail.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'),(8,'dummy4','test4@gmail.com','e6eb6b4699a92f63128c8ababde3879ef16279989aad2f125a7204e45272043a'),(9,'shysana','TWICEsana@jyp.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'),(10,'officialtest1','official@test1.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08'),(11,'officialtest2','official@test2.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -160,4 +160,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-09  1:53:13
+-- Dump completed on 2023-05-09 22:42:26
