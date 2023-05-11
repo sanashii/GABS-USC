@@ -43,7 +43,7 @@ public class MapPage {
         JButton jButton = new JButton();
         JPanel jPanel = new JPanel();
         sidebar = new JPanel();
-
+        
         jFrame.setTitle("GABS USC");
         jFrame.setSize(540,810);
         jFrame.setLayout(null);
@@ -196,7 +196,10 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
+                
+
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+             
                 
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {
@@ -247,7 +250,7 @@ public class MapPage {
                 panel2.add(new JLabel("View list of stalls:"), BorderLayout.NORTH);
                 panel2.add(stallBox, BorderLayout.CENTER);
                 panel2.add(stallLabel, BorderLayout.SOUTH);
-//                panel2.setPreferredSize(new Dimension(0, 500));
+//                panel2.setPreferredSize(new Dimension(0, 0));
 
                 // add an ActionListener to the JComboBox
                 stallBox.addActionListener(new ActionListener() {
@@ -315,9 +318,9 @@ public class MapPage {
                 String[] stallNames = null;
                 try {
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                    PreparedStatement stmt = conn.prepareStatement("SELECT office_name FROM offices WHERE building_code='SM'");
+                    PreparedStatement stmt = conn.prepareStatement("SELECT office_name FROM offices WHERE building_code='SM' OR building_code='ES' OR building_code='FO' OR building_code='EO'");
                     ResultSet result = stmt.executeQuery();
-                    PreparedStatement stmt2 = conn.prepareStatement("SELECT stall_name FROM stalls WHERE building_code='SM'");
+                    PreparedStatement stmt2 = conn.prepareStatement("SELECT stall_name FROM stalls WHERE building_code='SM' OR building_code='ES' OR building_code='FO' OR building_code='EO'");
                     ResultSet result2 = stmt2.executeQuery();
 
                     // create an array to store the office names and stall names
@@ -359,9 +362,11 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
 
-                // add an ActionListener to the JComboBox
+
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+
+
                 buildingCodeBox.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -370,7 +375,7 @@ public class MapPage {
                             // retrieve the office information from the database
                             try {
                                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                                PreparedStatement stmt = conn.prepareStatement("SELECT office_name, building_code, location, hours FROM offices WHERE office_name=? AND building_code='SM'"); // the AND clause is used to ensure that the item is found in this specific building code since item name duplication with a different building_code is possible
+                                PreparedStatement stmt = conn.prepareStatement("SELECT office_name, building_code, location, hours FROM offices WHERE office_name=? AND building_code='SM' OR building_code='ES' OR building_code='FO' OR building_code='EO'"); // the AND clause is used to ensure that the item is found in this specific building code since item name duplication with a different building_code is possible
                                 stmt.setString(1, selectedOffice);
                                 ResultSet result = stmt.executeQuery();
                                 if (result.next()) {
@@ -420,7 +425,7 @@ public class MapPage {
                             // retrieve the office information from the database
                             try {
                                 Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                                PreparedStatement stmt = conn.prepareStatement("SELECT stall_name, building_code, average_cost FROM stalls WHERE stall_name=? AND building_code='SM'");
+                                PreparedStatement stmt = conn.prepareStatement("SELECT stall_name, building_code, average_cost FROM stalls WHERE stall_name=? AND building_code='SM' OR building_code='ES' OR building_code='FO' OR building_code='EO'");
                                 stmt.setString(1, selectedStall);
                                 ResultSet result = stmt.executeQuery();
                                 if (result.next()) {
@@ -520,7 +525,10 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
+                
+             
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+
 
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {
@@ -682,8 +690,11 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
-
+                
+               
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+              
+                
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {
                     @Override
@@ -844,7 +855,10 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
+                
+                
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                
 
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {
@@ -1006,7 +1020,10 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
+ 
+                
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+      
 
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {
@@ -1168,7 +1185,10 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
+               
+                
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+              
 
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {
@@ -1328,7 +1348,10 @@ public class MapPage {
                 panel.add(new JLabel("View list of offices:"), BorderLayout.NORTH);
                 panel.add(buildingCodeBox, BorderLayout.CENTER);
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
-                panel.setPreferredSize(new Dimension(0, 100)); //This line of code alters the height of the JOptionPanel
+                
+                
+                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                
 
                 // add an ActionListener to the JComboBox
                 buildingCodeBox.addActionListener(new ActionListener() {

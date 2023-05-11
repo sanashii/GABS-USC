@@ -238,8 +238,8 @@ public class AddOfficeGUI {
 			        checkStatement.setString(2, buildingCode);
 			        ResultSet resultSet = checkStatement.executeQuery();
 			        if (resultSet.next()) {
-			            // Canteen already exists
-			            JOptionPane.showMessageDialog(jFrame, "Canteen already exists in this building.");
+			            // Office already exists
+			            JOptionPane.showMessageDialog(jFrame, "Office already exists in this building.");
 			            return;
 			        }
 			        checkStatement.close();

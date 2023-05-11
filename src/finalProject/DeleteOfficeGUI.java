@@ -82,7 +82,7 @@ public class DeleteOfficeGUI {
         deleteOffice.setBackground(Color.white);
         deleteOffice.setBorder(buttonBorder);
         deleteOffice.addActionListener(new ActionListener() {
-			@Override
+            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -98,32 +98,34 @@ public class DeleteOfficeGUI {
                         return;
                     }
                     
-                    String officeId = officeIDField.getText(); // Get the inputted route ID
-                    String sql = "DELETE FROM offices WHERE office_ID = " + officeId; // SQL query to delete the row with the given route ID
+                    // Confirmation dialog box
+                    int confirm = JOptionPane.showConfirmDialog(jPanel, "Are you sure you want to delete the office with ID " + id + "?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        String officeId = officeIDField.getText(); // Get the inputted route ID
+                        String sql = "DELETE FROM offices WHERE office_ID = " + officeId; // SQL query to delete the row with the given route ID
 
-                    int result = statement.executeUpdate(sql); 
+                        int result = statement.executeUpdate(sql); 
 
-                    if (result == 1) { 
-                        JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + officeId + "!");
+                        if (result == 1) { 
+                            JOptionPane.showMessageDialog(jFrame, "Successfully deleted office with ID " + officeId + "!");
+                            jFrame.dispose();
+                        } else { 
+                            JOptionPane.showMessageDialog(jFrame, "Error deleting office with ID " + officeId + ". Please check if the ID is valid.");
+                        }
+
+                        statement.close();
+                        connection.close();
+                        
+                        DeleteOfficeGUI delete = new DeleteOfficeGUI(username);
                         jFrame.dispose();
-                    } else { 
-                        JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + officeId + ". Please check if the ID is valid.");
                     }
-
-                    statement.close();
-                    connection.close();
-                    
-                    DeleteOfficeGUI delete = new DeleteOfficeGUI(username);
-                    jFrame.dispose();
 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
-
             }
-
         });
         jPanel.add(deleteOffice);
         

@@ -100,28 +100,30 @@ public class DeleteRouteGUI {
                         JOptionPane.showMessageDialog(jPanel, "Route ID does not exist.");
                         return;
                     }
-                    
-                    String routeId = routeIDField.getText();
-                    String sql = "DELETE FROM routes WHERE route_id = " + routeId; // SQL query to delete the row with the given route ID
 
-                    int result = statement.executeUpdate(sql);
+                    int confirmDialogResult = JOptionPane.showConfirmDialog(jFrame, "Are you sure you want to delete the route with ID " + id + "?");
+                    if (confirmDialogResult == JOptionPane.YES_OPTION) {
+                        String sql = "DELETE FROM routes WHERE route_id = " + id; // SQL query to delete the row with the given route ID
 
-                    if (result == 1) {
-                        JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + routeId + "!");
+                        int result = statement.executeUpdate(sql);
+
+                        if (result == 1) {
+                            JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + id + "!");
+                            jFrame.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + id + ". Please check if the ID is valid.");
+                        }
+
+                        statement.close();
+                        connection.close();
+
+                        try {
+                            DeleteRouteGUI delete = new DeleteRouteGUI(username);
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
                         jFrame.dispose();
-                    } else { 
-                        JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + routeId + ". Please check if the ID is valid.");
                     }
-
-                    statement.close();
-                    connection.close();
-                    
-                    try {
-						DeleteRouteGUI delete = new DeleteRouteGUI(username);
-					} catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					}
-                    jFrame.dispose();
 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
@@ -132,6 +134,7 @@ public class DeleteRouteGUI {
             }
 
         });
+
         jPanel.add(deleteRoute);
         
         JButton viewRoutesTable = new JButton("View Routes Table");

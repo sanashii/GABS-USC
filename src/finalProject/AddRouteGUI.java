@@ -114,12 +114,23 @@ public class AddRouteGUI {
 
 			        double traditionalJeepFare = 0.0;
 			        double modernJeepFare = 0.0;
-
-			        ResultSet resultSet = statement.executeQuery("SELECT traditionalJeep_fare, modernJeep_fare FROM routes WHERE route_id = 1");
-
+			        
+			        // Check if office already exists in same building
+			        String checkSql = "SELECT * FROM routes WHERE route_name = ?";
+			        java.sql.PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+			        checkStatement.setString(1, routeName);
+			        ResultSet resultSet = checkStatement.executeQuery();
 			        if (resultSet.next()) {
-			            traditionalJeepFare = resultSet.getDouble("traditionalJeep_Fare");
-			            modernJeepFare = resultSet.getDouble("modernJeep_Fare");
+			            // Route already exists
+			            JOptionPane.showMessageDialog(jFrame, "Route already exists in this building.");
+			            return;
+			        }
+
+			        ResultSet resultSet2 = statement.executeQuery("SELECT traditionalJeep_fare, modernJeep_fare FROM routes WHERE route_id = 1");
+
+			        if (resultSet2.next()) {
+			            traditionalJeepFare = resultSet2.getDouble("traditionalJeep_Fare");
+			            modernJeepFare = resultSet2.getDouble("modernJeep_Fare");
 			        }
 
 			        java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);

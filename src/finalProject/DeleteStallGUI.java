@@ -75,14 +75,14 @@ public class DeleteStallGUI {
         stallIDField.setBounds(20, 120, 150, 30);
         jPanel.add(stallIDField);
 
-        JButton deleteOffice = new JButton("Delete Stall");
+        JButton deleteStall = new JButton("Delete Stall");
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
-        deleteOffice.setBounds(110, 480, 120, 30);
-        deleteOffice.setForeground(new Color(29, 142, 0));
-        deleteOffice.setBackground(Color.white);
-        deleteOffice.setBorder(buttonBorder);
-        deleteOffice.addActionListener(new ActionListener() {
-			@Override
+        deleteStall.setBounds(110, 480, 120, 30);
+        deleteStall.setForeground(new Color(29, 142, 0));
+        deleteStall.setBackground(Color.white);
+        deleteStall.setBorder(buttonBorder);
+        deleteStall.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
@@ -97,25 +97,29 @@ public class DeleteStallGUI {
                         JOptionPane.showMessageDialog(jPanel, "Stall ID does not exist.");
                         return;
                     }
-                    
-                    String stallId = stallIDField.getText(); // Get the inputted route ID
-                    String sql = "DELETE FROM stalls WHERE stall_id = " + stallId; // SQL query to delete the row with the given route ID
 
-                    int result = statement.executeUpdate(sql); 
+                    // Show confirmation dialog
+                    int confirmResult = JOptionPane.showConfirmDialog(jFrame, "Are you sure you want to delete this stall?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+                    if (confirmResult == JOptionPane.YES_OPTION) {
+                        String stallId = stallIDField.getText(); // Get the inputted stall ID
+                        String sql = "DELETE FROM stalls WHERE stall_id = " + stallId; // SQL query to delete the row with the given stall ID
 
-                    if (result == 1) { 
-                        JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + stallId + "!");
+                        int result = statement.executeUpdate(sql);
+
+                        if (result == 1) {
+                            JOptionPane.showMessageDialog(jFrame, "Successfully deleted stall with ID " + stallId + "!");
+                            jFrame.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(jFrame, "Error deleting stall with ID " + stallId + ". Please check if the ID is valid.");
+                        }
+
+                        statement.close();
+                        connection.close();
+
+                        @SuppressWarnings("unused")
+                        DeleteStallGUI delete = new DeleteStallGUI(username);
                         jFrame.dispose();
-                    } else { 
-                        JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + stallId + ". Please check if the ID is valid.");
                     }
-
-                    statement.close();
-                    connection.close();
-                    
-                    @SuppressWarnings("unused")
-					DeleteStallGUI delete = new DeleteStallGUI(username);
-                    jFrame.dispose();
 
                 } catch (SQLException e1) {
                     e1.printStackTrace();
@@ -126,7 +130,7 @@ public class DeleteStallGUI {
             }
 
         });
-        jPanel.add(deleteOffice);
+        jPanel.add(deleteStall);
         
         JButton viewStallsTable = new JButton("View Stalls Table");
         viewStallsTable.setBounds(110, 440, 120, 30);

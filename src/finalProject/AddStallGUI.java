@@ -149,13 +149,25 @@ public class AddStallGUI {
                         JOptionPane.showMessageDialog(jFrame, "Please fill up all fields.");
                         return;
                     }
+                    // Check if office already exists in same building
+			        String checkSql = "SELECT * FROM stalls WHERE stall_name = ? AND building_code = ?";
+			        java.sql.PreparedStatement checkStatement = connection.prepareStatement(checkSql);
+			        checkStatement.setString(1, stallName);
+			        checkStatement.setString(2, buildingCode);
+			        ResultSet resultSet = checkStatement.executeQuery();
+			        if (resultSet.next()) {
+			            // Office already exists
+			            JOptionPane.showMessageDialog(jFrame, "Stall already exists in this building.");
+			            return;
+			        }
+			        
                     String sql = "SELECT * FROM stalls WHERE stall_name = ? AND building_code = ?";
                     java.sql.PreparedStatement preparedStatement = connection.prepareStatement(sql);
                     preparedStatement.setString(1, stallName);
                     preparedStatement.setString(2, buildingCode);
-                    ResultSet resultSet = preparedStatement.executeQuery();
+                    ResultSet resultSet2 = preparedStatement.executeQuery();
                     
-                    if (resultSet.next()) {
+                    if (resultSet2.next()) {
                         // stall name and building code already exist, display an error message
                         JOptionPane.showMessageDialog(jFrame, "Stall name and building code already exist.");
                     } else {
