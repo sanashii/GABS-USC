@@ -47,7 +47,7 @@ public class TranspoPageTo {
     	
         JFrame jFrame = new JFrame();
         
-        ImageIcon jIcon = new ImageIcon("src/resources/name.png");
+        ImageIcon jIcon = new ImageIcon("src/resources/nameTo.png");
         ImageIcon exitIcon = new ImageIcon("src/resources/exit.png");
         ImageIcon sideBar = new ImageIcon("src/resources/menu2.png");
         ImageIcon ayalaToTC = new ImageIcon("src/resources/routes/Ayala Terminal to TC.png");
@@ -115,35 +115,47 @@ public class TranspoPageTo {
 		});
         
         JButton button2 = new JButton("Transportation Guide");
-        button2.setBounds(0,50,190,50);
+        button2.setBounds(0, 50, 190, 50);
         button2.setBorder(null);
         button2.setBackground(new Color(118, 212, 152));
         button2.setFocusable(false);
         button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+
         JFrame frame = new JFrame("Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
+        frame.setLayout(null);
 
         JPanel panel = new JPanel();
         frame.add(panel);
         panel.add(button2);
+
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem1 = new JMenuItem("To USC TC");
         JMenuItem menuItem2 = new JMenuItem("From USC TC");
         popupMenu.add(menuItem1);
         popupMenu.add(menuItem2);
-        popupMenu.setPopupSize(190, 150);
         menuItem1.setBackground(new Color(118, 212, 152));
         menuItem2.setBackground(new Color(118, 212, 152));
         popupMenu.setBackground(new Color(118, 212, 152));
+
         button2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				  popupMenu.show(button2, 0, button2.getHeight());
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Calculate the required width based on menu items' preferred widths
+                int requiredWidth = Math.max(menuItem1.getPreferredSize().width,
+                        menuItem2.getPreferredSize().width) + 4; // Add some padding
+
+                // Resize the frame width to fit the menu items
+                int frameWidth = frame.getWidth();
+                int frameHeight = frame.getHeight();
+                frame.setSize(frameWidth + requiredWidth, frameHeight);
+
+                // Show the popup menu
+                popupMenu.show(button2, button2.getWidth(), 0);
+            }
+        });
+
         menuItem1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -232,7 +244,7 @@ public class TranspoPageTo {
 
 
        
-        dropOpt1.setText("USC Main to USC TC");
+        dropOpt1.setText("USC Main");
         dropOpt1.setBorder(null);
         dropOpt1.setFocusable(false);
         dropOpt1.setBackground(new Color(118, 212, 152));
@@ -275,7 +287,7 @@ public class TranspoPageTo {
                 try {
                     // create a connection to the database and execute a query to retrieve the data
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                     stmt.setInt(1, routeId);
                     ResultSet result = stmt.executeQuery();
 
@@ -315,7 +327,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt2.setText("Ayala Terminal to USC TC");
+        dropOpt2.setText("Ayala Terminal");
         dropOpt2.setBorder(null);
         dropOpt2.setFocusable(false);
         dropOpt2.setBackground(new Color(118, 212, 152));
@@ -354,7 +366,7 @@ public class TranspoPageTo {
                 try {
                     // create a connection to the database and execute a query to retrieve the data
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                     stmt.setInt(1, routeId);
                     ResultSet result = stmt.executeQuery();
 
@@ -395,7 +407,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt3.setText("Parkmall to USC TC");
+        dropOpt3.setText("Parkmall");
         dropOpt3.setBorder(null);
         dropOpt3.setFocusable(false);
         dropOpt3.setBackground(new Color(118, 212, 152));
@@ -434,7 +446,7 @@ public class TranspoPageTo {
                  try {
                      // create a connection to the database and execute a query to retrieve the data
                      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                      stmt.setInt(1, routeId);
                      ResultSet result = stmt.executeQuery();
 
@@ -474,7 +486,7 @@ public class TranspoPageTo {
         });
         
       
-        dropOpt4.setText("SM Consolacion to USC TC");
+        dropOpt4.setText("SM Consolacion");
         dropOpt4.setBorder(null);
         dropOpt4.setFocusable(false);
         dropOpt4.setBackground(new Color(118, 212, 152));
@@ -513,7 +525,7 @@ public class TranspoPageTo {
                 try {
                     // create a connection to the database and execute a query to retrieve the data
                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                     stmt.setInt(1, routeId);
                     ResultSet result = stmt.executeQuery();
 
@@ -553,7 +565,7 @@ public class TranspoPageTo {
         });
         
        
-        dropOpt5.setText("J Mall to USC TC");
+        dropOpt5.setText("J Mall");
         dropOpt5.setBorder(null);
         dropOpt5.setFocusable(false);
         dropOpt5.setBackground(new Color(118, 212, 152));
@@ -593,7 +605,7 @@ public class TranspoPageTo {
                  try {
                      // create a connection to the database and execute a query to retrieve the data
                      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T'");
                      stmt.setInt(1, routeId);
                      ResultSet result = stmt.executeQuery();
 
@@ -633,7 +645,7 @@ public class TranspoPageTo {
         });
         
       
-        dropOpt6.setText("MC Public Market to USC TC");
+        dropOpt6.setText("MC Public Market");
         dropOpt6.setBorder(null);
         dropOpt6.setFocusable(false);
         dropOpt6.setBackground(new Color(118, 212, 152));
@@ -672,7 +684,7 @@ public class TranspoPageTo {
                  try {
                      // create a connection to the database and execute a query to retrieve the data
                      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                      stmt.setInt(1, routeId);
                      ResultSet result = stmt.executeQuery();
 
@@ -712,7 +724,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt7.setText("Pacific Mall to USC TC");
+        dropOpt7.setText("Pacific Mall");
         dropOpt7.setBorder(null);
         dropOpt7.setFocusable(false);
         dropOpt7.setBackground(new Color(118, 212, 152));
@@ -748,7 +760,7 @@ public class TranspoPageTo {
                  try {
                      // create a connection to the database and execute a query to retrieve the data
                      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                      stmt.setInt(1, routeId);
                      ResultSet result = stmt.executeQuery();
 
@@ -788,7 +800,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt8.setText("Tintay to USC TC");
+        dropOpt8.setText("Tintay");
         dropOpt8.setBorder(null);
         dropOpt8.setFocusable(false);
         dropOpt8.setBackground(new Color(118, 212, 152));
@@ -820,7 +832,7 @@ public class TranspoPageTo {
                  try {
                      // create a connection to the database and execute a query to retrieve the data
                      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
+                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ? AND route_tag = 'T' ");
                      stmt.setInt(1, routeId);
                      ResultSet result = stmt.executeQuery();
 
