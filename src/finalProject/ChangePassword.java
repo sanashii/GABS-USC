@@ -18,10 +18,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-public class ChangePassword { //TODO: experiment and fix
+public class ChangePassword {
     @SuppressWarnings("unused")
 	ChangePassword(String username) {
         JFrame jFrame = new JFrame();
+        
         
 
         // setting of default header w/ logo
@@ -101,6 +102,12 @@ public class ChangePassword { //TODO: experiment and fix
         	newPassword = enterNewPass.getText();
             retypedPassword = retypedPass.getText();
             
+            if (newPassword.isEmpty() || retypedPassword.isEmpty()) { // check if any of the fields is empty
+                JOptionPane.showMessageDialog(jFrame, "All fields must be filled out!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             if (!newPassword.equals(retypedPassword)) { // checks if new pass & retyped pass matches
                 JOptionPane.showMessageDialog(jFrame, "The new password and retyped password do not match!", "Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -173,7 +180,7 @@ public class ChangePassword { //TODO: experiment and fix
         backButton.setBorderPainted(false);
         backButton.addActionListener(e -> {
             jFrame.dispose();
-            SuperuserGUI superUserMenu = new SuperuserGUI(username);
+            AdminLoginGUI login = new AdminLoginGUI();
         });
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
@@ -219,6 +226,12 @@ public class ChangePassword { //TODO: experiment and fix
             String retypedPassword = "";
         	newPassword = enterNewPass.getText();
             retypedPassword = retypedPass.getText();
+            
+            if (newPassword.isEmpty() || retypedPassword.isEmpty()) { // check if any of the fields is empty
+                JOptionPane.showMessageDialog(jFrame, "All fields must be filled out!", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             
             if (!newPassword.equals(retypedPassword)) { // checks if new pass & retyped pass matches
                 JOptionPane.showMessageDialog(jFrame, "The new password and retyped password do not match!", "Error",
