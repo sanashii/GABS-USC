@@ -91,7 +91,7 @@ public class AddOfficeGUI {
         officeNameLabel.setBounds(20, 80, 300, 30);
         jPanel.add(officeNameLabel);
         JTextField officeNameField = new JTextField();
-        officeNameField.setBounds(20, 120, 150, 30);
+        officeNameField.setBounds(20, 120, 300, 30);
         jPanel.add(officeNameField);
 
 
@@ -111,7 +111,7 @@ public class AddOfficeGUI {
         					"Michael Richartz Center (MR)", 
         					"SAFAD Building (AF)"};
         JComboBox<String> buildingCodeBox = new JComboBox<String>(options);
-        buildingCodeBox.setBounds(20, 210, 250, 30);
+        buildingCodeBox.setBounds(20, 210, 300, 30);
 
         buildingCodeBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -163,7 +163,7 @@ public class AddOfficeGUI {
         locationLabel.setBounds(20, 260, 300, 30);
         jPanel.add(locationLabel);
         JTextField locationField = new JTextField();
-        locationField.setBounds(20, 300, 150, 30);
+        locationField.setBounds(20, 300, 300, 30);
         jPanel.add(locationField);
         
         JLabel hoursLabel = new JLabel("Hours:");
@@ -204,7 +204,7 @@ public class AddOfficeGUI {
         hoursPanel.add(new JLabel(" to "));
         hoursPanel.add(closingHoursSpinner);
 
-        hoursPanel.setBounds(20, 390, 220, 30);
+        hoursPanel.setBounds(20, 390, 300, 30);
         jPanel.add(hoursPanel);
 
 
@@ -218,6 +218,14 @@ public class AddOfficeGUI {
         addOffice.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// Validate fields
+		        if (officeNameField.getText().isEmpty() ||
+		            selectedOption == null ||
+		            locationField.getText().isEmpty()) {
+		            JOptionPane.showMessageDialog(jFrame, "Please fill in all fields.");
+		            return;
+		        }
+		        
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");

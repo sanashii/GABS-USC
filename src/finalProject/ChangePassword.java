@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -43,8 +44,8 @@ public class ChangePassword { //TODO: experiment and fix
         JLabel passLabel = new JLabel();
         JLabel retypeLabel = new JLabel();
 
-        JTextField enterNewPass = new JTextField();
-        JTextField retypedPass = new JTextField();
+        JPasswordField enterNewPass = new JPasswordField();
+        JPasswordField retypedPass = new JPasswordField();
 
         JButton changePassBtn = new JButton();
         JButton backButton = new JButton();

@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
@@ -40,7 +41,7 @@ public class AdminLoginGUI extends PasswordHasher{
 		JLabel passLabel = new JLabel();
 		
 		JTextField enterUser = new JTextField();
-		JTextField enterPass = new JTextField();
+		JPasswordField enterPass = new JPasswordField();
 		
 		JButton loginBtn = new JButton();
 		JButton loginPage = new JButton();

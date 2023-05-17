@@ -77,7 +77,7 @@ JFrame jFrame = new JFrame();
         canteenNameLabel.setBounds(20, 80, 300, 30);
         jPanel.add(canteenNameLabel);
         JTextField canteenNameField = new JTextField();
-        canteenNameField.setBounds(20, 120, 150, 30);
+        canteenNameField.setBounds(20, 120, 300, 30);
         jPanel.add(canteenNameField);
 
 
@@ -97,7 +97,7 @@ JFrame jFrame = new JFrame();
         					"Michael Richartz Center (MR)", 
         					"SAFAD Building (AF)"};
         JComboBox<String> buildingCodeBox = new JComboBox<String>(options);
-        buildingCodeBox.setBounds(20, 210, 250, 30);
+        buildingCodeBox.setBounds(20, 210, 300, 30);
 
         buildingCodeBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -154,15 +154,19 @@ JFrame jFrame = new JFrame();
         addCanteen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String canteenName = canteenNameField.getText();
+		        String buildingCode = selectedOption;
+		        
+				if (canteenName.isEmpty() || buildingCode == null) {
+		            JOptionPane.showMessageDialog(jFrame, "Please fill in all fields.");
+		            return;
+		        }
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
 			        Statement statement = connection.createStatement();
 			        String sql = "INSERT INTO canteens (canteen_name, building_code) " +
 			                 		"VALUES (?, ?)";
-
-			        String canteenName = canteenNameField.getText();
-			        String buildingCode = selectedOption;
 
 			        // Check if canteen already exists in same building
 			        String checkSql = "SELECT * FROM canteens WHERE canteen_name = ? AND building_code = ?";

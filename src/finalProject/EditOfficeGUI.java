@@ -35,6 +35,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class EditOfficeGUI {
+	String id;
 	String selectedOption;
 	String selectedBuilding;
 	String selectedOption2;
@@ -90,12 +91,34 @@ public class EditOfficeGUI {
         jFrame.add(headerPanel);
         jFrame.add(jPanel);
 
-        JLabel officeIDLabel = new JLabel("Enter office ID:");
+        JLabel officeIDLabel = new JLabel("Select office ID:");
         officeIDLabel.setBounds(20, 80, 300, 30);
         jPanel.add(officeIDLabel);
-        JTextField officeIDField = new JTextField();
-        officeIDField.setBounds(20, 120, 150, 30);
-        jPanel.add(officeIDField);
+
+        // Replace the JTextField with a JComboBox
+        JComboBox<String> officeIDComboBox = new JComboBox<String>();
+        officeIDComboBox.setBounds(20, 120, 300, 30);
+        jPanel.add(officeIDComboBox);
+
+        // Fetch the IDs from the database and populate the JComboBox
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+            Statement statement = connection.createStatement();
+
+            ResultSet idResultSet = statement.executeQuery("SELECT office_ID FROM offices");
+            while (idResultSet.next()) {
+                id = idResultSet.getString("office_ID");
+                officeIDComboBox.addItem(id);
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
 
         JLabel buildingCodeLabel = new JLabel("Select building:");
         buildingCodeLabel.setBounds(20, 170, 300, 30);
@@ -113,7 +136,7 @@ public class EditOfficeGUI {
         					"Michael Richartz Center (MR)", 
         					"SAFAD Building (AF)"};
         JComboBox<String> buildingCodeBox = new JComboBox<String>(options);
-        buildingCodeBox.setBounds(20, 210, 250, 30);
+        buildingCodeBox.setBounds(20, 210, 300, 30);
 
         buildingCodeBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
@@ -166,7 +189,7 @@ public class EditOfficeGUI {
         locationLabel.setBounds(20, 260, 300, 30);
         jPanel.add(locationLabel);
         JTextField locationField = new JTextField();
-        locationField.setBounds(20, 300, 150, 30);
+        locationField.setBounds(20, 300, 300, 30);
         jPanel.add(locationField);
         
         JLabel hoursLabel = new JLabel("Hours:");
@@ -223,8 +246,6 @@ public class EditOfficeGUI {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
                     Statement statement = connection.createStatement();
-                    
-                    int id = Integer.parseInt(officeIDField.getText());
 
                     // Check if the ID exists in the table
                     ResultSet idCheck = statement.executeQuery("SELECT * FROM offices WHERE office_ID = " + id);

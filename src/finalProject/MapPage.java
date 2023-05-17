@@ -198,7 +198,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
                 
 
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 100)); //This line of code alters the height of the JOptionPanel
              
                 
                 // add an ActionListener to the JComboBox
@@ -284,12 +284,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -300,7 +306,7 @@ public class MapPage {
             }
         });
         
-        //Codes for SMED Building
+      //Codes for SMED Building
         ImageIcon smedImage = new ImageIcon("src/resources/building_codes/SMED Building.png");
         Image smedImg = smedImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon smedIcon = new ImageIcon(smedImg);
@@ -364,7 +370,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
 
 
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 100)); //This line of code alters the height of the JOptionPanel
 
 
                 buildingCodeBox.addActionListener(new ActionListener() {
@@ -448,12 +454,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -464,7 +476,7 @@ public class MapPage {
 			}
 		});
         
-        //Codes for PE Building
+      //Codes for PE Building
         ImageIcon peImage = new ImageIcon("src/resources/building_codes/PE Building.png");
         Image peImg = peImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon peIcon = new ImageIcon(peImg);
@@ -527,7 +539,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
                 
              
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 150)); //This line of code alters the height of the JOptionPanel
 
 
                 // add an ActionListener to the JComboBox
@@ -612,12 +624,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -627,7 +645,7 @@ public class MapPage {
 			}
 		});
         
-        //Codes for RH Building
+      //Codes for RH Building
         ImageIcon rhImage = new ImageIcon("src/resources/building_codes/RH Building.png");
         Image rhImg = rhImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon rhIcon = new ImageIcon(rhImg);
@@ -692,7 +710,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
                 
                
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(150, 200)); //This line of code alters the height of the JOptionPanel
               
                 
                 // add an ActionListener to the JComboBox
@@ -777,12 +795,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -792,7 +816,7 @@ public class MapPage {
 			}
 		});
         
-        //Codes for LRC Building
+      //Codes for LRC Building
         ImageIcon lrcImage = new ImageIcon("src/resources/building_codes/LRC Building.png");
         Image lrcImg = lrcImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon lrcIcon = new ImageIcon(lrcImg);
@@ -857,7 +881,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
                 
                 
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 150)); //This line of code alters the height of the JOptionPanel
                 
 
                 // add an ActionListener to the JComboBox
@@ -942,12 +966,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -957,7 +987,7 @@ public class MapPage {
 			}
 		});
         
-        //Codes for MR Building
+      //Codes for MR Building
         ImageIcon mrImage = new ImageIcon("src/resources/building_codes/MR Building.png");
         Image mrImg = mrImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon mrIcon = new ImageIcon(mrImg);
@@ -1022,7 +1052,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
  
                 
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 150)); //This line of code alters the height of the JOptionPanel
       
 
                 // add an ActionListener to the JComboBox
@@ -1107,12 +1137,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -1122,7 +1158,7 @@ public class MapPage {
 			}
 		});
         
-        //Codes for AF Building
+      //Codes for AF Building
         ImageIcon afImage = new ImageIcon("src/resources/building_codes/SAFAD Building.png");
         Image afImg = afImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon afIcon = new ImageIcon(afImg);
@@ -1187,7 +1223,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
                
                 
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 100)); //This line of code alters the height of the JOptionPanel
               
 
                 // add an ActionListener to the JComboBox
@@ -1272,12 +1308,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);
@@ -1287,7 +1329,7 @@ public class MapPage {
 			}
 		});
         
-        //Codes for Dormitory Codes
+      //Codes for Dormitory Codes
         ImageIcon dormImage = new ImageIcon("src/resources/building_codes/Dormitory.png");
         Image dormImg = dormImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         ImageIcon dormIcon = new ImageIcon(dormImg);
@@ -1350,7 +1392,7 @@ public class MapPage {
                 panel.add(officeInfoLabel, BorderLayout.SOUTH);
                 
                 
-                panel.setPreferredSize(new Dimension(100, 150)); //This line of code alters the height of the JOptionPanel
+                panel.setPreferredSize(new Dimension(50, 100)); //This line of code alters the height of the JOptionPanel
                 
 
                 // add an ActionListener to the JComboBox
@@ -1435,12 +1477,18 @@ public class MapPage {
                         }
                     }
                 });
-                Object[] options = {"OK", "Cancel"};
+                Object[] options = {"Okay"};
 
              // Create a new JPanel and add both panels to it
-             JPanel combinedPanel = new JPanel(new GridLayout(2, 1));
-             combinedPanel.add(panel);
-             combinedPanel.add(panel2);
+             JPanel combinedPanel = new JPanel(new GridLayout(1, 1));
+//             combinedPanel.add(panel);
+//             combinedPanel.add(panel2);
+             
+          // Create a JTabbedPane and add the panels as tabs
+             JTabbedPane tabbedPane = new JTabbedPane();
+             tabbedPane.addTab("Offices", panel);
+             tabbedPane.addTab("Stalls", panel2);
+             combinedPanel.add(tabbedPane);
 
              // Create a new JScrollPane and set its viewport to the combined panel
              JScrollPane scrollPane = new JScrollPane(combinedPanel);

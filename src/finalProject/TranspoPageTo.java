@@ -871,8 +871,8 @@ public class TranspoPageTo {
         });
         
       
-        //====== FOR OFFICIAL DEMO USE ======
-         /* dropOpt9.setText("Official Demo");
+        
+          dropOpt9.setText("Offical Demo");
         dropOpt9.setBorder(null);
         dropOpt9.setFocusable(false);
         dropOpt9.setBackground(new Color(118, 212, 152));
@@ -940,7 +940,7 @@ public class TranspoPageTo {
                      ex.printStackTrace();
                  }
             }
-        }); */
+        }); 
  
         transPoPanel.add(dropOpt1); transPoPanel.add(dropdownPanel1);
         transPoPanel.add(dropOpt2); transPoPanel.add(dropdownPanel2);
