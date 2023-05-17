@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class TranspoPageTo {
     private JPanel sidebar;
@@ -43,15 +44,10 @@ public class TranspoPageTo {
     	JButton dropOpt8 = new JButton();
     	JPanel dropdownPanel8 = new JPanel();
 
-    	JButton dropOpt9 = new JButton();
-    	JPanel dropdownPanel9 = new JPanel();
-    	
-    	JButton dropOpt10 = new JButton();
-    	JPanel dropdownPanel10 = new JPanel();
     	
         JFrame jFrame = new JFrame();
         
-        ImageIcon jIcon = new ImageIcon("src/resources/name.png");
+        ImageIcon jIcon = new ImageIcon("src/resources/nameTo.png");
         ImageIcon exitIcon = new ImageIcon("src/resources/exit.png");
         ImageIcon sideBar = new ImageIcon("src/resources/menu2.png");
         ImageIcon ayalaToTC = new ImageIcon("src/resources/routes/Ayala Terminal to TC.png");
@@ -119,35 +115,47 @@ public class TranspoPageTo {
 		});
         
         JButton button2 = new JButton("Transportation Guide");
-        button2.setBounds(0,50,190,50);
+        button2.setBounds(0, 50, 190, 50);
         button2.setBorder(null);
         button2.setBackground(new Color(118, 212, 152));
         button2.setFocusable(false);
         button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+
         JFrame frame = new JFrame("Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
+        frame.setLayout(null);
 
         JPanel panel = new JPanel();
         frame.add(panel);
         panel.add(button2);
+
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem1 = new JMenuItem("To USC TC");
         JMenuItem menuItem2 = new JMenuItem("From USC TC");
         popupMenu.add(menuItem1);
         popupMenu.add(menuItem2);
-        popupMenu.setPopupSize(190, 150);
         menuItem1.setBackground(new Color(118, 212, 152));
         menuItem2.setBackground(new Color(118, 212, 152));
         popupMenu.setBackground(new Color(118, 212, 152));
+
         button2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				  popupMenu.show(button2, 0, button2.getHeight());
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Calculate the required width based on menu items' preferred widths
+                int requiredWidth = Math.max(menuItem1.getPreferredSize().width,
+                        menuItem2.getPreferredSize().width) + 4; // Add some padding
+
+                // Resize the frame width to fit the menu items
+                int frameWidth = frame.getWidth();
+                int frameHeight = frame.getHeight();
+                frame.setSize(frameWidth + requiredWidth, frameHeight);
+
+                // Show the popup menu
+                popupMenu.show(button2, button2.getWidth(), 0);
+            }
+        });
+
         menuItem1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -214,7 +222,7 @@ public class TranspoPageTo {
 		    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
 		
 		    // execute a SELECT query to fetch the route_id and route_name
-		    PreparedStatement stmt = conn.prepareStatement("SELECT route_id, route_name FROM routes");
+		    PreparedStatement stmt = conn.prepareStatement("SELECT route_id, route_name FROM routes WHERE route_tag = 'T'");
 		    ResultSet rs = stmt.executeQuery();
 		
 		    // Step 3: Populate the map with the fetched values
@@ -232,11 +240,11 @@ public class TranspoPageTo {
 		    e.printStackTrace();
 		}
 		
-		//System.out.println(routeNames); // debugging material
+		// System.out.println(routeNames); // debugging material
 
 
        
-        dropOpt1.setText("USC Main to USC TC");
+        dropOpt1.setText("USC Main");
         dropOpt1.setBorder(null);
         dropOpt1.setFocusable(false);
         dropOpt1.setBackground(new Color(118, 212, 152));
@@ -319,7 +327,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt2.setText("Ayala Terminal to USC TC");
+        dropOpt2.setText("Ayala Terminal");
         dropOpt2.setBorder(null);
         dropOpt2.setFocusable(false);
         dropOpt2.setBackground(new Color(118, 212, 152));
@@ -399,7 +407,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt3.setText("Parkmall to USC TC");
+        dropOpt3.setText("Parkmall");
         dropOpt3.setBorder(null);
         dropOpt3.setFocusable(false);
         dropOpt3.setBackground(new Color(118, 212, 152));
@@ -478,7 +486,7 @@ public class TranspoPageTo {
         });
         
       
-        dropOpt4.setText("SM Consolacion to USC TC");
+        dropOpt4.setText("SM Consolacion");
         dropOpt4.setBorder(null);
         dropOpt4.setFocusable(false);
         dropOpt4.setBackground(new Color(118, 212, 152));
@@ -557,7 +565,7 @@ public class TranspoPageTo {
         });
         
        
-        dropOpt5.setText("J Mall to USC TC");
+        dropOpt5.setText("J Mall");
         dropOpt5.setBorder(null);
         dropOpt5.setFocusable(false);
         dropOpt5.setBackground(new Color(118, 212, 152));
@@ -637,7 +645,7 @@ public class TranspoPageTo {
         });
         
       
-        dropOpt6.setText("MC Public Market to USC TC");
+        dropOpt6.setText("MC Public Market");
         dropOpt6.setBorder(null);
         dropOpt6.setFocusable(false);
         dropOpt6.setBackground(new Color(118, 212, 152));
@@ -716,7 +724,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt7.setText("Pacific Mall to USC TC");
+        dropOpt7.setText("Pacific Mall");
         dropOpt7.setBorder(null);
         dropOpt7.setFocusable(false);
         dropOpt7.setBackground(new Color(118, 212, 152));
@@ -792,7 +800,7 @@ public class TranspoPageTo {
         });
         
         
-        dropOpt8.setText("Tintay to USC TC");
+        dropOpt8.setText("Tintay");
         dropOpt8.setBorder(null);
         dropOpt8.setFocusable(false);
         dropOpt8.setBackground(new Color(118, 212, 152));
@@ -820,13 +828,6 @@ public class TranspoPageTo {
             public void actionPerformed(ActionEvent e) {
             	 dropdownPanel8.setVisible(!dropdownPanel8.isVisible());
                
-                 dropOpt9.setVisible(false);
-                 dropOpt10.setVisible(false);
-                 if (!dropdownPanel8.isVisible()) {
-                     dropOpt9.setVisible(true);
-                     dropOpt10.setVisible(true);
-                     // add code to show other buttons if necessary
-                 }
                  int routeId = routeNames.get(dropOpt8.getText()); // gets the ID from the hashmap based on the dropOpt1 text which matches with the one in the hashmap
                  try {
                      // create a connection to the database and execute a query to retrieve the data
@@ -870,78 +871,8 @@ public class TranspoPageTo {
             }
         });
         
-      
-        
-          dropOpt9.setText("Offical Demo");
-        dropOpt9.setBorder(null);
-        dropOpt9.setFocusable(false);
-        dropOpt9.setBackground(new Color(118, 212, 152));
-        dropOpt9.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
-        dropOpt9.setBounds(0,640,540,50);
-        
-        dropdownPanel9.setBounds(0, 650, 540, 250);
-        dropdownPanel9.setBackground(Color.WHITE);
-        dropdownPanel9.setBorder(BorderFactory.createMatteBorder(0, 1, 1, 1, Color.black));
-        dropdownPanel9.setLayout(null);
-        dropdownPanel9.setVisible(false);
-        
-        ImageIcon icon9 = new ImageIcon("src/resources/routes/officialTest.png"); // create ImageIcon from file
-        Image img9 = icon9.getImage(); // get the image from the ImageIcon
-        Image scaledImg9 = img9.getScaledInstance(540, 130, Image.SCALE_SMOOTH); // scale the image to 50x50
-        ImageIcon scaledIcon9 = new ImageIcon(scaledImg9);
-        JLabel imageLabel9 = new JLabel(scaledIcon9);
-        imageLabel9.setBounds(0, 0, 540, 145);
-        dropdownPanel9.add(imageLabel9);
-        
-     
-        dropOpt9.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	 dropdownPanel9.setVisible(!dropdownPanel9.isVisible());
-               
-                 int routeId = routeNames.get(dropOpt9.getText()); // gets the ID from the hashmap based on the dropOpt1 text which matches with the one in the hashmap
-                 try {
-                     // create a connection to the database and execute a query to retrieve the data
-                     Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
-                     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM routes WHERE route_id = ?");
-                     stmt.setInt(1, routeId);
-                     ResultSet result = stmt.executeQuery();
-
-
-                     // retrieve the data and create JLabels to display them
-                     if (result.next()) {
-                     	 String routeNameResult = result.getString("route_name");
-                          double traditionalJeepFareResult = result.getDouble("traditionalJeep_Fare");
-                          double modernJeepFareResult = result.getDouble("modernJeep_Fare");
-                          String jeepsToTakeResult = result.getString("jeepsToTake");
-                          
-                        JLabel labelName = new JLabel("Route Name: " + routeNameResult);
-                        labelName.setBounds(20, 150, 400, 30);
-                        dropdownPanel9.add(labelName);
-
-                        JLabel labelTraditionalFare = new JLabel("Traditional Jeep Fare: ₱" + traditionalJeepFareResult);
-                        labelTraditionalFare.setBounds(20, 170, 400, 30);
-                        dropdownPanel9.add(labelTraditionalFare);
-
-                        JLabel labelModernFare = new JLabel("Modern Jeep Fare: ₱" + modernJeepFareResult);
-                        labelModernFare.setBounds(20, 190, 400, 30);
-                        dropdownPanel9.add(labelModernFare);
-
-                        JLabel labelJeepsToTake = new JLabel("Jeeps To Take: " + jeepsToTakeResult);
-                        labelJeepsToTake.setBounds(20, 210, 600, 30);
-                        dropdownPanel9.add(labelJeepsToTake);
-                     }
-
-                     // close the connection and the statement
-                     result.close();
-                     stmt.close();
-                     conn.close();
-                 } catch (SQLException ex) {
-                     ex.printStackTrace();
-                 }
-            }
-        }); 
- 
+       
+       
         transPoPanel.add(dropOpt1); transPoPanel.add(dropdownPanel1);
         transPoPanel.add(dropOpt2); transPoPanel.add(dropdownPanel2);
         transPoPanel.add(dropOpt3); transPoPanel.add(dropdownPanel3);
@@ -950,8 +881,7 @@ public class TranspoPageTo {
         transPoPanel.add(dropOpt6); transPoPanel.add(dropdownPanel6);
         transPoPanel.add(dropOpt7); transPoPanel.add(dropdownPanel7);
         transPoPanel.add(dropOpt8); transPoPanel.add(dropdownPanel8);
-        transPoPanel.add(dropOpt9); transPoPanel.add(dropdownPanel9);
-
+       
         JScrollPane scrollBar = new JScrollPane(transPoPanel);
         scrollBar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         
