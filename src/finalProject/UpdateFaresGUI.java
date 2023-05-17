@@ -93,7 +93,7 @@ public class UpdateFaresGUI {
         jPanel.add(traditionalJeepneyFareLabel);
 
         JTextField traditionalJeepneyFareTextField = new JTextField();
-        traditionalJeepneyFareTextField.setBounds(20, 120, 150, 30);
+        traditionalJeepneyFareTextField.setBounds(20, 120, 300, 30);
         jPanel.add(traditionalJeepneyFareTextField);
 
 
@@ -102,7 +102,7 @@ public class UpdateFaresGUI {
         jPanel.add(modernJeepneyFareLabel);
 
         JTextField modernJeepneyFareTextField = new JTextField();
-        modernJeepneyFareTextField.setBounds(20, 210, 150, 30);
+        modernJeepneyFareTextField.setBounds(20, 210, 300, 30);
         jPanel.add(modernJeepneyFareTextField);
 
         

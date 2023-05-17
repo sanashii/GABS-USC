@@ -81,7 +81,7 @@ public class AddStallGUI {
         stallNameLabel.setBounds(20, 80, 300, 30);
         jPanel.add(stallNameLabel);
         JTextField stallNameField = new JTextField();
-        stallNameField.setBounds(20, 120, 150, 30);
+        stallNameField.setBounds(20, 120, 300, 30);
         jPanel.add(stallNameField);
 
 
@@ -108,7 +108,7 @@ public class AddStallGUI {
         String[] options = canteenMap.keySet().toArray(new String[canteenMap.size()]);
 
         JComboBox<String> buildingCodeBox = new JComboBox<String>(options);
-        buildingCodeBox.setBounds(20, 210, 250, 30);
+        buildingCodeBox.setBounds(20, 210, 300, 30);
         jPanel.add(buildingCodeBox);
 
         buildingCodeBox.addItemListener(new ItemListener() {
@@ -125,16 +125,16 @@ public class AddStallGUI {
         costLabel.setBounds(20, 260, 300, 30);
         jPanel.add(costLabel);
         JTextField costField = new JTextField();
-        costField.setBounds(20, 300, 150, 30);
+        costField.setBounds(20, 300, 300, 30);
         jPanel.add(costField);
         
-        JButton addOffice = new JButton("Add Stall");
+        JButton addStall = new JButton("Add Stall");
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
-        addOffice.setBounds(110, 480, 120, 30);
-        addOffice.setForeground(new Color(29, 142, 0));
-        addOffice.setBackground(Color.white);
-        addOffice.setBorder(buttonBorder);
-        addOffice.addActionListener(new ActionListener() {
+        addStall.setBounds(110, 480, 120, 30);
+        addStall.setForeground(new Color(29, 142, 0));
+        addStall.setBackground(Color.white);
+        addStall.setBorder(buttonBorder);
+        addStall.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -194,7 +194,7 @@ public class AddStallGUI {
                 }
             }
         });
-        jPanel.add(addOffice);
+        jPanel.add(addStall);
         
         JButton viewStallsTable = new JButton("View Stalls Table");
         viewStallsTable.setBounds(110, 440, 120, 30);

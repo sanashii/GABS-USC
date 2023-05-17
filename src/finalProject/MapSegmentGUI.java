@@ -1,11 +1,16 @@
 package finalProject;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,20 +51,34 @@ public class MapSegmentGUI {
 
 
         JPanel jPanel = new JPanel();
+        JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(Color.white);
+        JPanel rightPanel = new JPanel();
+        rightPanel.setBackground(Color.white);
         jPanel.setBackground(Color.white);
         jPanel.setBounds(85, 80, 350, 680);
         jPanel.setLayout(null); 
         
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        
         JLabel titleLabel = new JLabel("USC Map Segment");
-        titleLabel.setBounds(75, 20, 400, 30);
+        titleLabel.setBounds(75, 20, 400, 90);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         titleLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        int topPadding = 20;
+        int leftPadding = 20;
+        int bottomPadding = 50;
+        int rightPadding = 20;
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(topPadding, leftPadding, bottomPadding, rightPadding));
         jPanel.add(titleLabel);
+        
+        
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.Y_AXIS));
 
         // add buttons with labels and set their positions
         JButton addOfficeBtn = new JButton("Add Office");
-        addOfficeBtn.setBounds(25, 80, 300, 50);
         addOfficeBtn.setForeground(Color.white);
         addOfficeBtn.setBackground(new Color(136, 191, 140, 255));
         addOfficeBtn.addActionListener(new ActionListener() {
@@ -72,7 +91,6 @@ public class MapSegmentGUI {
         });
 
         JButton editOfficeBtn = new JButton("Edit Office");
-        editOfficeBtn.setBounds(25, 160, 300, 50);
         editOfficeBtn.setForeground(Color.white);
         editOfficeBtn.setBackground(new Color(136, 191, 140, 255));
         editOfficeBtn.addActionListener(new ActionListener() {
@@ -85,9 +103,8 @@ public class MapSegmentGUI {
         });
 
         JButton deleteOfficeBtn = new JButton("Delete Office");
-        deleteOfficeBtn.setBounds(25, 240, 300, 50);
         deleteOfficeBtn.setForeground(Color.white);
-        deleteOfficeBtn.setBackground(new Color(136, 191, 140, 255));
+        deleteOfficeBtn.setBackground(Color.red);
         deleteOfficeBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,7 +115,6 @@ public class MapSegmentGUI {
  
 
         JButton addCanteenBtn = new JButton("Add Canteen");
-        addCanteenBtn.setBounds(25, 340, 300, 50);
         addCanteenBtn.setForeground(Color.white);
         addCanteenBtn.setBackground(new Color(136, 191, 140, 255));
         addCanteenBtn.addActionListener(new ActionListener() {
@@ -111,7 +127,6 @@ public class MapSegmentGUI {
         });
         
         JButton addStallBtn = new JButton("Add Stall");
-        addStallBtn.setBounds(25, 420, 300, 50);
         addStallBtn.setForeground(Color.white);
         addStallBtn.setBackground(new Color(136, 191, 140, 255));
         addStallBtn.addActionListener(new ActionListener() {
@@ -123,7 +138,6 @@ public class MapSegmentGUI {
         });
         
         JButton editStallBtn = new JButton("Edit Stall");
-        editStallBtn.setBounds(25, 500, 300, 50);
         editStallBtn.setForeground(Color.white);
         editStallBtn.setBackground(new Color(136, 191, 140, 255));
         editStallBtn.addActionListener(new ActionListener() {
@@ -135,9 +149,8 @@ public class MapSegmentGUI {
         });
         
         JButton deleteStallBtn = new JButton("Delete Stall");
-        deleteStallBtn.setBounds(25, 580, 300, 50);
         deleteStallBtn.setForeground(Color.white);
-        deleteStallBtn.setBackground(new Color(136, 191, 140, 255));
+        deleteStallBtn.setBackground(Color.red);
         deleteStallBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -146,13 +159,41 @@ public class MapSegmentGUI {
 			}
         });
         
-        jPanel.add(addOfficeBtn);
-        jPanel.add(editOfficeBtn);
-        jPanel.add(deleteOfficeBtn);
-        jPanel.add(addCanteenBtn);
-        jPanel.add(addStallBtn);
-        jPanel.add(editStallBtn);
-        jPanel.add(deleteStallBtn);
+        addOfficeBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        editOfficeBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        deleteOfficeBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addCanteenBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addStallBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        editStallBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        deleteStallBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Add buttons to leftPanel
+        leftPanel.add(addOfficeBtn);
+        leftPanel.add(Box.createVerticalStrut(50));
+        leftPanel.add(editOfficeBtn);
+        leftPanel.add(Box.createVerticalStrut(50));
+        leftPanel.add(deleteOfficeBtn);
+
+        // Add buttons to rightPanel
+        rightPanel.add(addCanteenBtn);
+        rightPanel.add(Box.createVerticalStrut(50));
+        rightPanel.add(addStallBtn);
+        rightPanel.add(Box.createVerticalStrut(50));
+        rightPanel.add(editStallBtn);
+        rightPanel.add(Box.createVerticalStrut(50));
+        rightPanel.add(deleteStallBtn);
+        
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setBackground(Color.white);
+        mainPanel.setLayout(new BorderLayout());
+
+        // Add leftPanel and rightPanel to mainPanel
+        mainPanel.add(leftPanel, BorderLayout.WEST);
+        mainPanel.add(rightPanel, BorderLayout.EAST);
+
+        // Add mainPanel to jPanel
+        jPanel.add(mainPanel);
 
         jFrame.getContentPane().setBackground(Color.white); // set main background to white
 

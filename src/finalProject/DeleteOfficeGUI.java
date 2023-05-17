@@ -13,6 +13,7 @@ import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -68,12 +69,34 @@ public class DeleteOfficeGUI {
         jFrame.add(headerPanel);
         jFrame.add(jPanel);
 
-        JLabel officeIDLabel = new JLabel("Enter office ID:");
+        JLabel officeIDLabel = new JLabel("Select office ID:");
         officeIDLabel.setBounds(20, 80, 300, 30);
         jPanel.add(officeIDLabel);
-        JTextField officeIDField = new JTextField();
-        officeIDField.setBounds(20, 120, 150, 30);
-        jPanel.add(officeIDField);
+
+        // Replace the JTextField with a JComboBox
+        JComboBox<String> officeIDComboBox = new JComboBox<String>();
+        officeIDComboBox.setBounds(20, 120, 300, 30);
+        jPanel.add(officeIDComboBox);
+
+        // Fetch the IDs from the database and populate the JComboBox
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+            Statement statement = connection.createStatement();
+
+            ResultSet idResultSet = statement.executeQuery("SELECT office_ID FROM offices");
+            while (idResultSet.next()) {
+                String id = idResultSet.getString("office_ID");
+                officeIDComboBox.addItem(id);
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
 
         JButton deleteOffice = new JButton("Delete Office");
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
@@ -89,7 +112,14 @@ public class DeleteOfficeGUI {
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
                     Statement statement = connection.createStatement();
 
-                    int id = Integer.parseInt(officeIDField.getText());
+                    // Get the selected office ID from the JComboBox
+                    String selectedOfficeID = (String) officeIDComboBox.getSelectedItem();
+                    if (selectedOfficeID == null) {
+                        JOptionPane.showMessageDialog(jPanel, "Please select an office ID.");
+                        return;
+                    }
+
+                    int id = Integer.parseInt(selectedOfficeID);
 
                     // Check if the ID exists in the table
                     ResultSet idCheck = statement.executeQuery("SELECT * FROM offices WHERE office_ID = " + id);
@@ -97,29 +127,39 @@ public class DeleteOfficeGUI {
                         JOptionPane.showMessageDialog(jPanel, "Office ID does not exist.");
                         return;
                     }
-                    
-                    // Confirmation dialog box
-                    int confirm = JOptionPane.showConfirmDialog(jPanel, "Are you sure you want to delete the office with ID " + id + "?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-                    if (confirm == JOptionPane.YES_OPTION) {
-                        String officeId = officeIDField.getText(); // Get the inputted route ID
-                        String sql = "DELETE FROM offices WHERE office_ID = " + officeId; // SQL query to delete the row with the given route ID
 
-                        int result = statement.executeUpdate(sql); 
+                    // Fetch the office details
+                    ResultSet officeDetails = statement.executeQuery("SELECT office_name, building_code FROM offices WHERE office_ID = " + id);
+                    if (officeDetails.next()) {
+                        String officeName = officeDetails.getString("office_name");
+                        String buildingCode = officeDetails.getString("building_code");
 
-                        if (result == 1) { 
-                            JOptionPane.showMessageDialog(jFrame, "Successfully deleted office with ID " + officeId + "!");
+                        // Confirmation dialog box
+                        int confirm = JOptionPane.showConfirmDialog(jPanel, "Are you sure you want to delete the office with ID " + id + "?\n\nOffice Name: " + officeName + "\nBuilding Code: " + buildingCode, "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                        if (confirm == JOptionPane.YES_OPTION) {
+                            String sql = "DELETE FROM offices WHERE office_ID = " + id;
+
+                            int result = statement.executeUpdate(sql);
+
+                            if (result == 1) {
+                                JOptionPane.showMessageDialog(jFrame, "Successfully deleted office with ID " + id + "!");
+                                jFrame.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(jFrame, "Error deleting office with ID " + id + ". Please check if the ID is valid.");
+                            }
+
+                            statement.close();
+                            connection.close();
+
+                            DeleteOfficeGUI delete = new DeleteOfficeGUI(username);
                             jFrame.dispose();
-                        } else { 
-                            JOptionPane.showMessageDialog(jFrame, "Error deleting office with ID " + officeId + ". Please check if the ID is valid.");
                         }
-
-                        statement.close();
-                        connection.close();
-                        
-                        DeleteOfficeGUI delete = new DeleteOfficeGUI(username);
-                        jFrame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(jPanel, "Failed to retrieve office details for ID " + id + ".");
                     }
 
+                    statement.close();
+                    connection.close();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {

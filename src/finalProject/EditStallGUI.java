@@ -35,6 +35,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class EditStallGUI {
+	String id;
 	String selectedOption;
 	String selectedBuilding;
 	String selectedOption2;
@@ -86,18 +87,43 @@ JFrame jFrame = new JFrame();
         jFrame.add(headerPanel);
         jFrame.add(jPanel);
 
-        JLabel stallIDLabel = new JLabel("Enter stall ID:");
+        JLabel stallIDLabel = new JLabel("Select stall ID:");
         stallIDLabel.setBounds(20, 80, 300, 30);
         jPanel.add(stallIDLabel);
-        JTextField stallIDField = new JTextField();
-        stallIDField.setBounds(20, 120, 150, 30);
-        jPanel.add(stallIDField);
+
+        // Replace the JTextField with a JComboBox
+        JComboBox<String> stallIDComboBox = new JComboBox<String>();
+        stallIDComboBox.setBounds(20, 120, 300, 30);
+        jPanel.add(stallIDComboBox);
+
+        // Fetch the stall IDs and names from the database and populate the JComboBox
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+            Statement statement = connection.createStatement();
+
+            ResultSet idResultSet = statement.executeQuery("SELECT stall_id, stall_name, building_code FROM stalls");
+            while (idResultSet.next()) {
+                id = idResultSet.getString("stall_id");
+                String name = idResultSet.getString("stall_name");
+                String canteen = idResultSet.getString("building_code");
+                String displayText = id + " - " + name + " - " + canteen;
+                stallIDComboBox.addItem(displayText);
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
 
         JLabel costLabel = new JLabel("New average cost:");
         costLabel.setBounds(20, 170, 300, 30);
         jPanel.add(costLabel);
         JTextField costField = new JTextField();
-        costField.setBounds(20, 210, 150, 30);
+        costField.setBounds(20, 210, 300, 30);
         jPanel.add(costField);
 
         JButton editOffice = new JButton("Apply Changes");
@@ -113,8 +139,6 @@ JFrame jFrame = new JFrame();
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
                     Statement statement = connection.createStatement();
-
-                    int id = Integer.parseInt(stallIDField.getText());
 
                     // Check if the ID exists in the table
                     ResultSet idCheck = statement.executeQuery("SELECT * FROM stalls WHERE stall_ID = " + id);

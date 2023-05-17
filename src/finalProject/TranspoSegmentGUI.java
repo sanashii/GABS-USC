@@ -36,7 +36,7 @@ public class TranspoSegmentGUI {
 
         JPanel jPanel = new JPanel();
         jPanel.setBackground(Color.white);
-        jPanel.setBounds(85, 83, 350, 500);
+        jPanel.setBounds(85, 83, 350, 560);
         jPanel.setLayout(null); 
         
         JLabel titleLabel = new JLabel("USC Transportation Segment");
@@ -87,27 +87,9 @@ public class TranspoSegmentGUI {
         });
         jPanel.add(editRouteButton);
 
-        JButton deleteRouteButton = new JButton("Delete Route");
-        deleteRouteButton.setBounds(25, 300, 300, 50);
-        deleteRouteButton.setForeground(Color.white);
-        deleteRouteButton.setBackground(new Color(136, 191, 140, 255));
-        deleteRouteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        deleteRouteButton.setAlignmentY(Component.CENTER_ALIGNMENT);
-        deleteRouteButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					DeleteRouteGUI newRoute =  new DeleteRouteGUI(username);
-				} catch (FileNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				}
-				jFrame.dispose();
-			}
-        });
-        jPanel.add(deleteRouteButton);
 
         JButton updateFaresButton = new JButton("Update Fares");
-        updateFaresButton.setBounds(25, 400, 300, 50);
+        updateFaresButton.setBounds(25, 300, 300, 50);
         updateFaresButton.setForeground(Color.white);
         updateFaresButton.setBackground(new Color(136, 191, 140, 255));
         updateFaresButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -122,6 +104,25 @@ public class TranspoSegmentGUI {
         	
         });
         jPanel.add(updateFaresButton);
+        
+        JButton deleteRouteButton = new JButton("Delete Route");
+        deleteRouteButton.setBounds(25, 500, 300, 50);
+        deleteRouteButton.setForeground(Color.white);
+        deleteRouteButton.setBackground(Color.red);
+        deleteRouteButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        deleteRouteButton.setAlignmentY(Component.CENTER_ALIGNMENT);
+        deleteRouteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					DeleteRouteGUI newRoute =  new DeleteRouteGUI(username);
+				} catch (FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+				jFrame.dispose();
+			}
+        });
+        jPanel.add(deleteRouteButton);
         
         JButton backButton = new JButton();
         backButton.setIcon(new ImageIcon("src/resources/previous.png"));

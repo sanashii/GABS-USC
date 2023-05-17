@@ -91,7 +91,7 @@ public class ViewRoutesTable {
 
         jFrame.add(headerPanel); // add header panel to frame
 
-        String[] columnNames = {"Route ID", "Route Name", "Traditional Jeep Fare", "Modern Jeep Fare", "Jeeps To Take", "Route Map"};
+        String[] columnNames = {"Route ID", "Route Name", "Traditional Jeep Fare", "Modern Jeep Fare", "Jeeps To Take", "Route Map", "Route Tag"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         JTable table = new JTable(model);
         table.setEnabled(false);
@@ -108,7 +108,7 @@ public class ViewRoutesTable {
 
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password")) {
             Statement stmt = conn.createStatement();
-            String sql = "SELECT route_id, route_name, traditionalJeep_Fare, modernJeep_Fare, jeepsToTake, route_map FROM routes";
+            String sql = "SELECT route_id, route_name, traditionalJeep_Fare, modernJeep_Fare, jeepsToTake, route_map, route_tag FROM routes";
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 int id = rs.getInt("route_id");
@@ -117,7 +117,8 @@ public class ViewRoutesTable {
                 double modernJeepneyFare = rs.getDouble("modernJeep_Fare");
                 String jeepsToTake = rs.getString("jeepsToTake");
                 String route_map = rs.getString("route_map");
-                Object[] rowData = {id, name, traditionalJeepneyFare, modernJeepneyFare, jeepsToTake, route_map};
+                char route_tag = rs.getString("route_tag").charAt(0); 
+                Object[] rowData = {id, name, traditionalJeepneyFare, modernJeepneyFare, jeepsToTake, route_map, route_tag};
                 model.addRow(rowData);
             }
         } catch (Exception e) {

@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,14 +17,18 @@ import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class AddRouteGUI {
+	String selectedOption;
 	@SuppressWarnings("unused")
 	AddRouteGUI(String username) throws SQLException, FileNotFoundException{
 		JFrame jFrame = new JFrame();
@@ -43,7 +49,7 @@ public class AddRouteGUI {
 
         JPanel jPanel = new JPanel();
         jPanel.setBackground(Color.white);
-        jPanel.setBounds(85, 83, 350, 500);
+        jPanel.setBounds(85, 83, 350, 560);
         jPanel.setLayout(null); 
         
         JLabel titleLabel = new JLabel("Adding a New Route");
@@ -75,7 +81,7 @@ public class AddRouteGUI {
         routeNameLabel.setBounds(20, 80, 300, 30);
         jPanel.add(routeNameLabel);
         JTextField routeNameField = new JTextField();
-        routeNameField.setBounds(20, 120, 150, 30);
+        routeNameField.setBounds(20, 120, 300, 30);
         jPanel.add(routeNameField);
 
 
@@ -83,34 +89,93 @@ public class AddRouteGUI {
         jeepsToTakeLabel.setBounds(20, 170, 300, 30);
         jPanel.add(jeepsToTakeLabel);
         JTextField jeepsToTakeField = new JTextField();
-        jeepsToTakeField.setBounds(20, 210, 150, 30);
+        jeepsToTakeField.setBounds(20, 210, 300, 30);
         jPanel.add(jeepsToTakeField);
 
         JLabel uploadRouteLabel = new JLabel("Upload route:");
         uploadRouteLabel.setBounds(20, 260, 300, 30);
         jPanel.add(uploadRouteLabel);
+
         JTextField uploadRouteField = new JTextField();
-        uploadRouteField.setBounds(20, 300, 150, 30);
+        uploadRouteField.setBounds(20, 300, 185, 30);
+        uploadRouteField.setEditable(false); // Disable direct text input
         jPanel.add(uploadRouteField);
+
+        // Button to open file chooser
+        JButton selectFileButton = new JButton("Select File");
+        selectFileButton.setBounds(220, 300, 100, 30);
+        selectFileButton.setForeground(new Color(29, 142, 0));
+        selectFileButton.setBackground(Color.white);
+        jPanel.add(selectFileButton);
+
+        // ActionListener for selectFileButton
+        selectFileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("Route Files", "png", "jpg", "jpeg"); // Customize the file types if needed
+                fileChooser.setFileFilter(filter);
+
+                int result = fileChooser.showOpenDialog(jFrame);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    String filePath = fileChooser.getSelectedFile().getPath();
+                    String fileName = fileChooser.getSelectedFile().getName(); // Extract the file name
+                    uploadRouteField.setText(fileName);
+                }
+            }
+        });
+        
+        JLabel routeTagLabel = new JLabel("Select route tag:");
+        routeTagLabel.setBounds(20, 350, 300, 30);
+        jPanel.add(routeTagLabel);
+        String[] options = {"Select Route Tag...",
+        					"From USC TC",
+        					"To USC TC"};
+        JComboBox<String> routeTagBox = new JComboBox<String>(options);
+        routeTagBox.setBounds(20, 390, 300, 30);
+
+        routeTagBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    switch((String) routeTagBox.getSelectedItem()) {
+	                    case "Select Building":
+	                		selectedOption = "N";
+                        case "From USC TC":
+                            selectedOption = "F";
+                            break;
+                        case "To USC TC":
+                            selectedOption = "T";
+                            break;
+                    }
+                }
+            }
+        });
+
+        jPanel.add(routeTagBox);
 
         JButton addRoute = new JButton("Add Route");
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
-        addRoute.setBounds(110, 380, 120, 30);
+        addRoute.setBounds(110, 460, 120, 30);
         addRoute.setForeground(new Color(29, 142, 0));
         addRoute.setBackground(Color.white);
         addRoute.setBorder(buttonBorder);
         addRoute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String routeName = routeNameField.getText();
+		        String jeepsToTake = jeepsToTakeField.getText();
+		        String routeMapFile = "src/resources/routes/" + uploadRouteField.getText();
+		        char routeTag = selectedOption.charAt(0);
+
+		        if (routeName.isEmpty() || jeepsToTake.isEmpty() || routeMapFile.isEmpty() || routeTag == ' ') {
+		            JOptionPane.showMessageDialog(jFrame, "Please fill in all fields.");
+		            return;
+		        }
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
 			        Statement statement = connection.createStatement();
-			        String sql = "INSERT INTO routes (route_name, traditionalJeep_Fare, modernJeep_Fare, jeepsToTake, route_map) VALUES (?, ?, ?, ?, ?)";
-
-			        String routeName = routeNameField.getText();
-			        String jeepsToTake = jeepsToTakeField.getText();
-			        String routeMapFile = "src/resources/routes/" + uploadRouteField.getText();
+			        String sql = "INSERT INTO routes (route_name, traditionalJeep_Fare, modernJeep_Fare, jeepsToTake, route_map, route_tag) VALUES (?, ?, ?, ?, ?, ?)";
 
 			        double traditionalJeepFare = 0.0;
 			        double modernJeepFare = 0.0;
@@ -122,7 +187,7 @@ public class AddRouteGUI {
 			        ResultSet resultSet = checkStatement.executeQuery();
 			        if (resultSet.next()) {
 			            // Route already exists
-			            JOptionPane.showMessageDialog(jFrame, "Route already exists in this building.");
+			            JOptionPane.showMessageDialog(jFrame, "Route already exists.");
 			            return;
 			        }
 
@@ -139,6 +204,7 @@ public class AddRouteGUI {
 			        preparedStatement.setDouble(3, modernJeepFare);
 			        preparedStatement.setString(4, jeepsToTake);
 			        preparedStatement.setString(5, routeMapFile);
+			        preparedStatement.setString(6, String.valueOf(routeTag));
 			        preparedStatement.executeUpdate();
 
 			        preparedStatement.close();
@@ -163,7 +229,7 @@ public class AddRouteGUI {
         jPanel.add(addRoute);
         
         JButton viewRoutesTable = new JButton("View Routes Table");
-        viewRoutesTable.setBounds(110, 440, 120, 30);
+        viewRoutesTable.setBounds(110, 520, 120, 30);
         viewRoutesTable.setForeground(new Color(29, 142, 0));
         viewRoutesTable.setBackground(Color.white);
         viewRoutesTable.setBorder(buttonBorder);

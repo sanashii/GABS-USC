@@ -15,6 +15,7 @@ import java.sql.Statement;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -71,12 +72,33 @@ public class DeleteRouteGUI {
         jFrame.add(headerPanel);
         jFrame.add(jPanel);
 
-        JLabel routeIDLabel = new JLabel("Enter route id to delete:");
+        JLabel routeIDLabel = new JLabel("Select route ID:");
         routeIDLabel.setBounds(20, 80, 300, 30);
         jPanel.add(routeIDLabel);
-        JTextField routeIDField = new JTextField();
-        routeIDField.setBounds(20, 120, 150, 30);
-        jPanel.add(routeIDField);
+
+        // Replace the JTextField with a JComboBox
+        JComboBox<String> routeIDComboBox = new JComboBox<String>();
+        routeIDComboBox.setBounds(20, 120, 300, 30);
+        jPanel.add(routeIDComboBox);
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
+            Statement statement = connection.createStatement();
+
+            ResultSet idResultSet = statement.executeQuery("SELECT route_ID FROM routes");
+            while (idResultSet.next()) {
+                String id = idResultSet.getString("route_ID");
+                routeIDComboBox.addItem(id);
+            }
+
+            statement.close();
+            connection.close();
+        } catch (SQLException e1) {
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            e1.printStackTrace();
+        }
 
         JButton deleteRoute = new JButton("Delete Route");
         Border buttonBorder = BorderFactory.createLineBorder(new Color(29, 142, 0), 2, true);
@@ -92,7 +114,14 @@ public class DeleteRouteGUI {
                     Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/gabs_usc", "superuser", "password");
                     Statement statement = connection.createStatement();
 
-                    int id = Integer.parseInt(routeIDField.getText());
+                    // Get the selected route ID from the JComboBox
+                    String selectedRouteID = (String) routeIDComboBox.getSelectedItem();
+                    if (selectedRouteID == null) {
+                        JOptionPane.showMessageDialog(jPanel, "Please select a route ID.");
+                        return;
+                    }
+
+                    int id = Integer.parseInt(selectedRouteID);
 
                     // Check if the ID exists in the routes table
                     ResultSet idCheck = statement.executeQuery("SELECT * FROM routes WHERE route_id = " + id);
@@ -101,39 +130,49 @@ public class DeleteRouteGUI {
                         return;
                     }
 
-                    int confirmDialogResult = JOptionPane.showConfirmDialog(jFrame, "Are you sure you want to delete the route with ID " + id + "?");
-                    if (confirmDialogResult == JOptionPane.YES_OPTION) {
-                        String sql = "DELETE FROM routes WHERE route_id = " + id; // SQL query to delete the row with the given route ID
+                    // Fetch the route details
+                    ResultSet routeDetails = statement.executeQuery("SELECT route_id, route_name FROM routes WHERE route_id = " + id);
+                    if (routeDetails.next()) {
+                        String routeName = routeDetails.getString("route_name");
 
-                        int result = statement.executeUpdate(sql);
+                        // Confirmation dialog box
+                        int confirmDialogResult = JOptionPane.showConfirmDialog(jFrame, "Are you sure you want to delete the route with ID " + id + "?\n\nRoute Name: " + routeName, "Confirm Delete", JOptionPane.YES_NO_OPTION);
+                        if (confirmDialogResult == JOptionPane.YES_OPTION) {
+                            String sql = "DELETE FROM routes WHERE route_id = " + id;
 
-                        if (result == 1) {
-                            JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + id + "!");
+                            int result = statement.executeUpdate(sql);
+
+                            if (result == 1) {
+                                JOptionPane.showMessageDialog(jFrame, "Successfully deleted route with ID " + id + "!");
+                                jFrame.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + id + ". Please check if the ID is valid.");
+                            }
+
+                            statement.close();
+                            connection.close();
+
+                            try {
+                                DeleteRouteGUI delete = new DeleteRouteGUI(username);
+                            } catch (FileNotFoundException e1) {
+                                e1.printStackTrace();
+                            }
                             jFrame.dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(jFrame, "Error deleting route with ID " + id + ". Please check if the ID is valid.");
                         }
-
-                        statement.close();
-                        connection.close();
-
-                        try {
-                            DeleteRouteGUI delete = new DeleteRouteGUI(username);
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
-                        }
-                        jFrame.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(jPanel, "Failed to retrieve route details for ID " + id + ".");
                     }
 
+                    statement.close();
+                    connection.close();
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 } catch (ClassNotFoundException e1) {
                     e1.printStackTrace();
                 }
-
             }
-
         });
+
 
         jPanel.add(deleteRoute);
         

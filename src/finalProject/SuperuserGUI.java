@@ -102,11 +102,18 @@ public class SuperuserGUI extends PasswordHasher{
 			}
         	
         });
+ 
+        JPanel logoutBtnPanel = new JPanel();
+        logoutBtnPanel.setBackground(Color.white);
+        logoutBtnPanel.setBounds(425, 680, 100, 100);
+        logoutBtnPanel.setLayout(null);
+
+        ImageIcon logoutIcon = new ImageIcon("src/resources/logout.png");
         
         JButton deleteAccountBtn = new JButton("Delete Account");
-        deleteAccountBtn.setBounds(25, 500, 300, 50);
+        deleteAccountBtn.setBounds(100, 530, 150, 50);
         deleteAccountBtn.setForeground(Color.white);
-        deleteAccountBtn.setBackground(new Color(136, 191, 140, 255));
+        deleteAccountBtn.setBackground(Color.red);
         deleteAccountBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -128,14 +135,6 @@ public class SuperuserGUI extends PasswordHasher{
             }
         });
 
-        
-        JPanel logoutBtnPanel = new JPanel();
-        logoutBtnPanel.setBackground(Color.white);
-        logoutBtnPanel.setBounds(425, 680, 100, 100);
-        logoutBtnPanel.setLayout(null);
-
-        ImageIcon logoutIcon = new ImageIcon("src/resources/logout.png");
-
         // create a new button with the image for logout
         JButton logoutBtn = new JButton(logoutIcon);
         logoutBtn.setBounds(0, 0, 100, 100);
@@ -144,6 +143,7 @@ public class SuperuserGUI extends PasswordHasher{
 
 
         logoutBtnPanel.add(logoutBtn);
+        jPanel.add(deleteAccountBtn);
         logoutBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
