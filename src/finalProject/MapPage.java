@@ -84,35 +84,50 @@ public class MapPage {
 		});
         
         JButton button2 = new JButton("Transportation Guide");
-        button2.setBounds(0,50,190,50);
+        button2.setBounds(0, 50, 190, 50);
         button2.setBorder(null);
         button2.setBackground(new Color(118, 212, 152));
         button2.setFocusable(false);
         button2.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.white));
+
         JFrame frame = new JFrame("Example");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
+        frame.setLayout(null);
 
         JPanel panel = new JPanel();
         frame.add(panel);
         panel.add(button2);
+
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem1 = new JMenuItem("To USC TC");
         JMenuItem menuItem2 = new JMenuItem("From USC TC");
         popupMenu.add(menuItem1);
         popupMenu.add(menuItem2);
-        popupMenu.setPopupSize(190, 150);
         menuItem1.setBackground(new Color(118, 212, 152));
         menuItem2.setBackground(new Color(118, 212, 152));
         popupMenu.setBackground(new Color(118, 212, 152));
+
+        Dimension buttonSize = button2.getSize();
+        menuItem1.setPreferredSize(buttonSize);
+        menuItem2.setPreferredSize(buttonSize);
+
         button2.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				  popupMenu.show(button2, 0, button2.getHeight());
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Calculate the required width based on menu items' preferred widths
+                int requiredWidth = Math.max(menuItem1.getPreferredSize().width,
+                        menuItem2.getPreferredSize().width) + 4; // Add some padding
+
+                // Resize the frame width to fit the menu items
+                int frameWidth = frame.getWidth();
+                int frameHeight = frame.getHeight();
+                frame.setSize(frameWidth + requiredWidth, frameHeight);
+
+                // Show the popup menu
+                popupMenu.show(button2, button2.getWidth(), 0);
+            }
+        });
         menuItem1.addActionListener(new ActionListener() {
 			
 			@Override
