@@ -50,7 +50,7 @@ public class EditRouteGUI {
 
         JPanel jPanel = new JPanel();
         jPanel.setBackground(Color.white);
-        jPanel.setBounds(85, 83, 350, 500);
+        jPanel.setBounds(85, 83, 350, 560);
         jPanel.setLayout(null); 
         
         JLabel titleLabel = new JLabel("Editing a Route");
@@ -226,7 +226,7 @@ public class EditRouteGUI {
         jPanel.add(editRoute);
         
         JButton viewRoutesTable = new JButton("View Routes Table");
-        viewRoutesTable.setBounds(110, 460, 120, 30);
+        viewRoutesTable.setBounds(110, 490, 120, 30);
         viewRoutesTable.setForeground(new Color(29, 142, 0));
         viewRoutesTable.setBackground(Color.white);
         viewRoutesTable.setBorder(buttonBorder);
