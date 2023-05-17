@@ -139,6 +139,10 @@ public class TranspoPageTo {
         menuItem2.setBackground(new Color(118, 212, 152));
         popupMenu.setBackground(new Color(118, 212, 152));
 
+        Dimension buttonSize = button2.getSize();
+        menuItem1.setPreferredSize(buttonSize);
+        menuItem2.setPreferredSize(buttonSize);
+
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -155,7 +159,6 @@ public class TranspoPageTo {
                 popupMenu.show(button2, button2.getWidth(), 0);
             }
         });
-
         menuItem1.addActionListener(new ActionListener() {
 			
 			@Override
