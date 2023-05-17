@@ -83,7 +83,7 @@ CREATE TABLE `routes` (
   `modernJeep_Fare` double DEFAULT NULL,
   `jeepsToTake` varchar(255) DEFAULT NULL,
   `route_map` varchar(255) DEFAULT NULL,
-  `route_tag` varchar(255) DEFAULT NULL, -- New column
+  `route_tag` char(1) DEFAULT NULL, -- New column
   PRIMARY KEY (`route_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
