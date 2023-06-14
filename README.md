@@ -1,44 +1,7 @@
 # OOP-FP
 github repo for the final project in OOP
 
-## DEFAULT JFRAME SETTINGS
-```java
-// setting of default header w/ logo & GUI size
-		JFrame jFrame = new JFrame();
-		
-		JPanel headerPanel = new JPanel();
-		headerPanel.setBackground(new Color(0, 177, 64, 255));
-		headerPanel.setBounds(0, 0, 540, 80);
-		headerPanel.setLayout(null);
-
-		ImageIcon icon = new ImageIcon("src/resources/headerlogo.png");
-		JLabel iconLabel = new JLabel();
-		iconLabel.setIcon(icon);
-		iconLabel.setHorizontalAlignment(JLabel.CENTER);
-		iconLabel.setBounds(0, 0, 540, 80);
-
-		headerPanel.add(iconLabel);
-
-
-		JPanel jPanel = new JPanel();
-		jPanel.setBackground(Color.white);
-		jPanel.setBounds(85,80,350,500);
-		jPanel.setLayout(null);
-
-		jFrame.getContentPane().setBackground(Color.white); // set main background to white
-
-		jFrame.add(headerPanel); // add header panel to frame
-		jFrame.add(jPanel);
-
-		jFrame.setTitle("GABS USC");
-		jFrame.setSize(540,810); //Android Screen Ratio
-		jFrame.setLayout(null);
-		jFrame.setResizable(false);
-
-		jFrame.setVisible(true);
-		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-```
-## GENERAL RULES
+## CONTRIBUTING
 1] git pull from main to your branch and only merge once your assigned features are complete
 
 2] (Inclusion of icons on your page) always use the format "src/resources/iconName.format" and place them in the resources folder under src
@@ -90,3 +53,41 @@ It means that the MySQL JDBC Driverhas not been included in your project's class
 5. Click on the Add External JARs button and navigate to the location where you downloaded the MySQL JDBC driver JAR file. (possible path for the JAR File: `C:\Program Files (x86)\MySQL\Connector J 8.0`)
 6. Select the JAR file and click on Open to add it to your project's `classpath`.
 7. Click on OK / Apply to close the Properties dialog box.
+
+## DEFAULT JFRAME SETTINGS
+```java
+// setting of default header w/ logo & GUI size
+		JFrame jFrame = new JFrame();
+		
+		JPanel headerPanel = new JPanel();
+		headerPanel.setBackground(new Color(0, 177, 64, 255));
+		headerPanel.setBounds(0, 0, 540, 80);
+		headerPanel.setLayout(null);
+
+		ImageIcon icon = new ImageIcon("src/resources/headerlogo.png");
+		JLabel iconLabel = new JLabel();
+		iconLabel.setIcon(icon);
+		iconLabel.setHorizontalAlignment(JLabel.CENTER);
+		iconLabel.setBounds(0, 0, 540, 80);
+
+		headerPanel.add(iconLabel);
+
+
+		JPanel jPanel = new JPanel();
+		jPanel.setBackground(Color.white);
+		jPanel.setBounds(85,80,350,500);
+		jPanel.setLayout(null);
+
+		jFrame.getContentPane().setBackground(Color.white); // set main background to white
+
+		jFrame.add(headerPanel); // add header panel to frame
+		jFrame.add(jPanel);
+
+		jFrame.setTitle("GABS USC");
+		jFrame.setSize(540,810); //Android Screen Ratio
+		jFrame.setLayout(null);
+		jFrame.setResizable(false);
+
+		jFrame.setVisible(true);
+		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+```
