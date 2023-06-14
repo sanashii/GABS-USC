@@ -1,5 +1,10 @@
-# OOP-FP
-github repo for the final project in OOP
+# GABS USC
+GABS USC is a Java based Mobile Application Mockup, dedicated for the students in the University of San Carlos Talamban Campus. The project is an application that allows the students to be able to view the campus map and interact with the different building in terms of the offices and canteen stalls present within that building. The application also has a static transportation guide for the students to use in commuting from thje school to specific landmarks within Cebu and vice-versa.
+
+### Modules
+- Application Superuser Functionalities
+- USC Map Segment
+- Transportation Guide
 
 ## CONTRIBUTING
 1] git pull from main to your branch and only merge once your assigned features are complete
@@ -7,11 +12,6 @@ github repo for the final project in OOP
 2] (Inclusion of icons on your page) always use the format "src/resources/iconName.format" and place them in the resources folder under src
 
 3] Java Application Login credentials: username: `yourlastname` ; password: `yourlastname`
-
-### Modules
-- Application Superuser Functionalities
-- USC Map Segment
-- Transportation Guide
 
 ## DATABASE GUIDE
 1. download MySQL on your device (https://dev.mysql.com/downloads/ && VIDEO GUIDE: https://youtu.be/GoQq5D_ntiY)
